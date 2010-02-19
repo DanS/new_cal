@@ -1,0 +1,48 @@
+<h1>Rutledge Travel Calendar Version 5</h1>
+<table id='three-calendars'>
+  <tr>
+    <% for month, year in next_3_months_years(@start_date) %>
+      <td>
+        <%= calendar(:year => year, :month => month) do |day|
+          if day < Date.today
+            [day.mday, {:class => 'day-past'}]
+          else
+            [day.mday, {:class => "normal-day" }]
+          end
+        end %>
+        </td>
+      <% end %>
+      <td>
+        <table id="destination-list">
+          <% (@destination_list + ['Show Only Trips to']).each do |text| %>
+            <tr><td> <%= text %> </td></tr>
+          <% end %>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table id="trip-list">
+    <tr>
+      <% ['Date', 'Time', 'Destination', 'Contact', 'Community', 'Preferred Vehicle',
+        'Travelers', 'Notes', 'Actions'].each do |header| %>
+        <td> <%= header %> </td>
+      <% end %>
+    </tr>
+    <% for days_trips in @trips_by_date %>
+      <% days_trips.each_with_index do |trip, i| %>
+        <tr>
+          <% if i == 0  #date cell should span all rows with same date %>
+            <td rowspan="<%= days_trips.length %>">
+              <%= days_trips[0].date.strftime("%b %d %a")%>
+            </td>
+          <% end %>
+          <td> <%= trip.depart.strftime("%I:%M%p")%> <br />
+            <%= trip.return.strftime("%I:%M%p")%> </td>
+          <% for attrib in [ 'destination', 'contact', 'community', 'preferred_vehicle',
+              'travelers', 'notes'] %>
+            <td> <%= trip.send(attrib) %> </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>

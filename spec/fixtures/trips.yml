@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  date: 2010-02-12 17:25:11
+  contact: MyString
+  community: MyString
+  preferred_vehicle: MyString
+  travelers: 1
+  destination: MyString
+  notes: MyText
+  depart: 2010-02-12 17:25:11
+  return: 2010-02-12 17:25:11
+
+two:
+  date: 2010-02-12 17:25:11
+  contact: MyString
+  community: MyString
+  preferred_vehicle: MyString
+  travelers: 1
+  destination: MyString
+  notes: MyText
+  depart: 2010-02-12 17:25:11
+  return: 2010-02-12 17:25:11
