@@ -1,9 +1,9 @@
 class Trip < ActiveRecord::Base
-  named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date'}
+  named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date, depart'}
   named_scope :next_3_months, {:conditions =>
     ["date >= ? AND date <= ?", Date.today, Date.today + 3.months]}
-  named_scope :next_week, {:conditions =>
-    ["date >= ? AND date <= ?", Date.today, Date.today + 1.week]}
+  named_scope :for_week_year, lambda {|wk, yr| {:conditions =>
+    ["strftime('%W', date) = ? AND strftime('%Y', date) = ?", sprintf("%02d", wk), "#{yr}"]}}
 
   def self.list_destinations
     dests = Hash.new {|hash, key| hash[key] = 0}
@@ -19,4 +19,6 @@ class Trip < ActiveRecord::Base
     end
     out
   end
+  
+  
 end

@@ -1,0 +1,176 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size:   13px;
+    line-height: 18px;
+}
+
+pre {
+    background-color: #eee;
+    padding: 10px;
+    font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+    padding: 2px;
+    background-color: red;
+    display: table;
+}
+
+.trip_form p{
+    padding: 0 10px 5px 0;
+}
+
+.trip_form td {
+    vertical-align: top;
+}
+
+.trip_form label{
+    font-weight: bold;
+    width: 150px;
+    float: left;
+}
+
+.trip_form .radio input  {
+    margin: 0;
+}
+
+.trip_form input {
+    margin: 0 0 13px 0;
+    float: left;
+}
+
+#months-cal{
+  width: 100%;
+}
+
+#destination-list{
+  width: 100%;
+}
+
+#errorExplanation {
+    /*width: 400px;*/
+    border: 2px solid red;
+    padding: 7px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    background-color: #c00;
+    color: #fff;
+}
+
+#errorExplanation p {
+    color: #333;
+    margin-bottom: 0;
+    padding: 5px;
+}
+
+#errorExplanation ul li {
+    font-size: 12px;
+    list-style: square;
+}
+
+/*
+  A blue based theme, inspired by Blinksale and their ColorBurn widget. http://firewheeldesign.com
+
+  AUTHOR: Geoffrey Grosenbach http://nubyonrails.com
+
+  Colors:
+    Light Blue: bbccff
+    White: eeddee
+    Turq: 003355
+    Cream: ffffdd
+*/
+
+.calendar {
+    margin: auto;
+}
+
+.monthName th {
+    font-weight: normal;
+    text-align: right;
+    padding-top: 1em;
+    padding-bottom: 0.7em;
+}
+
+.dayName th {
+    font-size: 0.7em;
+    font-weight: normal;
+    padding-top: 0.6em;
+    padding-bottom: 0.3em;
+}
+
+.otherMonth, .day, .specialDay .past {
+    padding: 0.7em 1em;
+    font-size: 10px;
+    line-height: normal;
+    text-align: center;
+}
+
+.otherMonth {
+    color: #BCBFC0;
+    background-color: white;
+    border-right: 1px solid white;
+}
+
+.day {
+    border: 1px dotted #bbbbbb;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+My calendar customizations
+*/
+
+.past {
+    color: #CCCCCC;
+    border-bottom: 1px dotted #bbbbbb;
+}
+.centered {
+    text-align: center;
+} 
+
+.centered a, .centered span {
+    color: #000000;
+    background-color: #CDD0D0;
+}
+
+.centered a:hover{
+    color: white;
+    background-color: #656A6B;
+    font-weight: bold;
+}
+
+a.selected-tab  {
+    font-weight: bold;
+    color: white;
+    background-color: #656A6B;
+}
+
+/* week styling
+*/
+
+.week-table {
+    width: 100%;
+}
+
+.week-table td {
+    width: 12.5%;
+    vertical-align: top;
+}
+
+

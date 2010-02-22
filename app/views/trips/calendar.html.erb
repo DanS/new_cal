@@ -28,7 +28,7 @@
         <td> <%= header %> </td>
       <% end %>
     </tr>
-    <% for days_trips in @trips_by_date %>
+    <% @trips_by_date.each_pair do |date, days_trips| %>
       <% days_trips.each_with_index do |trip, i| %>
         <tr>
           <% if i == 0  #date cell should span all rows with same date %>

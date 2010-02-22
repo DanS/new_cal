@@ -4,7 +4,7 @@ describe "trips/calendar.html.erb" do
   before(:each) do
     assigns[:start_date] = Date.today.strftime("%Y%m") + "01"
     @trip = Factory.create(:trip)
-    assigns[:trips_by_date] = [[@trip]]
+    assigns[:trips_by_date] = {Date.today.strftime("%Y%m%d") => [@trip]}
     @destinations = ["Rutledge(2)", "Memphis(4)", "La Plata(3)", "Quincy(1)"]
     assigns[:destination_list] = @destinations
   end
@@ -26,13 +26,6 @@ describe "trips/calendar.html.erb" do
       end
     end
   end
-  it "should display number of trips to a destination next to the destination" do
-    pending
-    render
-    response.should have_selector('table', :id => "destination-list" ) do |table|
-      table.should have_selector('tr td')
-    end
-  end
   it "first row of trip-list table should display column headers" do
     render
     response.should have_selector('table', :id => 'trip-list') do |table|
@@ -44,7 +37,7 @@ describe "trips/calendar.html.erb" do
       end
     end
   end
-  it "should display the details of a pending trip" do
+  it "should display the details of an upcoming trip" do
     render
     response.should have_selector('table', :id => 'trip-list') do |table|
       todays_date_str = Date.today.strftime("%b %d %a")
@@ -58,8 +51,8 @@ describe "trips/calendar.html.erb" do
     end
   end
   it "should have the date cell span all the rows with the same date" do
-    tbd = [[]]
-    3.times { tbd[0] << Factory.create(:trip, :date => Date.today)}
+    tbd = {Date.today.strftime("%Y%m%d") => []}
+    3.times { tbd[Date.today.strftime("%Y%m%d")] << Factory.create(:trip, :date => Date.today)}
     assigns[:trips_by_date] = tbd
     render
     response.should have_selector("table", :id => "trip-list") do |table|
@@ -89,6 +82,15 @@ describe "trips/calendar.html.erb" do
     end
   end
   it "should display trips in order by date then time" do
-    pending
+    add_unordered_trips #defined in my_spec_helpers
+    assigns[:trips_by_date] = Trip.by_date_string
+    render
+    response.should have_selector("table", :id => "trip-list" ) do |table|
+      [1,2,3,4,5,6,7,8,9].each do |i|
+        table.should have_selector("tr:nth-child(#{i + 2})") do |tr|
+          tr.should have_selector('td', :content => "trip-#{i}") 
+        end
+      end
+    end
   end
 end
