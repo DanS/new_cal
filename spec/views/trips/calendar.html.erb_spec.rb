@@ -31,8 +31,8 @@ describe "trips/calendar.html.erb" do
     response.should have_selector('table', :id => 'trip-list') do |table|
       table.should have_selector('tr:nth-child(1)') do |tr|
         ['Date', 'Time', 'Destination', 'Contact', 'Community', 'Preferred Vehicle',
-        'Travelers', 'Notes', 'Actions'].each do |header|
-          tr.should contain(header)
+          'Travelers', 'Notes', 'Actions'].each do |header|
+          tr.should have_selector('th', :content => header)
         end
       end
     end
@@ -72,9 +72,9 @@ describe "trips/calendar.html.erb" do
     end
     it "should not display trips older than today in the calendar" do
       render
-      response.should have_selector("table", :id => "three-calendars" ) do |table|
-        table.should have_selector("table", :class => "calendar" ) do |table2|
-          table2.should have_selector("td", :class => 'day-past') do |td|
+      response.should have_selector("div", :id => "three-calendars" ) do |div|
+        div.should have_selector("table", :class => "calendar" ) do |table2|
+          table2.should have_selector("td", :class => 'day past') do |td|
             td.should contain(@yesterday.day.to_s)
           end
         end
