@@ -27,7 +27,8 @@ class TripsController < ApplicationController
   # GET /trips/new.xml
   def new
     @trip = Trip.new
-
+    @communities = Community.all
+    @vehicles = Vehicle.all
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @trip }

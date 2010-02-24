@@ -7,6 +7,7 @@ describe TripsController do
 
   describe "GET calendar" do #replaces index action
     before(:each) do
+
     end
     it "assigns all trips as @trips" do
       Trip.stub(:find).with(:all).and_return([mock_trip])
@@ -51,7 +52,6 @@ describe TripsController do
     end
   end
 
-
   describe "GET show" do
     it "assigns the requested trip as @trip" do
       Trip.stub(:find).with("37").and_return(mock_trip)
@@ -65,6 +65,20 @@ describe TripsController do
       Trip.stub(:new).and_return(mock_trip)
       get :new
       assigns[:trip].should equal(mock_trip)
+    end
+    it "assigns a list of communities" do
+      names = ['a', 'b', 'c']
+      Community = mock_model(Community).as_null_object
+      Community.stub(:all).and_return(names)
+      get :new
+      assigns[:communities].should equal(names)
+    end
+    it "assigns a list of vehicles" do
+      names = ['bug', 'beetle', 'rabbit']
+      Vehicle = mock_model(Vehicle).as_null_object
+      Vehicle.stub(:all).and_return(names)
+      get :new
+      assigns[:vehicles].should equal(names)
     end
   end
 

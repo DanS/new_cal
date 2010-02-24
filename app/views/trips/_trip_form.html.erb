@@ -31,17 +31,15 @@
       <div class="radio"
            <p>
           <%= f.label :community %><br />
-          <%= f.radio_button( "community", 'Dancing Rabbit') %>Dancing Rabbit <br />
-          <%= f.radio_button( "community", 'Sandhill') %>Sandhill <br />
-          <%= f.radio_button( "community", 'Red Earth Farms') %>Red Earth Farms <br />
+          <% @communities.each do |cmty|%>
+            <%= f.radio_button( "community", cmty) %><%= cmty %> <br />
+          <% end %>
         </p>
         <p>
-          <%#= f.label :preferred_vehicle %><br />
-          <%# Vehicle.find(:all, :order=>"display_order ASC").each do |v| %>
-            <%#= f.radio_button("preferred_vehicle", "#{v.name}")%>
-            <%#= v.name %>
-            <!-- <br /> -->
-          <%# end %>
+          <%= f.label :preferred_vehicle %><br />
+          <% @vehicles.each do |v| %>
+            <%= f.radio_button("preferred_vehicle", "#{v}")%> <%= v %> <br />
+          <% end %>
         </p>
       </div>
     </td>

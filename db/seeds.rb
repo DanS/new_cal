@@ -5,3 +5,7 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+['Dancing Rabbit', 'Red Earth Farms', 'Sandhill'].each {|c| Community.create :name => c}
+['Truck', 'Black Jetta', 'Silver Jetta', 'Any', 'Sandhill', 'SSVC', 'Either Jetta'].each do |v|
+  Vehicle.create :name => v
+end

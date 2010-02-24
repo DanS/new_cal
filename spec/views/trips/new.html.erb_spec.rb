@@ -3,6 +3,10 @@ require 'spec_helper'
 describe "trips/new.html.erb" do
   before(:each) do
     assigns[:trip] = Factory.build(:trip)
+    @communities = ['Dancing Rabbit', 'foo', 'Sandhill'].each {|c| Factory(:community, :name => c)}
+    assigns[:communities] = @communities
+    @vehicles = ['Truck', 'Black Jetta', 'Silver Jetta', 'Any', 'Sandhill', 'SSVC', 'Either Jetta']
+    assigns[:vehicles] = @vehicles
   end
 
   context "date selection" do
@@ -69,10 +73,17 @@ describe "trips/new.html.erb" do
       end
     end
     
-    it "should have buttons for community" do
+    it "should have buttons for community" do   
       render
-      ['Dancing Rabbit', 'Red Earth Farms', 'Sandhill'].each do |cmty|
+      @communities.each do |cmty|
         response.should have_selector('input', :type => "radio", :value => cmty )
+      end
+    end
+
+    it "should have buttons for vehicles" do
+      render
+      @vehicles.each do |vehicle|
+        response.should have_selector('input', :type => "radio", :value => vehicle )
       end
     end
   end

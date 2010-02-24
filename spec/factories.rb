@@ -20,7 +20,6 @@ Factory.define :trip do |trip|
   trip.community 'Dancing Rabbit'
 end
 
-
 Factory.define :random_trip do |trip|
   trip.travelers (1..8).to_a.rand
   trip.destination @destinations.rand
@@ -31,4 +30,8 @@ Factory.define :random_trip do |trip|
   trip.return rand_time
   trip.depart rand_time
   trip.community cmtys.rand
+end
+
+Factory.define :community do |community|
+  community.name cmtys.rand
 end
