@@ -38,7 +38,7 @@
         <p>
           <%= f.label :preferred_vehicle %><br />
           <% @vehicles.each do |v| %>
-            <%= f.radio_button("preferred_vehicle", "#{v}")%> <%= v %> <br />
+            <%= f.radio_button("preferred_vehicle", v)%> <%= v %> <br />
           <% end %>
         </p>
       </div>

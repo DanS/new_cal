@@ -86,4 +86,5 @@ describe "trips/new.html.erb" do
         response.should have_selector('input', :type => "radio", :value => vehicle )
       end
     end
+    
   end

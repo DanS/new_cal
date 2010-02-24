@@ -6,33 +6,20 @@ class TripsController < ApplicationController
     @start_date = Date.today.strftime("%Y%m") + "01"
     @trips_by_date = Trip.by_date_string
     @destination_list = Trip.list_destinations
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @trips }
-    end
   end
 
   # GET /trips/1
   # GET /trips/1.xml
   def show
     @trip = Trip.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @trip }
-    end
   end
 
   # GET /trips/new
   # GET /trips/new.xml
   def new
     @trip = Trip.new
-    @communities = Community.all
-    @vehicles = Vehicle.all
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @trip }
-    end
+    @communities = Community.all.collect {|c| c.name}
+    @vehicles = Vehicle.all.collect {|v| v.name}
   end
 
   # GET /trips/1/edit

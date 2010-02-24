@@ -68,17 +68,15 @@ describe TripsController do
     end
     it "assigns a list of communities" do
       names = ['a', 'b', 'c']
-      Community = mock_model(Community).as_null_object
-      Community.stub(:all).and_return(names)
+      names.each {|n| Community.create :name => n}
       get :new
-      assigns[:communities].should equal(names)
+      assigns[:communities].should == names
     end
     it "assigns a list of vehicles" do
       names = ['bug', 'beetle', 'rabbit']
-      Vehicle = mock_model(Vehicle).as_null_object
-      Vehicle.stub(:all).and_return(names)
+      names.each {|n| Vehicle.create(:name => n)}
       get :new
-      assigns[:vehicles].should equal(names)
+      assigns[:vehicles].should == names
     end
   end
 
