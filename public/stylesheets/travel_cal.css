@@ -37,7 +37,7 @@ a:hover { color: #fff; background-color:#000; }
 }
 
 .trip_form .radio input  {
-    margin: 0;
+    margin: 2px 5px 0 0;
 }
 
 .trip_form input {
