@@ -30,8 +30,8 @@
         </p>
       </td>
       <td>
-        <div class="radio"
-             <p>
+        <div class="radio" name="select-community-vehicle">
+          <p>
             <%= f.label :community %><br />
             <% @communities.each do |cmty|%>
               <%= f.radio_button( "community", cmty) %><%= cmty %> <br />

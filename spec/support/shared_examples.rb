@@ -1,9 +1,9 @@
-#require File.dirname(__FILE__) + '/../spec_helper'
-
-shared_examples_for "a time of day selector" do
-  
-  it "should desc" do
-    # TODO
+shared_examples_for "a template that renders the trip_form partial" do
+  it "renders the trips/trip_form partial" do
+    template.should_receive(:render).with(
+      :partial => 'trip_form',
+      :locals => {:trip => assigns[:trip]}
+    )
+    render
   end
 end
-
