@@ -1,4 +1,5 @@
 class Trip < ActiveRecord::Base
+  validates_presence_of :date, :contact, :destination, :community
   named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date, depart'}
   named_scope :next_3_months, {:conditions =>
     ["date >= ? AND date <= ?", Date.today, Date.today + 3.months]}

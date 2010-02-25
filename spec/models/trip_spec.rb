@@ -19,6 +19,14 @@ describe Trip do
     Trip.create!(@valid_attributes)
   end
   
+  it "should not be valid without all required attributes" do
+    [:date, :contact, :community, :destination].each do |attrib|
+      @valid_attributes[attrib] = nil
+      trip = Trip.create(@valid_attributes)
+      trip.should_not be_valid
+    end
+  end
+  
   it "should return upcoming trips" do
     (-5..5).each {|i| Factory(:trip, :date => Date.today + i.day)}
     Trip.upcoming.count.should == 6
