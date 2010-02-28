@@ -15,5 +15,31 @@ def add_unordered_trips
   ordered_datetimes << [today + 40.days, Time.parse('6:30PM'), 'trip-9']
   unordered_datetimes = ordered_datetimes.sort_by {rand}
   unordered_datetimes.each {|day, time, order| Factory(:trip, :date=>day, :depart=>time,
-                                                       :notes=>order)}
+    :notes=>order)}
+end
+
+def days_in_month(month, year)
+  lengths = [nil, 31, 28, 31, 30, 31, 30, 31, 31,30, 31, 30, 31]
+  leap = year % 4 == 0 && month == 2 ? 1 : 0 #not totally accurate but good enough
+  lengths[month] + leap
+end
+
+def weekend_days_in_month(month, year)
+  #returns a hash, keys are day numbers values are true/ false if weekend or not
+  length = days_in_month(month,year)
+  is_wk_end = {}
+  (1..length).each do |dayn|
+    day = Date.parse("#{year}#{sprintf("%02d", month)}#{sprintf("%02d", dayn)}")
+    is_wk_end[dayn] = day.wday == 0 || day.wday ==6
+    #puts "#{year}#{sprintf("%02d", month)}#{sprintf("%02d", dayn)} is #{is_wk_end[dayn]}"
+  end
+  is_wk_end
+end
+
+def day_class_for(date)
+  day_class = 'day'
+  day_class += date < Date.today ? ' past' :''
+  day_class += date.wday == 0 || date.wday == 6 ? ' weekendDay' : ''
+  day_class += date == Date.today ? ' today' : ""
+  return day_class
 end

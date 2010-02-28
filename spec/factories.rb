@@ -21,7 +21,7 @@ Factory.define :trip do |trip|
 end
 
 Factory.define :random_trip do |trip|
-  trip.travelers (1..8).to_a.rand
+  trip.travelers((1..8).to_a.rand)
   trip.destination @destinations.rand
   trip.date Date.today + rand(90).days
   trip.contact ['Joe', 'Dan', 'Sally', 'Temperance', 'Shirley']

@@ -13,12 +13,12 @@ class Trip < ActiveRecord::Base
   end
 
   def self.by_date_string
-    out = Hash.new {|hash, key| hash[key] = []}
+    trips_by_date = Hash.new {|hash, key| hash[key] = []}
     upcoming.each do |t| 
       date_str = t.date.strftime("%Y%m%d")
-      out[date_str] = out[date_str] << t 
+      trips_by_date[date_str] = trips_by_date[date_str] << t
     end
-    out
+    trips_by_date
   end
   
   

@@ -26,7 +26,7 @@ describe "trips/calendar.html.erb" do
       end
     end
   end
-  it "first row of trip-list table should display column headers" do
+  it "should display column headers in the first row of the trip-list table" do
     render
     response.should have_selector('table', :id => 'trip-list') do |table|
       table.should have_selector('tr:nth-child(1)') do |tr|
@@ -86,9 +86,24 @@ describe "trips/calendar.html.erb" do
     assigns[:trips_by_date] = Trip.by_date_string
     render
     response.should have_selector("table", :id => "trip-list" ) do |table|
-      [1,2,3,4,5,6,7,8,9].each do |i|
+      (1..9).each do |i|
         table.should have_selector("tr:nth-child(#{i + 2})") do |tr|
           tr.should have_selector('td', :content => "trip-#{i}") 
+        end
+      end
+    end
+  end
+  context "calendar days should be assigned class based on date and destinations" do
+    it "should give days in the past a class of past" do
+      day_count = days_in_month(Date.today.month, Date.today.year)
+      render
+      response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
+          today = Date.today
+          (1..day_count).each do |day_number|
+             day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_number}"))
+             month_cal.should have_selector('td', :class => day_class, :content => day_number.to_s)
+          end
         end
       end
     end

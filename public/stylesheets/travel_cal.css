@@ -52,9 +52,10 @@ a:hover { color: #fff; background-color:#000; }
   vertical-align: top;
 }
 
-.calendar{
+table.calendar{
   border: 1px solid black;
   float: left;
+  width: 20%;
 }
 
  #trip-list, #destination-list{
@@ -68,8 +69,7 @@ table .calendar td, #destination-list td, #trip-list td {
   border: 1px dotted #BBBBBB;
 }
 
-#destination-list{
-  width: 300px;
+table#destination-list{
   float: left;
 }
 
