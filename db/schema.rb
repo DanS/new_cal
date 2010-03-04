@@ -9,10 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100224190843) do
+ActiveRecord::Schema.define(:version => 20100303230149) do
 
   create_table "communities", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "destinations", :force => true do |t|
+    t.string   "place"
+    t.string   "letter"
+    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
