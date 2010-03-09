@@ -1,5 +1,5 @@
 module TripsHelper
-
+  
   def next_3_months_years(start_date)
     #given a date, returns an array of 3 arrays, each array containing
     #the month number and year number
@@ -58,6 +58,15 @@ module TripsHelper
     else
       return 'Unknown'
     end
+  end
+  
+  def class_for_day(year, month, day)
+    dest_lookup = Hash[*[Destination.all.collect {|d| [d.place, d.letter]}].flatten]
+    dest_lookup.default = dest_lookup['Other']
+    destinations = Trip.on_date(Date.parse("#{year}-#{month}-#{day}")).collect do |t| 
+      t.destination
+    end.uniq.collect {|d| dest_lookup[d]}.join('') 
+    ('day ' + destinations).strip
   end
   
 end

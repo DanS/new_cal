@@ -21,5 +21,11 @@ class Trip < ActiveRecord::Base
     trips_by_date
   end
   
+  def self.on_date(date)
+    self.all.select {|t| t.date.strftime("%Y-%m-%d") == date.to_s}
+  end
   
+  def self.destinations_for(date)
+    self.all.select {|t| t.date.strftime("%Y-%m-%d") == date.to_s}.collect {|t| t.destination}.uniq
+  end
 end

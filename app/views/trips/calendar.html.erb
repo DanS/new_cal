@@ -6,7 +6,8 @@
       if day < Date.today
         [day.mday, {:class => 'day past'}]
       else
-        [day.mday, {:class => "day" }]
+        [link_to(day.mday, :action => 'new', :controller => 'trips'),  {
+          :id => "day_cell#{day.mday}", :class => class_for_day(year, month, day.mday) }]
       end
     end %>
   <% end %>

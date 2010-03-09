@@ -31,7 +31,7 @@ describe "trips/calendar.html.erb" do
     response.should have_selector('table', :id => 'trip-list') do |table|
       table.should have_selector('tr:nth-child(1)') do |tr|
         ['Date', 'Time', 'Destination', 'Contact', 'Community', 'Preferred Vehicle',
-          'Travelers', 'Notes', 'Actions'].each do |header|
+        'Travelers', 'Notes', 'Actions'].each do |header|
           tr.should have_selector('th', :content => header)
         end
       end
@@ -71,6 +71,7 @@ describe "trips/calendar.html.erb" do
       response.should_not contain('yesterdays trip')
     end
     it "should not display trips older than today in the calendar" do
+      pending()
       render
       response.should have_selector("div", :id => "three-calendars" ) do |div|
         div.should have_selector("table", :class => "calendar" ) do |table2|
@@ -88,12 +89,12 @@ describe "trips/calendar.html.erb" do
     response.should have_selector("table", :id => "trip-list" ) do |table|
       (1..9).each do |i|
         table.should have_selector("tr:nth-child(#{i + 2})") do |tr|
-          tr.should have_selector('td', :content => "trip-#{i}") 
+          tr.should have_selector('td', :content => "trip-#{i}")
         end
       end
     end
   end
-  context "calendar days should be assigned class based on date and destinations" do
+  context "calendar days should be assigned class based on date and destinations\n" do
     it "should give days in the past a class of past" do
       day_count = days_in_month(Date.today.month, Date.today.year)
       render
@@ -101,11 +102,60 @@ describe "trips/calendar.html.erb" do
         three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
           today = Date.today
           (1..day_count).each do |day_number|
-             day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_number}"))
-             month_cal.should have_selector('td', :class => day_class, :content => day_number.to_s)
+            day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_number}"))
+            month_cal.should have_selector('td', :class => day_class, :content => day_number.to_s)
           end
         end
       end
+    end
+  end
+  context "only current and future calendar days all should have a link to create a new trip" do
+    it "should contain a link to create a new trip" do
+      render
+      response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
+          today = Date.today
+          days = days_in_month(today.month, today.year)
+          (today.day..days).each do |day_num|
+            day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_num}"))
+            month_cal.should have_selector('td', :id => "day_cell#{day_num}") do |day|
+              day.should have_selector('a', :href => '/trips/new')
+            end
+          end
+        end
+      end
+    end
+    it "should NOT contain a link to create a new trip if its in the past" do
+      render
+      response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
+          today = Date.today
+          days = days_in_month(today.month, today.year)
+          (1..today.day-1).each do |day_num|
+            day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_num}"))
+            month_cal.should_not have_selector('td', :id => "day_cell#{day_num}") do |day|
+              day.should_not have_selector('a', :href => '/trips/new')
+            end
+          end
+        end
+      end
+    end
+  end
+
+  context "calendar days should have colors representing trip designations on that day" do
+    it "should have a class representing the destination of a trip on today" do
+      dest = Destination.create(:place => 'Rutledge', :letter => 'R', :color => '#FFC')
+      render
+      response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
+          today = Date.today
+          days = days_in_month(today.month, today.year)
+          day_num = today.day
+          day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_num}"))
+          month_cal.should have_selector('td', :id => "day_cell#{day_num}", :class => day_class)
+        end
+      end
+      
     end
   end
 end

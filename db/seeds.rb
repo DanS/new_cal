@@ -1,3 +1,5 @@
+require 'factory_girl'
+require RAILS_ROOT + "/spec/factories"
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -25,3 +27,5 @@ end
     Destination.create :place => p, :letter => l[0], :color => l[1]
   end
 
+tmp = Factory.create(:trip)
+# Trip.new(:date => Date.today, :contact => "joe", :community => "Dancing Rabbit", :preferred_vehicles => "black jetta", )

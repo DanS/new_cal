@@ -32,6 +32,12 @@ Factory.define :random_trip do |trip|
   trip.community cmtys.rand
 end
 
+Factory.define :destination do |dest|
+  dest.place 'Rutledge'
+  dest.letter 'R'
+  dest.color '#FFC'
+end
+
 Factory.define :community do |community|
   community.name cmtys.rand
 end

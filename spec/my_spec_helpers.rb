@@ -1,3 +1,5 @@
+require RAILS_ROOT + '/app/helpers/trips_helper'
+include TripsHelper
 
 def add_unordered_trips
   #setup for testing trips are returned/ displayed in order by date, departure time
@@ -37,9 +39,10 @@ def weekend_days_in_month(month, year)
 end
 
 def day_class_for(date)
-  day_class = 'day'
-  day_class += date < Date.today ? ' past' :''
-  day_class += date.wday == 0 || date.wday == 6 ? ' weekendDay' : ''
-  day_class += date == Date.today ? ' today' : ""
-  return day_class
+  day_class = []
+  day_class << TripsHelper.class_for_day(*date.strftime("%Y,%m,%d").split(',')) 
+  day_class << 'past' if date < Date.today
+  day_class << 'weekendDay' if [0,6].include?(date.wday)
+  day_class << 'today' if date == Date.today
+  return day_class.join(' ').gsub('  ', ' ').strip
 end
