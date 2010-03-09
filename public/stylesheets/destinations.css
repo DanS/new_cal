@@ -2,6 +2,7 @@
 /* rake generate_colors:generate_css */
 /*           or                      */
 /* rake generate_colors:all */
+/* DON'T EDIT THIS FILE.  Edits will be lost on next auto generation */
   .E{
      background: url(../images/E.jpg);
      
@@ -17,86 +18,6 @@
      background-repeat: no-repeat;
   }
   
-  .EFKL{
-     background: url(../images/EFKL.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLM{
-     background: url(../images/EFKLM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLMO{
-     background: url(../images/EFKLMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLMOQ{
-     background: url(../images/EFKLMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLMOQX{
-     background: url(../images/EFKLMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLMOX{
-     background: url(../images/EFKLMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLMQ{
-     background: url(../images/EFKLMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLMQX{
-     background: url(../images/EFKLMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLMX{
-     background: url(../images/EFKLMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLO{
-     background: url(../images/EFKLO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLOQ{
-     background: url(../images/EFKLOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLOQX{
-     background: url(../images/EFKLOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLOX{
-     background: url(../images/EFKLOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLQ{
-     background: url(../images/EFKLQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLQX{
-     background: url(../images/EFKLQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFKLX{
-     background: url(../images/EFKLX.jpg);
-     background-repeat: no-repeat;
-  }
-  
   .EFKM{
      background: url(../images/EFKM.jpg);
      background-repeat: no-repeat;
@@ -107,18 +28,58 @@
      background-repeat: no-repeat;
   }
   
+  .EFKMOP{
+     background: url(../images/EFKMOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKMOPQ{
+     background: url(../images/EFKMOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKMOPQR{
+     background: url(../images/EFKMOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKMOPR{
+     background: url(../images/EFKMOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EFKMOQ{
      background: url(../images/EFKMOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFKMOQX{
-     background: url(../images/EFKMOQX.jpg);
+  .EFKMOQR{
+     background: url(../images/EFKMOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFKMOX{
-     background: url(../images/EFKMOX.jpg);
+  .EFKMOR{
+     background: url(../images/EFKMOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKMP{
+     background: url(../images/EFKMP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKMPQ{
+     background: url(../images/EFKMPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKMPQR{
+     background: url(../images/EFKMPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKMPR{
+     background: url(../images/EFKMPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -127,13 +88,13 @@
      background-repeat: no-repeat;
   }
   
-  .EFKMQX{
-     background: url(../images/EFKMQX.jpg);
+  .EFKMQR{
+     background: url(../images/EFKMQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFKMX{
-     background: url(../images/EFKMX.jpg);
+  .EFKMR{
+     background: url(../images/EFKMR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -142,18 +103,58 @@
      background-repeat: no-repeat;
   }
   
+  .EFKOP{
+     background: url(../images/EFKOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKOPQ{
+     background: url(../images/EFKOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKOPQR{
+     background: url(../images/EFKOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKOPR{
+     background: url(../images/EFKOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EFKOQ{
      background: url(../images/EFKOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFKOQX{
-     background: url(../images/EFKOQX.jpg);
+  .EFKOQR{
+     background: url(../images/EFKOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFKOX{
-     background: url(../images/EFKOX.jpg);
+  .EFKOR{
+     background: url(../images/EFKOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKP{
+     background: url(../images/EFKP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKPQ{
+     background: url(../images/EFKPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKPQR{
+     background: url(../images/EFKPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFKPR{
+     background: url(../images/EFKPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -162,93 +163,13 @@
      background-repeat: no-repeat;
   }
   
-  .EFKQX{
-     background: url(../images/EFKQX.jpg);
+  .EFKQR{
+     background: url(../images/EFKQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFKX{
-     background: url(../images/EFKX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFL{
-     background: url(../images/EFL.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLM{
-     background: url(../images/EFLM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLMO{
-     background: url(../images/EFLMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLMOQ{
-     background: url(../images/EFLMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLMOQX{
-     background: url(../images/EFLMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLMOX{
-     background: url(../images/EFLMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLMQ{
-     background: url(../images/EFLMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLMQX{
-     background: url(../images/EFLMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLMX{
-     background: url(../images/EFLMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLO{
-     background: url(../images/EFLO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLOQ{
-     background: url(../images/EFLOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLOQX{
-     background: url(../images/EFLOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLOX{
-     background: url(../images/EFLOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLQ{
-     background: url(../images/EFLQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLQX{
-     background: url(../images/EFLQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EFLX{
-     background: url(../images/EFLX.jpg);
+  .EFKR{
+     background: url(../images/EFKR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -262,18 +183,58 @@
      background-repeat: no-repeat;
   }
   
+  .EFMOP{
+     background: url(../images/EFMOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFMOPQ{
+     background: url(../images/EFMOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFMOPQR{
+     background: url(../images/EFMOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFMOPR{
+     background: url(../images/EFMOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EFMOQ{
      background: url(../images/EFMOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFMOQX{
-     background: url(../images/EFMOQX.jpg);
+  .EFMOQR{
+     background: url(../images/EFMOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFMOX{
-     background: url(../images/EFMOX.jpg);
+  .EFMOR{
+     background: url(../images/EFMOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFMP{
+     background: url(../images/EFMP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFMPQ{
+     background: url(../images/EFMPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFMPQR{
+     background: url(../images/EFMPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFMPR{
+     background: url(../images/EFMPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -282,13 +243,13 @@
      background-repeat: no-repeat;
   }
   
-  .EFMQX{
-     background: url(../images/EFMQX.jpg);
+  .EFMQR{
+     background: url(../images/EFMQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFMX{
-     background: url(../images/EFMX.jpg);
+  .EFMR{
+     background: url(../images/EFMR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -297,18 +258,58 @@
      background-repeat: no-repeat;
   }
   
+  .EFOP{
+     background: url(../images/EFOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFOPQ{
+     background: url(../images/EFOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFOPQR{
+     background: url(../images/EFOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFOPR{
+     background: url(../images/EFOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EFOQ{
      background: url(../images/EFOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFOQX{
-     background: url(../images/EFOQX.jpg);
+  .EFOQR{
+     background: url(../images/EFOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFOX{
-     background: url(../images/EFOX.jpg);
+  .EFOR{
+     background: url(../images/EFOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFP{
+     background: url(../images/EFP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFPQ{
+     background: url(../images/EFPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFPQR{
+     background: url(../images/EFPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EFPR{
+     background: url(../images/EFPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -317,98 +318,18 @@
      background-repeat: no-repeat;
   }
   
-  .EFQX{
-     background: url(../images/EFQX.jpg);
+  .EFQR{
+     background: url(../images/EFQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EFX{
-     background: url(../images/EFX.jpg);
+  .EFR{
+     background: url(../images/EFR.jpg);
      background-repeat: no-repeat;
   }
   
   .EK{
      background: url(../images/EK.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKL{
-     background: url(../images/EKL.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLM{
-     background: url(../images/EKLM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLMO{
-     background: url(../images/EKLMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLMOQ{
-     background: url(../images/EKLMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLMOQX{
-     background: url(../images/EKLMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLMOX{
-     background: url(../images/EKLMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLMQ{
-     background: url(../images/EKLMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLMQX{
-     background: url(../images/EKLMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLMX{
-     background: url(../images/EKLMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLO{
-     background: url(../images/EKLO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLOQ{
-     background: url(../images/EKLOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLOQX{
-     background: url(../images/EKLOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLOX{
-     background: url(../images/EKLOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLQ{
-     background: url(../images/EKLQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLQX{
-     background: url(../images/EKLQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EKLX{
-     background: url(../images/EKLX.jpg);
      background-repeat: no-repeat;
   }
   
@@ -422,18 +343,58 @@
      background-repeat: no-repeat;
   }
   
+  .EKMOP{
+     background: url(../images/EKMOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKMOPQ{
+     background: url(../images/EKMOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKMOPQR{
+     background: url(../images/EKMOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKMOPR{
+     background: url(../images/EKMOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EKMOQ{
      background: url(../images/EKMOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EKMOQX{
-     background: url(../images/EKMOQX.jpg);
+  .EKMOQR{
+     background: url(../images/EKMOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EKMOX{
-     background: url(../images/EKMOX.jpg);
+  .EKMOR{
+     background: url(../images/EKMOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKMP{
+     background: url(../images/EKMP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKMPQ{
+     background: url(../images/EKMPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKMPQR{
+     background: url(../images/EKMPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKMPR{
+     background: url(../images/EKMPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -442,13 +403,13 @@
      background-repeat: no-repeat;
   }
   
-  .EKMQX{
-     background: url(../images/EKMQX.jpg);
+  .EKMQR{
+     background: url(../images/EKMQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EKMX{
-     background: url(../images/EKMX.jpg);
+  .EKMR{
+     background: url(../images/EKMR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -457,18 +418,58 @@
      background-repeat: no-repeat;
   }
   
+  .EKOP{
+     background: url(../images/EKOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKOPQ{
+     background: url(../images/EKOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKOPQR{
+     background: url(../images/EKOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKOPR{
+     background: url(../images/EKOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EKOQ{
      background: url(../images/EKOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EKOQX{
-     background: url(../images/EKOQX.jpg);
+  .EKOQR{
+     background: url(../images/EKOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EKOX{
-     background: url(../images/EKOX.jpg);
+  .EKOR{
+     background: url(../images/EKOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKP{
+     background: url(../images/EKP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKPQ{
+     background: url(../images/EKPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKPQR{
+     background: url(../images/EKPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EKPR{
+     background: url(../images/EKPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -477,93 +478,13 @@
      background-repeat: no-repeat;
   }
   
-  .EKQX{
-     background: url(../images/EKQX.jpg);
+  .EKQR{
+     background: url(../images/EKQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EKX{
-     background: url(../images/EKX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .EL{
-     background: url(../images/EL.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELM{
-     background: url(../images/ELM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELMO{
-     background: url(../images/ELMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELMOQ{
-     background: url(../images/ELMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELMOQX{
-     background: url(../images/ELMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELMOX{
-     background: url(../images/ELMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELMQ{
-     background: url(../images/ELMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELMQX{
-     background: url(../images/ELMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELMX{
-     background: url(../images/ELMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELO{
-     background: url(../images/ELO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELOQ{
-     background: url(../images/ELOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELOQX{
-     background: url(../images/ELOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELOX{
-     background: url(../images/ELOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELQ{
-     background: url(../images/ELQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELQX{
-     background: url(../images/ELQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .ELX{
-     background: url(../images/ELX.jpg);
+  .EKR{
+     background: url(../images/EKR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -577,18 +498,58 @@
      background-repeat: no-repeat;
   }
   
+  .EMOP{
+     background: url(../images/EMOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EMOPQ{
+     background: url(../images/EMOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EMOPQR{
+     background: url(../images/EMOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EMOPR{
+     background: url(../images/EMOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EMOQ{
      background: url(../images/EMOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EMOQX{
-     background: url(../images/EMOQX.jpg);
+  .EMOQR{
+     background: url(../images/EMOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EMOX{
-     background: url(../images/EMOX.jpg);
+  .EMOR{
+     background: url(../images/EMOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EMP{
+     background: url(../images/EMP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EMPQ{
+     background: url(../images/EMPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EMPQR{
+     background: url(../images/EMPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EMPR{
+     background: url(../images/EMPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -597,13 +558,13 @@
      background-repeat: no-repeat;
   }
   
-  .EMQX{
-     background: url(../images/EMQX.jpg);
+  .EMQR{
+     background: url(../images/EMQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EMX{
-     background: url(../images/EMX.jpg);
+  .EMR{
+     background: url(../images/EMR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -612,18 +573,58 @@
      background-repeat: no-repeat;
   }
   
+  .EOP{
+     background: url(../images/EOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EOPQ{
+     background: url(../images/EOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EOPQR{
+     background: url(../images/EOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EOPR{
+     background: url(../images/EOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .EOQ{
      background: url(../images/EOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .EOQX{
-     background: url(../images/EOQX.jpg);
+  .EOQR{
+     background: url(../images/EOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EOX{
-     background: url(../images/EOX.jpg);
+  .EOR{
+     background: url(../images/EOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EP{
+     background: url(../images/EP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EPQ{
+     background: url(../images/EPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EPQR{
+     background: url(../images/EPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .EPR{
+     background: url(../images/EPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -632,13 +633,13 @@
      background-repeat: no-repeat;
   }
   
-  .EQX{
-     background: url(../images/EQX.jpg);
+  .EQR{
+     background: url(../images/EQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .EX{
-     background: url(../images/EX.jpg);
+  .ER{
+     background: url(../images/ER.jpg);
      background-repeat: no-repeat;
   }
   
@@ -652,86 +653,6 @@
      background-repeat: no-repeat;
   }
   
-  .FKL{
-     background: url(../images/FKL.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLM{
-     background: url(../images/FKLM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLMO{
-     background: url(../images/FKLMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLMOQ{
-     background: url(../images/FKLMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLMOQX{
-     background: url(../images/FKLMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLMOX{
-     background: url(../images/FKLMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLMQ{
-     background: url(../images/FKLMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLMQX{
-     background: url(../images/FKLMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLMX{
-     background: url(../images/FKLMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLO{
-     background: url(../images/FKLO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLOQ{
-     background: url(../images/FKLOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLOQX{
-     background: url(../images/FKLOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLOX{
-     background: url(../images/FKLOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLQ{
-     background: url(../images/FKLQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLQX{
-     background: url(../images/FKLQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FKLX{
-     background: url(../images/FKLX.jpg);
-     background-repeat: no-repeat;
-  }
-  
   .FKM{
      background: url(../images/FKM.jpg);
      background-repeat: no-repeat;
@@ -742,18 +663,58 @@
      background-repeat: no-repeat;
   }
   
+  .FKMOP{
+     background: url(../images/FKMOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKMOPQ{
+     background: url(../images/FKMOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKMOPQR{
+     background: url(../images/FKMOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKMOPR{
+     background: url(../images/FKMOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .FKMOQ{
      background: url(../images/FKMOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .FKMOQX{
-     background: url(../images/FKMOQX.jpg);
+  .FKMOQR{
+     background: url(../images/FKMOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FKMOX{
-     background: url(../images/FKMOX.jpg);
+  .FKMOR{
+     background: url(../images/FKMOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKMP{
+     background: url(../images/FKMP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKMPQ{
+     background: url(../images/FKMPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKMPQR{
+     background: url(../images/FKMPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKMPR{
+     background: url(../images/FKMPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -762,13 +723,13 @@
      background-repeat: no-repeat;
   }
   
-  .FKMQX{
-     background: url(../images/FKMQX.jpg);
+  .FKMQR{
+     background: url(../images/FKMQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FKMX{
-     background: url(../images/FKMX.jpg);
+  .FKMR{
+     background: url(../images/FKMR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -777,18 +738,58 @@
      background-repeat: no-repeat;
   }
   
+  .FKOP{
+     background: url(../images/FKOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKOPQ{
+     background: url(../images/FKOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKOPQR{
+     background: url(../images/FKOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKOPR{
+     background: url(../images/FKOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .FKOQ{
      background: url(../images/FKOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .FKOQX{
-     background: url(../images/FKOQX.jpg);
+  .FKOQR{
+     background: url(../images/FKOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FKOX{
-     background: url(../images/FKOX.jpg);
+  .FKOR{
+     background: url(../images/FKOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKP{
+     background: url(../images/FKP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKPQ{
+     background: url(../images/FKPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKPQR{
+     background: url(../images/FKPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FKPR{
+     background: url(../images/FKPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -797,93 +798,13 @@
      background-repeat: no-repeat;
   }
   
-  .FKQX{
-     background: url(../images/FKQX.jpg);
+  .FKQR{
+     background: url(../images/FKQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FKX{
-     background: url(../images/FKX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FL{
-     background: url(../images/FL.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLM{
-     background: url(../images/FLM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLMO{
-     background: url(../images/FLMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLMOQ{
-     background: url(../images/FLMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLMOQX{
-     background: url(../images/FLMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLMOX{
-     background: url(../images/FLMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLMQ{
-     background: url(../images/FLMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLMQX{
-     background: url(../images/FLMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLMX{
-     background: url(../images/FLMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLO{
-     background: url(../images/FLO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLOQ{
-     background: url(../images/FLOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLOQX{
-     background: url(../images/FLOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLOX{
-     background: url(../images/FLOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLQ{
-     background: url(../images/FLQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLQX{
-     background: url(../images/FLQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .FLX{
-     background: url(../images/FLX.jpg);
+  .FKR{
+     background: url(../images/FKR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -897,18 +818,58 @@
      background-repeat: no-repeat;
   }
   
+  .FMOP{
+     background: url(../images/FMOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FMOPQ{
+     background: url(../images/FMOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FMOPQR{
+     background: url(../images/FMOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FMOPR{
+     background: url(../images/FMOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .FMOQ{
      background: url(../images/FMOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .FMOQX{
-     background: url(../images/FMOQX.jpg);
+  .FMOQR{
+     background: url(../images/FMOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FMOX{
-     background: url(../images/FMOX.jpg);
+  .FMOR{
+     background: url(../images/FMOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FMP{
+     background: url(../images/FMP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FMPQ{
+     background: url(../images/FMPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FMPQR{
+     background: url(../images/FMPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FMPR{
+     background: url(../images/FMPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -917,13 +878,13 @@
      background-repeat: no-repeat;
   }
   
-  .FMQX{
-     background: url(../images/FMQX.jpg);
+  .FMQR{
+     background: url(../images/FMQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FMX{
-     background: url(../images/FMX.jpg);
+  .FMR{
+     background: url(../images/FMR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -932,18 +893,58 @@
      background-repeat: no-repeat;
   }
   
+  .FOP{
+     background: url(../images/FOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FOPQ{
+     background: url(../images/FOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FOPQR{
+     background: url(../images/FOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FOPR{
+     background: url(../images/FOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .FOQ{
      background: url(../images/FOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .FOQX{
-     background: url(../images/FOQX.jpg);
+  .FOQR{
+     background: url(../images/FOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FOX{
-     background: url(../images/FOX.jpg);
+  .FOR{
+     background: url(../images/FOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FP{
+     background: url(../images/FP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FPQ{
+     background: url(../images/FPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FPQR{
+     background: url(../images/FPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .FPR{
+     background: url(../images/FPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -952,99 +953,19 @@
      background-repeat: no-repeat;
   }
   
-  .FQX{
-     background: url(../images/FQX.jpg);
+  .FQR{
+     background: url(../images/FQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .FX{
-     background: url(../images/FX.jpg);
+  .FR{
+     background: url(../images/FR.jpg);
      background-repeat: no-repeat;
   }
   
   .K{
      background: url(../images/K.jpg);
      
-  }
-  
-  .KL{
-     background: url(../images/KL.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLM{
-     background: url(../images/KLM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLMO{
-     background: url(../images/KLMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLMOQ{
-     background: url(../images/KLMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLMOQX{
-     background: url(../images/KLMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLMOX{
-     background: url(../images/KLMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLMQ{
-     background: url(../images/KLMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLMQX{
-     background: url(../images/KLMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLMX{
-     background: url(../images/KLMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLO{
-     background: url(../images/KLO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLOQ{
-     background: url(../images/KLOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLOQX{
-     background: url(../images/KLOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLOX{
-     background: url(../images/KLOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLQ{
-     background: url(../images/KLQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLQX{
-     background: url(../images/KLQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .KLX{
-     background: url(../images/KLX.jpg);
-     background-repeat: no-repeat;
   }
   
   .KM{
@@ -1057,18 +978,58 @@
      background-repeat: no-repeat;
   }
   
+  .KMOP{
+     background: url(../images/KMOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KMOPQ{
+     background: url(../images/KMOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KMOPQR{
+     background: url(../images/KMOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KMOPR{
+     background: url(../images/KMOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .KMOQ{
      background: url(../images/KMOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .KMOQX{
-     background: url(../images/KMOQX.jpg);
+  .KMOQR{
+     background: url(../images/KMOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .KMOX{
-     background: url(../images/KMOX.jpg);
+  .KMOR{
+     background: url(../images/KMOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KMP{
+     background: url(../images/KMP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KMPQ{
+     background: url(../images/KMPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KMPQR{
+     background: url(../images/KMPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KMPR{
+     background: url(../images/KMPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -1077,13 +1038,13 @@
      background-repeat: no-repeat;
   }
   
-  .KMQX{
-     background: url(../images/KMQX.jpg);
+  .KMQR{
+     background: url(../images/KMQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .KMX{
-     background: url(../images/KMX.jpg);
+  .KMR{
+     background: url(../images/KMR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -1092,18 +1053,58 @@
      background-repeat: no-repeat;
   }
   
+  .KOP{
+     background: url(../images/KOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KOPQ{
+     background: url(../images/KOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KOPQR{
+     background: url(../images/KOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KOPR{
+     background: url(../images/KOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .KOQ{
      background: url(../images/KOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .KOQX{
-     background: url(../images/KOQX.jpg);
+  .KOQR{
+     background: url(../images/KOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .KOX{
-     background: url(../images/KOX.jpg);
+  .KOR{
+     background: url(../images/KOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KP{
+     background: url(../images/KP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KPQ{
+     background: url(../images/KPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KPQR{
+     background: url(../images/KPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .KPR{
+     background: url(../images/KPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -1112,93 +1113,13 @@
      background-repeat: no-repeat;
   }
   
-  .KQX{
-     background: url(../images/KQX.jpg);
+  .KQR{
+     background: url(../images/KQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .KX{
-     background: url(../images/KX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .L{
-     background: url(../images/L.jpg);
-     
-  }
-  
-  .LM{
-     background: url(../images/LM.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LMO{
-     background: url(../images/LMO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LMOQ{
-     background: url(../images/LMOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LMOQX{
-     background: url(../images/LMOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LMOX{
-     background: url(../images/LMOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LMQ{
-     background: url(../images/LMQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LMQX{
-     background: url(../images/LMQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LMX{
-     background: url(../images/LMX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LO{
-     background: url(../images/LO.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LOQ{
-     background: url(../images/LOQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LOQX{
-     background: url(../images/LOQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LOX{
-     background: url(../images/LOX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LQ{
-     background: url(../images/LQ.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LQX{
-     background: url(../images/LQX.jpg);
-     background-repeat: no-repeat;
-  }
-  
-  .LX{
-     background: url(../images/LX.jpg);
+  .KR{
+     background: url(../images/KR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -1212,18 +1133,58 @@
      background-repeat: no-repeat;
   }
   
+  .MOP{
+     background: url(../images/MOP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .MOPQ{
+     background: url(../images/MOPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .MOPQR{
+     background: url(../images/MOPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .MOPR{
+     background: url(../images/MOPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .MOQ{
      background: url(../images/MOQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .MOQX{
-     background: url(../images/MOQX.jpg);
+  .MOQR{
+     background: url(../images/MOQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .MOX{
-     background: url(../images/MOX.jpg);
+  .MOR{
+     background: url(../images/MOR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .MP{
+     background: url(../images/MP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .MPQ{
+     background: url(../images/MPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .MPQR{
+     background: url(../images/MPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .MPR{
+     background: url(../images/MPR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -1232,13 +1193,13 @@
      background-repeat: no-repeat;
   }
   
-  .MQX{
-     background: url(../images/MQX.jpg);
+  .MQR{
+     background: url(../images/MQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .MX{
-     background: url(../images/MX.jpg);
+  .MR{
+     background: url(../images/MR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -1247,18 +1208,58 @@
      
   }
   
+  .OP{
+     background: url(../images/OP.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .OPQ{
+     background: url(../images/OPQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .OPQR{
+     background: url(../images/OPQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .OPR{
+     background: url(../images/OPR.jpg);
+     background-repeat: no-repeat;
+  }
+  
   .OQ{
      background: url(../images/OQ.jpg);
      background-repeat: no-repeat;
   }
   
-  .OQX{
-     background: url(../images/OQX.jpg);
+  .OQR{
+     background: url(../images/OQR.jpg);
      background-repeat: no-repeat;
   }
   
-  .OX{
-     background: url(../images/OX.jpg);
+  .OR{
+     background: url(../images/OR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .P{
+     background: url(../images/P.jpg);
+     
+  }
+  
+  .PQ{
+     background: url(../images/PQ.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .PQR{
+     background: url(../images/PQR.jpg);
+     background-repeat: no-repeat;
+  }
+  
+  .PR{
+     background: url(../images/PR.jpg);
      background-repeat: no-repeat;
   }
   
@@ -1267,13 +1268,13 @@
      
   }
   
-  .QX{
-     background: url(../images/QX.jpg);
+  .QR{
+     background: url(../images/QR.jpg);
      background-repeat: no-repeat;
   }
   
-  .X{
-     background: url(../images/X.jpg);
+  .R{
+     background: url(../images/R.jpg);
      
   }
   

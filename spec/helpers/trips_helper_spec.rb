@@ -60,9 +60,9 @@ describe TripsHelper do
   describe "class_for_day" do
     before(:each) do
       @today = Date.today
-      Factory(:destination, :place => "Alpha", :letter => 'A')
       Factory(:destination, :place => "Beta",  :letter => 'B')
       Factory(:destination, :place => "Gamma", :letter => 'C')
+      Factory(:destination, :place => "Alpha", :letter => 'A')
     end
     
     it "should produce a class name containing all the letters for the days destinations" do
@@ -70,9 +70,10 @@ describe TripsHelper do
       helper.class_for_day(@today.year, @today.month, @today.day).should == 'day A'
     end
     it "should produce multiple letters if there are multiple destiantions" do
-      Factory(:trip, :date => @today, :destination => 'Alpha')
+      #letters should be sorted alphabetically
       Factory(:trip, :date => @today, :destination => 'Beta')
       Factory(:trip, :date => @today, :destination => 'Gamma')
+      Factory(:trip, :date => @today, :destination => 'Alpha')
       helper.class_for_day(@today.year, @today.month, @today.day).should == 'day ABC'
     end
     it "should not produce multiple letters if destinations are duplicated" do

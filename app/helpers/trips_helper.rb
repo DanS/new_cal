@@ -65,7 +65,7 @@ module TripsHelper
     dest_lookup.default = dest_lookup['Other']
     destinations = Trip.on_date(Date.parse("#{year}-#{month}-#{day}")).collect do |t| 
       t.destination
-    end.uniq.collect {|d| dest_lookup[d]}.join('') 
+    end.uniq.sort.collect {|d| dest_lookup[d]}.join('') 
     ('day ' + destinations).strip
   end
   

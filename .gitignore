@@ -1,0 +1,8 @@
+.DS_Store
+.project
+tmp/**/*
+.svn/
+log/*.log
+db/*.sqlite3
+nbproject/
+/public/images/*.*
