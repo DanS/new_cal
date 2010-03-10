@@ -6,6 +6,8 @@
       if day < Date.today
         [day.mday, {:class => 'day past'}]
       else
+        #puts "day = #{day.mday} class = #{class_for_day(year, month, day.mday)}"
+        #debugger
         [link_to(day.mday, :action => 'new', :controller => 'trips'),  {
           :id => "day_cell#{day.mday}", :class => class_for_day(year, month, day.mday) }]
       end
@@ -34,9 +36,16 @@
             <%= days_trips[0].date.strftime("%b %d %a")%>
           </td>
         <% end %>
-        <td> <%= trip.depart.strftime("%I:%M%p")%> <br />
-          <%= trip.return.strftime("%I:%M%p")%> </td>
-        <% for attrib in [ 'destination', 'contact', 'community', 'preferred_vehicle',
+        <td> 
+          <%= trip.depart.strftime("%I:%M%p")%>
+          <br />
+          <%= trip.return.strftime("%I:%M%p")%> 
+        </td>
+        <% letter = class_letter_for_destination(trip.destination) %>
+        <td class=<%= "\"#{letter}\"" %>>
+          <%= trip.destination %>
+        </td>
+        <% for attrib in [  'contact', 'community', 'preferred_vehicle',
             'travelers', 'notes'] %>
           <td> <%= trip.send(attrib) %> </td>
         <% end %>

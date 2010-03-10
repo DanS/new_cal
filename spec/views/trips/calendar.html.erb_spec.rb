@@ -50,6 +50,15 @@ describe "trips/calendar.html.erb" do
       table.should have_selector('td', :content => "1")
     end
   end
+  it "should style the destination cell so that it gets the destination color" do
+    Destination.create :place => 'Rutledge', :letter => 'R', :color => '#CFF'
+    render
+    response.should have_selector('table', :id => 'trip-list') do |table|
+      table.should have_selector('tr:nth-child(2)') do |second_row|
+        second_row.should have_selector('td:nth-child(3)', :class => "R")
+      end
+    end
+  end
   it "should have the date cell span all the rows with the same date" do
     tbd = {Date.today.strftime("%Y%m%d") => []}
     3.times { tbd[Date.today.strftime("%Y%m%d")] << Factory.create(:trip, :date => Date.today)}
@@ -96,12 +105,11 @@ describe "trips/calendar.html.erb" do
   end
   context "calendar days should be assigned class based on date and destinations\n" do
     it "should give days in the past a class of past" do
-      day_count = days_in_month(Date.today.month, Date.today.year)
       render
       response.should have_selector('div', :id => 'three-calendars') do |three_cal|
         three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
           today = Date.today
-          (1..day_count).each do |day_number|
+          (1..today.mday - 1).each do |day_number|
             day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_number}"))
             month_cal.should have_selector('td', :class => day_class, :content => day_number.to_s)
           end
