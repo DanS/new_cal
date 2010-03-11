@@ -1,13 +1,5 @@
 module TripsHelper
-  
-  def class_letter_for_destination(dest)
-    unless @dest_lookup 
-      @dest_lookup = Hash[*[Destination.all.collect {|d| [d.place, d.letter]}].flatten]
-      @dest_lookup.default = @dest_lookup['Other']
-    end
-    @dest_lookup[dest]
-  end
-  
+ 
   def next_3_months_years(start_date)
     #given a date, returns an array of 3 arrays, each array containing
     #the month number and year number
@@ -72,7 +64,7 @@ module TripsHelper
     #return the destination class for a given date
     date = Date.parse("#{year}-#{month}-#{day}")
     dest_class = Trip.on_date(date).collect do |t|
-      class_letter_for_destination(t.destination)
+      Destination.class_letter_for(t.destination)
     end.uniq.sort.join('') 
       return ('day ' + dest_class).strip
   end

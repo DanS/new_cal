@@ -7,9 +7,12 @@ class Trip < ActiveRecord::Base
     ["strftime('%W', date) = ? AND strftime('%Y', date) = ?", sprintf("%02d", wk), "#{yr}"]}}
 
   def self.list_destinations
+    #produces an hash, keys are upcoming destinations with count of trips to that destination "Memphis(3)"
+    #and values are the letter used to style the element the color assigned the destination
     dests = Hash.new {|hash, key| hash[key] = 0}
     upcoming.each {|t| dests[t.destination] = dests[t.destination] += 1}
-    dests.collect {|k,v| k + "(#{v})"}.sort
+    #dests.collect {|k,v| k + "(#{v})"}.sort
+    Hash[*dests.collect {|k,v| [k + "(#{v})", Destination.class_letter_for(k)]}.flatten]
   end
 
   def self.by_date_string
@@ -28,4 +31,5 @@ class Trip < ActiveRecord::Base
   def self.destinations_for(date)
     self.all.select {|t| t.date.strftime("%Y-%m-%d") == date.to_s}.collect {|t| t.destination}.uniq
   end
+
 end

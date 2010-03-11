@@ -39,11 +39,16 @@ describe Trip do
   end
 
   it "should list number of trips to each destination in upcoming trips" do
-    destinations = {'Quincy' => 1, 'Rutledge' => 2, 'La Plata' => 3, 'Kirksville' => 4,
-                    'Memphis' => 1, 'Fairfield' => 1}
-    destinations.each {|dest, count| count.times {Factory(:trip, :destination => dest)}}
-    destination_list = destinations.collect {|k,v| k + "(#{v})"}
-    Trip.list_destinations.should == destination_list.sort
+    destinations = {'Quincy(1)' => 'Q', 'Rutledge(2)' => 'R', 'La Plata(3)' => 'P', 'Kirksville(4)' => 'K',
+                    'Memphis(1)' => 'M', 'Fairfield(1)' => 'F'}
+    destinations.keys.each do |key|
+      dest = key[0..-4]
+      count = key[-2,1].to_i
+      count.times {Factory(:trip, :destination => dest)}
+      Factory(:destination, :place =>dest, :letter => destinations[key])
+    end
+    destination_list = Trip.list_destinations
+    destination_list.keys.sort.should == destinations.keys.sort
   end
 
   context "trips.by_date_string" do

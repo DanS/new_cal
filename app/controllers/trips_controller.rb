@@ -6,6 +6,7 @@ class TripsController < ApplicationController
     @start_date = Date.today.strftime("%Y%m") + "01"
     @trips_by_date = Trip.by_date_string
     @destination_list = Trip.list_destinations
+    @destination_color_lookup = Hash[* Destination.all.map {|d| [d.place, d.letter]}.flatten]
   end
 
   # GET /trips/1

@@ -69,8 +69,7 @@ describe TripsHelper do
       Factory(:trip, :date => @today, :destination => 'Alpha')
       helper.class_for_day(@today.year, @today.month, @today.day).should == 'day A'
     end
-    it "should produce multiple letters if there are multiple destiantions" do
-      #letters should be sorted alphabetically
+    it "should produce multiple letters in alphabetical order if there are multiple destinations" do
       Factory(:trip, :date => @today, :destination => 'Beta')
       Factory(:trip, :date => @today, :destination => 'Gamma')
       Factory(:trip, :date => @today, :destination => 'Alpha')

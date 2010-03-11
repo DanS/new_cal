@@ -15,8 +15,13 @@
   <% end %>
   <table id="destination-list">
     <tr><th>Show Only Trips to</th></tr>
-    <% @destination_list.each do |text| %>
-      <tr><td> <%= text %> </td></tr>
+    <% @destination_list.keys.each do |text| %>
+      <tr>
+        <% letter = @destination_list[text] %>
+        <td class=<%= "\"#{letter}\"" %>> 
+          <%= text %> 
+        </td>
+      </tr>
     <% end %>
   </table>
 </div>
@@ -41,7 +46,7 @@
           <br />
           <%= trip.return.strftime("%I:%M%p")%> 
         </td>
-        <% letter = class_letter_for_destination(trip.destination) %>
+        <% letter = Destination.class_letter_for(trip.destination) %>
         <td class=<%= "\"#{letter}\"" %>>
           <%= trip.destination %>
         </td>

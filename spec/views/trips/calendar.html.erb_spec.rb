@@ -5,8 +5,11 @@ describe "trips/calendar.html.erb" do
     assigns[:start_date] = Date.today.strftime("%Y%m") + "01"
     @trip = Factory.create(:trip)
     assigns[:trips_by_date] = {Date.today.strftime("%Y%m%d") => [@trip]}
-    @destinations = ["Rutledge(2)", "Memphis(4)", "La Plata(3)", "Quincy(1)"]
+    @destinations = {"Rutledge(2)" => 'R', "Memphis(4)" => 'M', "La Plata(3)" => 'P',
+      "Quincy(1)" => 'Q'}
     assigns[:destination_list] = @destinations
+#    @destination_color_lookup = Hash[*[@destinations.collect {|d| [ d, d[0,1].upcase]}].flatten]
+#    assigns[:destination_color_lookup] = @destination_color_lookup
   end
   it "displays the header" do
     render
@@ -18,20 +21,32 @@ describe "trips/calendar.html.erb" do
       response.should contain(month)
     end
   end
-  it "should display destinations in destination-list table" do
-    render
-    response.should have_selector('table', :id => "destination-list" ) do |table|
-      @destinations.each do |dest|
-        table.should have_selector('tr td', :content => dest)
+  context "destination list" do
+
+    it "should display destinations in destination-list table" do
+      render
+      response.should have_selector('table', :id => "destination-list" ) do |table|
+        @destinations.keys.each do |dest|
+          table.should have_selector('tr td', :content => dest)
+        end
+      end
+    end
+    it "should have color styles for destination in the destination list" do
+      render
+      response.should have_selector('table', :id => "destination-list" ) do |table|
+        @destinations.each_pair do |place, style_letter|
+          table.should have_selector('tr td', :class => style_letter, :content => place)
+        end
       end
     end
   end
+  
   it "should display column headers in the first row of the trip-list table" do
     render
     response.should have_selector('table', :id => 'trip-list') do |table|
       table.should have_selector('tr:nth-child(1)') do |tr|
         ['Date', 'Time', 'Destination', 'Contact', 'Community', 'Preferred Vehicle',
-        'Travelers', 'Notes', 'Actions'].each do |header|
+          'Travelers', 'Notes', 'Actions'].each do |header|
           tr.should have_selector('th', :content => header)
         end
       end
@@ -163,7 +178,7 @@ describe "trips/calendar.html.erb" do
           month_cal.should have_selector('td', :id => "day_cell#{day_num}", :class => day_class)
         end
       end
-      
+
     end
   end
 end
