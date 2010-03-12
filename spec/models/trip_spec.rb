@@ -38,19 +38,20 @@ describe Trip do
       "trip-4", "trip-5", "trip-6", "trip-7", "trip-8", "trip-9"]
   end
 
-  it "should list number of trips to each destination in upcoming trips" do
-    destinations = {'Quincy(1)' => 'Q', 'Rutledge(2)' => 'R', 'La Plata(3)' => 'P', 'Kirksville(4)' => 'K',
-                    'Memphis(1)' => 'M', 'Fairfield(1)' => 'F'}
-    destinations.keys.each do |key|
-      dest = key[0..-4]
-      count = key[-2,1].to_i
-      count.times {Factory(:trip, :destination => dest)}
-      Factory(:destination, :place =>dest, :letter => destinations[key])
+  context "destination_list method" do
+    it "should list number of trips to each destination in upcoming trips" do
+      destinations = {'Quincy(1)' => 'Q', 'Rutledge(2)' => 'R', 'La Plata(3)' => 'P', 'Kirksville(4)' => 'K',
+        'Memphis(1)' => 'M', 'Fairfield(1)' => 'F'}
+      destinations.keys.each do |key|
+        dest = key[0..-4]
+        count = key[-2,1].to_i
+        count.times {Factory(:trip, :destination => dest)}
+        Factory(:destination, :place =>dest, :letter => destinations[key])
+      end
+      destination_list = Trip.list_destinations
+      destination_list.keys.sort.should == destinations.keys.sort
     end
-    destination_list = Trip.list_destinations
-    destination_list.keys.sort.should == destinations.keys.sort
   end
-
   context "trips.by_date_string" do
     before(:each) do
       dates = (1..3).collect {|i| Date.today + i.days}

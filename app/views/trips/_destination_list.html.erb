@@ -1,6 +1,6 @@
 <table id="destination-list">
   <tr><th>Show Only Trips to</th></tr>
-  <% @destination_list.keys.each do |text| %>
+  <% @destination_list.keys.sort.each do |text| %>
     <tr>
       <% letter = @destination_list[text] %>
       <td class=<%= "\"#{letter}\"" %>> 
