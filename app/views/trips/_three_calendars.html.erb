@@ -1,0 +1,13 @@
+
+  <% for month, year in next_3_months_years(@start_date) %>
+    <%= calendar(:year => year, :month => month) do |day|
+      if day < Date.today
+        [day.mday, {:class => 'day past'}]
+      else
+        #puts "day = #{day.mday} class = #{class_for_day(year, month, day.mday)}"
+        #debugger
+        [link_to(day.mday, :action => 'new', :controller => 'trips'),  {
+          :id => "day_cell#{day.mday}", :class => class_for_day(year, month, day.mday) }]
+      end
+    end %>
+  <% end %>

@@ -1,0 +1,11 @@
+<table id="destination-list">
+  <tr><th>Show Only Trips to</th></tr>
+  <% @destination_list.keys.each do |text| %>
+    <tr>
+      <% letter = @destination_list[text] %>
+      <td class=<%= "\"#{letter}\"" %>> 
+        <%= text %> 
+      </td>
+    </tr>
+  <% end %>
+</table>
