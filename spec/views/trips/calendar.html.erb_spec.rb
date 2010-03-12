@@ -186,9 +186,6 @@ describe "trips/calendar.html.erb" do
         end
       end
     end
-    it "should not allow past trips to affect the destination list" do
-      pending()
-    end
   end
 
 end
