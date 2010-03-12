@@ -85,4 +85,6 @@ describe TripsHelper do
       helper.class_for_day(@today.year, @today.month, @today.day).should == 'day'
     end
   end
+
+  
 end

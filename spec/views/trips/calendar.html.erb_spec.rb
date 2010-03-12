@@ -35,17 +35,26 @@ describe "trips/calendar.html.erb" do
         end
       end
     end
-    context "only current and future calendar days all should have a link to create a new trip" do
-      it "should contain a link to create a new trip" do
+    context "only current and future calendar days should have a link to create a new trip on that date" do
+      it "should contain links to create a new trip on that date on current and future dates" do
+        #pending()
+        months_to_check = next_3_months_years(Date.today.strftime("%Y%m%d"))
         render
         response.should have_selector('div', :id => 'three-calendars') do |three_cal|
-          three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
-            today = Date.today
-            days = days_in_month(today.month, today.year)
-            (today.day..days).each do |day_num|
-              day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_num}"))
-              month_cal.should have_selector('td', :id => "day_cell#{day_num}") do |day|
-                day.should have_selector('a', :href => '/trips/new')
+          (1..3).each do |current_month|
+            three_cal.should have_selector("table:nth-child(#{current_month})", :class => "calendar" ) do |month_cal|
+              today = Date.today
+              start_day = current_month == 1 ? today.mday : 1
+              days = days_in_month(*months_to_check[current_month - 1])
+              (start_day..days).each do |day_num|
+                day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_num}"))
+                month_cal.should have_selector('td', :id => "day_cell#{day_num}") do |day|
+                  current_date = sprintf("%d%02d%02d",
+                    *months_to_check[current_month - 1].reverse + [day_num])
+                  #current_date = months_to_check[current_month - 1].reverse.join + sprintf("%02d", day_num)
+                  day.should have_selector("a", :href => "/trips/new?date=#{current_date}",
+                    :content => day_num.to_s)
+                end
               end
             end
           end

@@ -68,5 +68,5 @@ module TripsHelper
     end.uniq.sort.join('') 
       return ('day ' + dest_class).strip
   end
-  
+
 end

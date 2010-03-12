@@ -18,7 +18,7 @@ class TripsController < ApplicationController
   # GET /trips/new
   # GET /trips/new.xml
   def new
-    @trip = Trip.new
+    @trip = Trip.new(:date => params[:date])
     @communities = Community.all.collect {|c| c.name}
     @vehicles = Vehicle.all.collect {|v| v.name}
   end

@@ -71,6 +71,10 @@ describe TripsController do
   end
 
   describe "GET new" do
+    it "gets the trip date from params if present" do
+      Trip.should_receive(:new).with(:date => '20100415')
+      get :new, :date => '20100415'
+    end
     it "assigns a new trip as @trip" do
       Trip.stub(:new).and_return(mock_trip)
       get :new
