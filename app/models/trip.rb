@@ -7,12 +7,13 @@ class Trip < ActiveRecord::Base
     ["strftime('%W', date) = ? AND strftime('%Y', date) = ?", sprintf("%02d", wk), "#{yr}"]}}
 
   def self.list_destinations
-    #produces an hash, keys are upcoming destinations with count of trips to that destination "Memphis(3)"
-    #and values are the letter used to style the element the color assigned the destination
+    #produces a hash, keys are upcoming destinations, values are an array of count of trips
+    #to that destination, and css style letter for right color. like  "Rutledge => [3, 'R']
     dests = Hash.new {|hash, key| hash[key] = 0}
+    output = {}
     upcoming.each {|t| dests[t.destination] = dests[t.destination] += 1}
-    #dests.collect {|k,v| k + "(#{v})"}.sort
-    Hash[*dests.collect {|k,v| [k + "(#{v})", Destination.class_letter_for(k)]}.flatten]
+    dests.each_pair {|k, v| output[k] = [v, Destination.class_letter_for(k)]}
+    return output
   end
 
   def self.by_date_string

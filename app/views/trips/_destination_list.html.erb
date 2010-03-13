@@ -2,9 +2,10 @@
   <tr><th>Show Only Trips to</th></tr>
   <% @destination_list.keys.sort.each do |text| %>
     <tr>
-      <% letter = @destination_list[text] %>
-      <td class=<%= "\"#{letter}\"" %>> 
-        <%= text %> 
+      <% count, letter = @destination_list[text] %>
+      <%value =  text  + "(#{count})"%>
+      <td class=<%= "\"#{letter}\"" %>>
+        <%= link_to value, "/?destination=#{text.gsub(' ', '_')}" %>
       </td>
     </tr>
   <% end %>

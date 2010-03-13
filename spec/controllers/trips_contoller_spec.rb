@@ -6,9 +6,7 @@ describe TripsController do
   end
 
   describe "GET calendar" do #replaces index action
-    before(:each) do
-
-    end
+    
     it "assigns all trips as @trips" do
       Trip.stub(:find).with(:all).and_return([mock_trip])
       get :calendar
@@ -19,16 +17,19 @@ describe TripsController do
       assigns[:start_date].should == Date.today.strftime("%Y%m") + "01"
     end
     it "assigns destinations " do
-      destinations = {'Quincy' => 1, 'Rutledge' => 2, 'La Plata' => 3, 'Kirksville' => 4,
-                      'Memphis' => 1, 'Fairfield' => 1}
-      destinations.each {|dest, count| count.times {Factory(:trip, :destination => dest)}}
+      destinations = {'Quincy' => [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
+        'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
+      destinations.each do |dest, value|
+        value[0].times {Factory(:trip, :destination => dest)}
+        Factory(:destination, :place => dest, :letter => value[1])
+      end
       get :calendar
-      destination_list = destinations.collect {|k,v| k + "(#{v})"}
-      assigns[:destination_list].keys.sort.should == destination_list.sort
+      assigns[:destination_list].keys.sort.should == destinations.keys.sort
+      assigns[:destination_list].values.sort.should == destinations.values.sort
     end
     it "assigns destination_color_lookup" do
       look_hash = {"Kirksville"=>"K", "Rutledge"=>"R", "Fairfield"=>"F", "Other"=>"O",
-                   "Memphis"=>"M", "Ottumwa"=>"O", "Quincy"=>"Q"}
+        "Memphis"=>"M", "Ottumwa"=>"O", "Quincy"=>"Q"}
       look_hash.each_pair do |place, letter|
         Factory(:destination, :place => place, :letter => letter)
       end
