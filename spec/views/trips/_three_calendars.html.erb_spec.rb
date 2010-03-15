@@ -26,10 +26,11 @@ describe "trips/calendar.html.erb" do
         Trip.delete_all
         test_date = Date.today - 1.day
         Factory(:trip, :date => test_date)
+        yesterdays_class = day_class_for(test_date)
         render
         response.should have_selector('div', :id => 'three-calendars') do |three_cal|
           three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
-            three_cal.should have_selector("td", :class => 'day past', :content => test_date.mday.to_s )
+            three_cal.should have_selector("td", :class => yesterdays_class, :content => test_date.mday.to_s )
           end
         end
       end
