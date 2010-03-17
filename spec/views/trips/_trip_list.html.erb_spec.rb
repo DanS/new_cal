@@ -57,7 +57,7 @@ describe "trips/_trip_list.html.erb" do
     end
     it "should display trips in order by date then time" do
       add_unordered_trips #defined in my_spec_helpers
-      assigns[:trips_by_date] = Trip.by_date_string
+      assigns[:trips_by_date] = Trip.by_date_string(params)
       render
       response.should have_selector("table", :id => "trip-list" ) do |table|
         (1..9).each do |i|

@@ -2,9 +2,9 @@ class TripsController < ApplicationController
   # GET /calendar
   # GET /trips.xml
   def calendar
-    @trips = Trip.all
+    @trips = Trip.filtered(params)
     @start_date = Date.today.strftime("%Y%m") + "01"
-    @trips_by_date = Trip.by_date_string
+    @trips_by_date = Trip.by_date_string(params)
     @destination_list = Trip.list_destinations
     @destination_color_lookup = Hash[* Destination.all.map {|d| [d.place, d.letter]}.flatten]
   end

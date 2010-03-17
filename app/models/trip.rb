@@ -2,9 +2,14 @@ class Trip < ActiveRecord::Base
   validates_presence_of :date, :contact, :destination, :community
   named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date, depart'}
   named_scope :next_3_months, {:conditions =>
-    ["date >= ? AND date <= ?", Date.today, Date.today + 3.months]}
+      ["date >= ? AND date <= ?", Date.today, Date.today + 3.months]}
   named_scope :for_week_year, lambda {|wk, yr| {:conditions =>
-    ["strftime('%W', date) = ? AND strftime('%Y', date) = ?", sprintf("%02d", wk), "#{yr}"]}}
+        ["strftime('%W', date) = ? AND strftime('%Y', date) = ?", sprintf("%02d", wk), "#{yr}"]}}
+  #default dates
+  first = Date.parse("2000-01-01")
+  last = Date.parse("2100-01-01")
+  named_scope :to_destination, lambda {|*dest| {:conditions => ["destination like ?", dest[0] || "%"]}}
+  named_scope :between_dates, lambda {|*d| {:conditions => ["? < date and date < ?", d[0] || first, d[1] || last]}}
 
   def self.list_destinations
     #produces a hash, keys are upcoming destinations, values are an array of count of trips
@@ -16,9 +21,9 @@ class Trip < ActiveRecord::Base
     return output
   end
 
-  def self.by_date_string
+  def self.by_date_string(params)
     trips_by_date = Hash.new {|hash, key| hash[key] = []}
-    upcoming.each do |t| 
+    to_destination(params[:destination]).upcoming.each do |t|
       date_str = t.date.strftime("%Y%m%d")
       trips_by_date[date_str] = trips_by_date[date_str] << t
     end
@@ -29,8 +34,11 @@ class Trip < ActiveRecord::Base
     self.all.select {|t| t.date.strftime("%Y-%m-%d") == date.to_s}
   end
   
-  def self.destinations_for(date)
+  def self.destinations_for_date(date)
     self.all.select {|t| t.date.strftime("%Y-%m-%d") == date.to_s}.collect {|t| t.destination}.uniq
   end
 
+  def self.filtered(filters)
+    Trip.to_destination(filters[:destination]).between_dates(filters[:start_d], filters[:end_d])
+  end
 end

@@ -38,10 +38,32 @@ describe Trip do
       "trip-4", "trip-5", "trip-6", "trip-7", "trip-8", "trip-9"]
   end
 
+  context "to_destination method" do
+    before(:each) do
+      @test_dests = ["Rutledge", "Memphis", "Fairfield", "Quincy", "Kirksville"]
+      @test_dests.each  do |d|
+        Factory(:trip, :destination => d, :date => Date.today + 1.day)
+      end
+    end
+
+    it "should return only trips going to the given destination" do
+      for test_dest in @test_dests do
+        trip_results = Trip.to_destination(test_dest).collect {|t| t.destination}
+        trip_results.should include(test_dest)
+        for other_dest in @test_dests.reject {|d| d == test_dest}
+          trip_results.should_not include(other_dest)
+        end
+      end
+    end
+    it "should return all trips if no destination given" do
+      Trip.to_destination().size.should == 5
+    end
+  end
+
   context "destination_list method" do
     it "should list number of trips to each destination in upcoming trips" do
-#      destinations = {'Quincy(1)' => 'Q', 'Rutledge(2)' => 'R', 'La Plata(3)' => 'P', 'Kirksville(4)' => 'K',
-#        'Memphis(1)' => 'M', 'Fairfield(1)' => 'F'}
+      #      destinations = {'Quincy(1)' => 'Q', 'Rutledge(2)' => 'R', 'La Plata(3)' => 'P', 'Kirksville(4)' => 'K',
+      #        'Memphis(1)' => 'M', 'Fairfield(1)' => 'F'}
 
       destinations = {'Quincy' =>  [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
         'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
@@ -64,18 +86,19 @@ describe Trip do
         (j + 1).times {trips[date_str] = trips[date_str] << Factory(:trip, :date => d)}
       end
       @date_strings = dates.collect {|d| d.strftime("%Y%m%d")}
+      @params = {}
     end
     it "should have 3 date keys" do
-      Trip.by_date_string.keys.length.should == 3
+      Trip.by_date_string(@params).keys.length.should == 3
     end
     it "should have 1 trip in the lowest date" do
-      Trip.by_date_string[@date_strings[0]].length.should == 1
+      Trip.by_date_string(@params)[@date_strings[0]].length.should == 1
     end
     it "should have 3 trips in the highest date" do
-      Trip.by_date_string[@date_strings[2]].length.should == 3
+      Trip.by_date_string(@params)[@date_strings[2]].length.should == 3
     end
     it "should only contain trip objects as values" do
-      Trip.by_date_string.values.flatten.all? {|t| t.class == Trip}.should == true
+      Trip.by_date_string(@params).values.flatten.all? {|t| t.class == Trip}.should == true
     end
   end
   it "should return trips for the next 3 months" do
@@ -123,7 +146,7 @@ describe Trip do
     end
   end
 
-  context "destinations_for method" do
+  context "destinations_for_date method" do
     before(:each) do
       @today = Date.today
       @tomorrow = @today + 1.day
@@ -133,18 +156,69 @@ describe Trip do
       Factory(:trip, :date => @tomorrow, :destination => "destination three" )
     end
     it "should return the destinations for all trips on a date (1 trip for today)" do
-      Trip.destinations_for(@today).should == ['todays destination']
+      Trip.destinations_for_date(@today).should == ['todays destination']
     end
     it "should return the destinations for all trips on a date (2 trips for tomorrow)" do
-      Trip.destinations_for(@tomorrow).should include('destination two')
-      Trip.destinations_for(@tomorrow).should include('destination three')
+      Trip.destinations_for_date(@tomorrow).should include('destination two')
+      Trip.destinations_for_date(@tomorrow).should include('destination three')
     end
     it "should only return unique destinations (no duplicates)" do
       Factory(:trip, :date => @tomorrow, :destination => "destination two" ) #dup destination
-      Trip.destinations_for(@tomorrow).should have_exactly(2).items
+      Trip.destinations_for_date(@tomorrow).should have_exactly(2).items
     end
     it "should return an empty array for dates with no trips" do
-      Trip.destinations_for(@tomorrow + 3.days).should == []
+      Trip.destinations_for_date(@tomorrow + 3.days).should == []
+    end
+  end
+
+  context "between_dates named scope" do
+    before(:each) do
+      (1..12).each {|n| Factory(:trip, :date => Date.today + n.months)}
+    end
+    it  "should return all trips if no dates given" do
+      Trip.between_dates().should have_exactly(Trip.all.size).Trip
+    end
+    it "should return no trips if no trips in date range" do
+      Trip.between_dates(Date.today + 2.years, Date.today + 3.years)
+    end
+    it "should only return trip between dates given" do
+      result = Trip.between_dates(Date.today + 2.months, Date.today + 4.months)
+      result.should have_exactly(2).Trips
+    end
+  end
+
+  context "filtered trips method" do
+    it "should only return trips to 'destination' if destination in params" do
+      trip_destinations =  ["Rutledge", "Memphis", "Fairfield", "Quincy", "Kirksville"]
+      trip_destinations.each  do |d|
+        Factory(:trip, :destination => d, :date => Date.today + 1.day)
+      end
+      trip_results = Trip.filtered(:destination => 'Rutledge')
+      trip_results.should have_exactly(1).Trip
+      trip_results[0].destination.should == 'Rutledge'
+    end
+    it "should only return trips in date range if start_date and end_date are in the params" do
+      today = Date.today
+      (1..5).each do |i|
+        Factory(:trip, :date => today + i.weeks , :notes => "#{i} trip")
+      end
+      result = Trip.filtered(:start_d => today + 2.weeks, :end_d => today + 5.weeks)
+      result.should have_exactly(3).Trip
+      result.collect {|t| t.notes}.should include('2 trip')
+      result.collect {|t| t.notes}.should include('3 trip')
+      result.collect {|t| t.notes}.should include('4 trip')
+    end
+    it "should filter by both date and destination if both are present" do
+      today = Date.today
+      trip_params =  [["Rutledge", today + 1.day], ["Memphis", today + 2.day], ["Memphis", today + 3.day],
+        ["Kirksville", today + 3.day], ["Kirksville", today + 3.day]]
+      trip_params.each  do |dest, date|
+        Factory(:trip, :destination => dest, :date => date)
+      end
+      result = Trip.filtered(:destination => 'Kirksville', :start_d => today + 3.day, :end_d => today + 5.weeks)
+      result.should have_exactly(2).Trip
+      result = Trip.filtered(:destination => 'Memphis', :start_d => today + 3.day, :end_d => today + 5.weeks)
+      result.should have_exactly(1).Trip
     end
   end
 end
