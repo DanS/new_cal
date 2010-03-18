@@ -86,5 +86,19 @@ describe TripsHelper do
     end
   end
 
+  context "class_for_trips method" do
+    it "should return the color class for an array of trips given" do
+      Factory(:destination, :place => "Beta",  :letter => 'B')
+      Factory(:destination, :place => "Gamma", :letter => 'C')
+      Factory(:destination, :place => "Alpha", :letter => 'A')
+      tripA = Factory(:trip, :destination => "Alpha")
+      tripB = Factory(:trip, :destination => "Beta")
+      tripC = Factory(:trip, :destination => "Gamma")
+      helper.class_for_trips([tripC, tripB, tripB]).should == 'BC'
+      helper.class_for_trips([tripC, tripB, tripA]).should == 'ABC'
+      helper.class_for_trips([tripC, tripC, tripC]).should == 'C'
+    end
+  end
+
   
 end
