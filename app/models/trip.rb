@@ -11,6 +11,14 @@ class Trip < ActiveRecord::Base
   named_scope :to_destination, lambda {|*dest| {:conditions => ["destination like ?", dest[0] || "%"]}}
   named_scope :between_dates, lambda {|*d| {:conditions => ["? < date and date < ?", d[0] || first, d[1] || last]}}
 
+  def destination_id
+      begin
+        Destination.find_by_place(destination).id
+      rescue
+        Destination.find_by_place('Other').id
+      end
+  end
+
   def self.list_destinations
     #produces a hash, keys are upcoming destinations, values are an array of count of trips
     #to that destination, and css style letter for right color. like  "Rutledge => [3, 'R']

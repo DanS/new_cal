@@ -11,7 +11,7 @@ describe Trip do
       :destination => 'Rutledge',
       :notes => "Zim's here we come",
       :depart => Time.parse('10:15AM'),
-      :return => Time.parse('12:30PM')
+      :return => Time.parse('12:30PM'),
     }
   end
 
@@ -26,6 +26,17 @@ describe Trip do
       trip.should_not be_valid
     end
   end
+
+  it "should have a virtual attribute destination_id" do
+    %w(two four six Other).each {|p| Factory(:destination, :place => p, :letter => p[0,1])}
+    trip = Factory(:trip, :destination => 'two')
+    trip.destination_id.should == Destination.find_by_place('two').id
+    trip = Factory(:trip, :destination => 'four')
+    trip.destination_id.should == Destination.find_by_place('four').id
+    trip = Factory(:trip, :destination => 'eight')
+    trip.destination_id.should == Destination.find_by_place('Other').id
+  end
+
 
   it "should return upcoming trips" do
     (-5..5).each {|i| Factory(:trip, :date => Date.today + i.day)}
