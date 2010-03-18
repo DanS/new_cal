@@ -19,6 +19,10 @@ class Trip < ActiveRecord::Base
       end
   end
 
+  def letter
+    Destination.find(destination_id).letter
+  end
+
   def self.list_destinations
     #produces a hash, keys are upcoming destinations, values are an array of count of trips
     #to that destination, and css style letter for right color. like  "Rutledge => [3, 'R']

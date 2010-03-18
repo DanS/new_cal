@@ -27,16 +27,25 @@ describe Trip do
     end
   end
 
-  it "should have a virtual attribute destination_id" do
-    %w(two four six Other).each {|p| Factory(:destination, :place => p, :letter => p[0,1])}
-    trip = Factory(:trip, :destination => 'two')
-    trip.destination_id.should == Destination.find_by_place('two').id
-    trip = Factory(:trip, :destination => 'four')
-    trip.destination_id.should == Destination.find_by_place('four').id
-    trip = Factory(:trip, :destination => 'eight')
-    trip.destination_id.should == Destination.find_by_place('Other').id
-  end
+  context "Link trips to destination thru a virtural attribute" do
+    before(:each) do
+      %w(two four six Other).each {|p| Factory(:destination, :place => p, :letter => p[0,1])}
+    end
 
+    it "should have a virtual attribute destination_id" do
+      trip = Factory(:trip, :destination => 'two')
+      trip.destination_id.should == Destination.find_by_place('two').id
+      trip = Factory(:trip, :destination => 'four')
+      trip.destination_id.should == Destination.find_by_place('four').id
+      trip = Factory(:trip, :destination => 'eight')
+      trip.destination_id.should == Destination.find_by_place('Other').id
+    end
+
+    it "should return the letter for its destination" do
+      Factory(:trip, :destination => 'two').letter.should == 't'
+      Factory(:trip, :destination => 'non-standard').letter.should == 'O'
+    end
+  end
 
   it "should return upcoming trips" do
     (-5..5).each {|i| Factory(:trip, :date => Date.today + i.day)}
