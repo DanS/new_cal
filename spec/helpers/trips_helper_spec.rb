@@ -97,6 +97,7 @@ describe TripsHelper do
       helper.class_for_trips([tripC, tripB, tripB]).should == 'BC'
       helper.class_for_trips([tripC, tripB, tripA]).should == 'ABC'
       helper.class_for_trips([tripC, tripC, tripC]).should == 'C'
+      helper.class_for_trips([]).should == ''
     end
   end
 

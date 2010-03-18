@@ -4,8 +4,10 @@
     if day < Date.today
       [day.mday, {:class => 'day past'}]
     else
-      [link_to(day.mday, :action => 'new', :controller => 'trips', :date => day.strftime("%Y%m%d")),  {
-          :id => "day_cell#{day.mday}", :class => class_for_day(year, month, day.mday) }]
+      date = day.strftime("%Y%m%d")
+      style_class = class_for_trips(@trips_by_date[date])
+      [link_to(day.mday, :action => 'new', :controller => 'trips', :date =>date ),  {
+          :id => "day_cell#{day.mday}", :class => style_class }]
     end
   end %>
 <% end %>
