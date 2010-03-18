@@ -122,12 +122,13 @@ describe TripsController do
         assigns[:trip].should equal(mock_trip)
       end
 
-      it "redirects to the created trip" do
+      it "redirects to the home page on success" do
         Trip.stub(:new).and_return(mock_trip(:save => true))
         post :create, :trip => {}
-        response.should redirect_to(trip_url(mock_trip))
+        response.should redirect_to(root_path)
       end
     end
+
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved trip as @trip" do
@@ -160,10 +161,10 @@ describe TripsController do
         assigns[:trip].should equal(mock_trip)
       end
 
-      it "redirects to the trip" do
+      it "redirects to the homepage" do
         Trip.stub(:find).and_return(mock_trip(:update_attributes => true))
         put :update, :id => "1"
-        response.should redirect_to(trip_url(mock_trip))
+        response.should redirect_to(root_path)
       end
     end
 

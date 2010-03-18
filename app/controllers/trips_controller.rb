@@ -35,7 +35,7 @@ class TripsController < ApplicationController
     respond_to do |format|
       if @trip.save
         flash[:notice] = 'Trip was successfully created.'
-        format.html { redirect_to(@trip) }
+        format.html { redirect_to(root_path) }
         format.xml  { render :xml => @trip, :status => :created, :location => @trip }
       else
         format.html { render :action => "new" }
@@ -52,7 +52,7 @@ class TripsController < ApplicationController
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
         flash[:notice] = 'Trip was successfully updated.'
-        format.html { redirect_to(@trip) }
+        format.html { redirect_to(root_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
