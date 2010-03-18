@@ -80,4 +80,12 @@ describe "trips/_trip_list.html.erb" do
     end
   end
 
+  it "should accept trips that do not have a return time" do
+    trip  = Factory(:trip, :return => nil, :notes => 'No return time for this trip')
+    assigns[:trips_by_date] = {Date.today.strftime("%Y%m%d") => [trip]}
+    render
+    response.should have_selector("table", :id => "trip-list" ) do |table|
+      table.should contain('No return time for this trip')
+    end
+  end
 end

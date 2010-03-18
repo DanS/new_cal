@@ -103,9 +103,26 @@ describe "trips/calendar.html.erb" do
             month_cal.should have_selector('td', :id => "day_cell#{day_num}", :class => day_class)
           end
         end
-
+      end
+      it "should filter destination colors displayed when a destination filter is active" do
+        pending()
+        dest = Destination.create(:place => 'Rutledge', :letter => 'R', :color => '#FFC')
+        Destination.create(:place => 'Quincy', :letter => 'Q', :color => '#FCC')
+        Factory(:trip, :destination => 'Quincy')
+        assigns[:params] = {:destination => 'Rutledge'}
+        render
+        response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+          three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
+            today = Date.today
+            days = days_in_month(today.month, today.year)
+            day_num = today.day
+            day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_num}"))
+            month_cal.should have_selector('td', :id => "day_cell#{day_num}", :class => day_class)
+          end
+        end
       end
     end
+
   end
 
   

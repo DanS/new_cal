@@ -17,7 +17,9 @@
         <td>
           <%= trip.depart.strftime("%I:%M%p")%>
           <br />
-          <%= trip.return.strftime("%I:%M%p")%>
+          <% if trip.return %>
+            <%= trip.return.strftime("%I:%M%p")%>
+          <% end %>
         </td>
         <% letter = Destination.class_letter_for(trip.destination) %>
         <td class=<%= "\"#{letter}\"" %>>
