@@ -26,6 +26,8 @@ class TripsController < ApplicationController
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
+    @communities = Community.all.collect {|c| c.name}
+    @vehicles = Vehicle.all.collect {|v| v.name}
   end
 
   # POST /trips

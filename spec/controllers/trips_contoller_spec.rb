@@ -106,10 +106,25 @@ describe TripsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested trip as @trip" do
+    before(:each) do
       Trip.stub(:find).with("37").and_return(mock_trip)
+    end
+
+    it "assigns the requested trip as @trip" do
       get :edit, :id => "37"
       assigns[:trip].should equal(mock_trip)
+    end
+    it "assigns @communities" do
+      communities =  ['DR', 'SH', 'RE'].collect {|c| Community.create :name => c}
+      Community.stub(:all).and_return(communities)
+      get :edit, :id => "37"
+      assigns[:communities].should == (['DR', 'SH', 'RE'])
+    end
+    it "assigns @communities" do
+      vehicles =  ['truck', 'Vdub', 'Porsche'].collect {|v| Vehicle.create :name => v}
+      Community.stub(:all).and_return(vehicles)
+      get :edit, :id => "37"
+      assigns[:vehicles].should == (['truck', 'Vdub', 'Porsche'])
     end
   end
 
