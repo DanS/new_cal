@@ -29,7 +29,6 @@ module TripsHelper
         dates = (0..6).to_a.collect {|i| day + i.days}
         week = {}
         dates.each do |day|
-          
           week[day] = Trip.all.select {|t| t.date.to_date == day}
         end
         return week

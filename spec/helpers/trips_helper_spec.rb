@@ -31,32 +31,32 @@ describe TripsHelper do
     end
   end
 
-  # describe "trips_in_week" do
-  #    it "should return trips for the given week" do
-  #      week_start = Date.parse("2010-02-07")
-  #      (1..6).to_a.each {|i| Factory.create(:trip, :date => week_start + i.days)}
-  #      trips = helper.trips_in_week(6, 2010)
-  #      trips.length.should == 7
-  #      trips.values.select {|t| t[0].class == Trip}.length.should == 6
-  #    end
-  #  end
-  #
-  #  describe "ymd_to_date" do
-  #    it "should return a date from a year-month-day string" do
-  #      helper.ymd_to_date("20100101").should == Date.parse('20100101')
-  #    end
-  #  end
-  #
-  #  describe "dates_between" do
-  #    it "should return a array of strings describing all the dates between dates given" do
-  #      helper.dates_between('20100101', '20100107').should == ["20100101", "20100102",
-  #        "20100103", "20100104", "20100105", "20100106", "20100107"]
-  #      helper.dates_between('20091229', '20100107').should == ["20091229", "20091230",
-  #        "20091231", "20100101", "20100102", "20100103", "20100104", "20100105",
-  #        "20100106", "20100107"]
-  #    end
-  #  end
-  #
+   describe "trips_in_week" do
+      it "should return trips for the given week" do
+        week_start = Date.parse("2010-02-07")
+        (1..6).to_a.each {|i| Factory.create(:trip, :date => week_start + i.days)}
+        trips = helper.trips_in_week(6, 2010)
+        trips.length.should == 7
+        trips.values.select {|t| t[0].class == Trip}.length.should == 6
+      end
+    end
+  
+    describe "ymd_to_date" do
+      it "should return a date from a year-month-day string" do
+        helper.ymd_to_date("20100101").should == Date.parse('20100101')
+      end
+    end
+  
+    describe "dates_between" do
+      it "should return a array of strings describing all the dates between dates given" do
+        helper.dates_between('20100101', '20100107').should == ["20100101", "20100102",
+          "20100103", "20100104", "20100105", "20100106", "20100107"]
+        helper.dates_between('20091229', '20100107').should == ["20091229", "20091230",
+          "20091231", "20100101", "20100102", "20100103", "20100104", "20100105",
+          "20100106", "20100107"]
+      end
+    end
+  
   describe "class_for_day" do
     before(:each) do
       @today = Date.today
