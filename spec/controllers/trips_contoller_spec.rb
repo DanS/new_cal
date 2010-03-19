@@ -212,10 +212,10 @@ describe TripsController do
       delete :destroy, :id => "37"
     end
 
-    it "redirects to the trips list" do
+    it "redirects to home page" do
       Trip.stub(:find).and_return(mock_trip(:destroy => true))
       delete :destroy, :id => "1"
-      response.should redirect_to(trips_url)
+      response.should redirect_to(root_url)
     end
   end
 
