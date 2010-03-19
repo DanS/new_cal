@@ -29,6 +29,10 @@
             'travelers', 'notes'] %>
           <td> <%= trip.send(attrib) %> </td>
         <% end %>
+        <td>
+          <%= button_to 'Edit', edit_trip_path(trip), :method=>:get %>
+          <%= button_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %>
+        </td>
       <% end %>
     </tr>
   <% end %>

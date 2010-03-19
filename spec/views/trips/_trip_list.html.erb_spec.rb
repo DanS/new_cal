@@ -22,6 +22,15 @@ describe "trips/_trip_list.html.erb" do
         end
       end
     end
+    it "should display edit and delete buttons in last cell of row" do
+      render
+      response.should have_selector('table', :id => 'trip-list') do |table|
+        table.should have_selector('tr:nth-child(2)') do |second_row|
+          second_row.should have_selector('input', :type=>'submit', :value=>'Edit')
+          second_row.should have_selector('input', :type=>'submit', :value=>'Delete')
+        end
+      end
+    end
     it "should display the details of an upcoming trip" do
       render
       response.should have_selector('table', :id => 'trip-list') do |table|
