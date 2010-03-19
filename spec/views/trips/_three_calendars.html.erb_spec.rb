@@ -4,7 +4,10 @@ describe "trips/calendar.html.erb" do
   before(:each) do
     assigns[:start_date] = Date.today.strftime("%Y%m") + "01"
     @trip = Factory.create(:trip)
-    assigns[:trips_by_date] = {Date.today.strftime("%Y%m%d") => [@trip]}
+    trips_by_date = Hash.new([])
+    trips_by_date[Date.today.strftime("%Y%m%d")] = [@trip]
+    assigns[:trips_by_date] = trips_by_date
+    Factory(:destination, :place=>'Rutledge', :letter=>'R')
     @destinations = {"Rutledge(2)" => 'R', "Memphis(4)" => 'M', "La Plata(3)" => 'P',
       "Quincy(1)" => 'Q'}
     assigns[:destination_list] = @destinations
@@ -51,7 +54,6 @@ describe "trips/calendar.html.erb" do
     end
     context "only current and future calendar days should have a link to create a new trip on that date" do
       it "should contain links to create a new trip on that date on current and future dates" do
-        #pending()
         months_to_check = next_3_months_years(Date.today.strftime("%Y%m%d"))
         render
         response.should have_selector('div', :id => 'three-calendars') do |three_cal|

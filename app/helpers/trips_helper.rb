@@ -70,6 +70,6 @@ module TripsHelper
   end
 
   def class_for_trips(trips)
-    'day ' + trips.collect {|t| t.letter}.uniq.sort.join
+    trips.collect {|t| t.letter}.uniq.sort.join
   end
 end

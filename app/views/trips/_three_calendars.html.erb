@@ -7,7 +7,7 @@
       date = day.strftime("%Y%m%d")
       style_class = class_for_trips(@trips_by_date[date])
       [link_to(day.mday, :action => 'new', :controller => 'trips', :date =>date ),  {
-          :id => "day_cell#{day.mday}", :class => style_class }]
+          :id => "day_cell#{day.mday}", :class => 'day ' + style_class }]
     end
   end %>
 <% end %>

@@ -120,6 +120,10 @@ describe Trip do
     it "should only contain trip objects as values" do
       Trip.by_date_string(@params).values.flatten.all? {|t| t.class == Trip}.should == true
     end
+    it "should return an empty array for a date with no trips" do
+      tbd = Trip.by_date_string(@params)
+      tbd['22000101'].should == []
+    end
   end
   it "should return trips for the next 3 months" do
     4.times {|i| Factory(:trip, :date => Date.today + i.months)}

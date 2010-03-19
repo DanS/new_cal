@@ -17,7 +17,7 @@ def add_unordered_trips
   ordered_datetimes << [today + 40.days, Time.parse('6:30PM'), 'trip-9']
   unordered_datetimes = ordered_datetimes.sort_by {rand}
   unordered_datetimes.each {|day, time, order| Factory(:trip, :date=>day, :depart=>time,
-    :notes=>order)}
+      :notes=>order)}
 end
 
 def days_in_month(month, year)
@@ -40,8 +40,11 @@ end
 
 def day_class_for(date)
   day_class = []
-  day_class << TripsHelper.class_for_day(*date.strftime("%Y,%m,%d").split(',')) 
-  day_class << 'past' if date < Date.today
+  if date < Date.today
+    day_class << 'day past' if date < Date.today
+  else
+    day_class << TripsHelper.class_for_day(*date.strftime("%Y,%m,%d").split(','))
+  end
   day_class << 'weekendDay' if [0,6].include?(date.wday)
   day_class << 'today' if date == Date.today
   return day_class.join(' ').gsub('  ', ' ').strip

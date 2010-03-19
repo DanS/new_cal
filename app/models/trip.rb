@@ -39,6 +39,7 @@ class Trip < ActiveRecord::Base
       date_str = t.date.strftime("%Y%m%d")
       trips_by_date[date_str] = trips_by_date[date_str] << t
     end
+    trips_by_date.default = []
     trips_by_date
   end
   
