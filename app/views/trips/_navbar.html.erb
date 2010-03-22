@@ -1,0 +1,13 @@
+<div id="navbar">
+  <%= link_to '<', root_path(
+    :date => (Date.today - 1.month).strftime("%Y%m") + '01') %>
+  |
+      <%= link_to 'Month', root_path(:type => 'month') %>
+  |
+      <%= link_to 'Week', root_path(:type => 'week') %>
+  |
+      <%= link_to 'WIP', root_path(:type => 'wip') %>
+  |
+  <%= link_to '>', root_path(
+    :date => (Date.today + 1.month).strftime("%Y%m") + '01') %>
+</div>

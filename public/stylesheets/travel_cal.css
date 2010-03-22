@@ -177,16 +177,16 @@ My calendar customizations
     color: #CCCCCC;
     border-bottom: 1px dotted #bbbbbb;
 }
-.centered {
+#navbar {
     text-align: center;
 } 
 
-.centered a, .centered span {
+#navbar a, #navbar span {
     color: #000000;
     background-color: #CDD0D0;
 }
 
-.centered a:hover{
+#navbar a:hover{
     color: white;
     background-color: #656A6B;
     font-weight: bold;

@@ -16,7 +16,7 @@ describe "trips/calendar.html.erb" do
     render
     response.should contain("Rutledge Travel Calendar Version 5")
   end
-  
+
   context "calendar partial" do
     it "should display the current month and following 2 months" do
       render
