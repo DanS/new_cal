@@ -2,8 +2,9 @@ class TripsController < ApplicationController
   # GET /calendar
   # GET /trips.xml
   def calendar
+    default_start = Date.today.strftime("%&%m") + '01'
+    @start_date = assign_from_param_session_or_default("start_date", default_start)
     @trips = Trip.filtered(params)
-    @start_date = Date.today.strftime("%Y%m") + "01"
     @trips_by_date = Trip.by_date_string(params)
     @destination_list = Trip.list_destinations
     @destination_color_lookup = Hash[* Destination.all.map {|d| [d.place, d.letter]}.flatten]

@@ -6,14 +6,32 @@ describe TripsController do
   end
 
   describe "GET calendar" do #replaces index action
-    
-    it "assigns start_date to be the first of the current month" do
-      get :calendar
-      assigns[:start_date].should == Date.today.strftime("%Y%m") + "01"
+
+    context "Calendar date range " do
+      it "assigns start_date to be the first of the current month when no date in session" do
+        get :calendar
+        assigns[:start_date].should == Date.today.strftime("%Y%m") + "01"
+      end
+      it "assigns start date to session value when present" do
+        test_date = (Date.today + 1.month).strftime("%Y%m") + '01'
+        get :calendar, {}, {:start_date => test_date }
+        assigns[:start_date].should == test_date
+      end
+      it "assigns start date to params value if both param and session values present" do
+        param_value = '10001010'
+        session_value = '20001010'
+        get :calendar, {:start_date => param_value}, {:start_date => session_value}
+        assigns[:start_date].should == param_value
+      end
+      it "assigns start date to default value if start_date not in params or session" do
+        #default start date is first day of current month
+        get :calendar, {}, {}
+        assigns[:start_date].should == Date.today.strftime("%Y%m") + '01'
+      end
     end
     it "assigns destinations " do
       destinations = {'Quincy' => [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
-        'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
+                      'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
       destinations.each do |dest, value|
         value[0].times {Factory(:trip, :destination => dest)}
         Factory(:destination, :place => dest, :letter => value[1])
@@ -24,7 +42,7 @@ describe TripsController do
     end
     it "assigns destination_color_lookup" do
       look_hash = {"Kirksville"=>"K", "Rutledge"=>"R", "Fairfield"=>"F", "Other"=>"O",
-        "Memphis"=>"M", "Ottumwa"=>"O", "Quincy"=>"Q"}
+                   "Memphis"=>"M", "Ottumwa"=>"O", "Quincy"=>"Q"}
       look_hash.each_pair do |place, letter|
         Factory(:destination, :place => place, :letter => letter)
       end
@@ -144,7 +162,6 @@ describe TripsController do
       end
     end
 
-
     describe "with invalid params" do
       it "assigns a newly created but unsaved trip as @trip" do
         Trip.stub(:new).with({'these' => 'params'}).and_return(mock_trip(:save => false))
@@ -221,7 +238,8 @@ describe TripsController do
 
 end
 
-
+#specs from a previous version of this code
+#
 # describe TripsController, 'POST create' do
 #   before(:each) do
 #     @trip_params = Factory.attributes_for(:trip)
