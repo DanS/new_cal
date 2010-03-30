@@ -1,6 +1,5 @@
 <div id="navbar">
-  <%= link_to '<', root_path(
-    :date => (Date.today - 1.month).strftime("%Y%m") + '01') %>
+  <%= link_to '<', root_path( :start_date => prev_month(@start_date)) %>
   |
       <%= link_to 'Month', root_path(:type => 'month') %>
   |
@@ -8,6 +7,8 @@
   |
       <%= link_to 'WIP', root_path(:type => 'wip') %>
   |
-  <%= link_to '>', root_path(
-    :date => (Date.today + 1.month).strftime("%Y%m") + '01') %>
+  <%= link_to '>', root_path( :start_date => next_month(@start_date)) %>
 </div>
+
+
+link_to '<', root_path( :start_date => prev_month(@start_date))

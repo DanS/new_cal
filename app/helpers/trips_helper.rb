@@ -38,6 +38,14 @@ module TripsHelper
     Date.strptime(date_string, "%Y%m%d")
   end
 
+  def next_month(date_string)
+    (ymd_to_date(date_string) + 1.month).strftime("%Y%m%d")
+  end
+
+  def prev_month(date_string)
+    (ymd_to_date(date_string) - 1.month).strftime("%Y%m%d")
+  end
+
   def dates_between(start_string, end_string)
     #returns and array of strings representing all dates between start and end
     start_date = ymd_to_date(start_string)
