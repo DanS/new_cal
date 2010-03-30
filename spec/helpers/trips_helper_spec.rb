@@ -6,17 +6,17 @@ describe TripsHelper do
   # #    @trips_helper = TripsHelper.new
   # #  end
   #
-  #  describe "next_3_months_years" do
-  #    it "should return the same 3 month/ years when sent different days in the same month" do
-  #      helper.next_3_months_years("20100201").should == [[2, 2010], [3, 2010], [4, 2010]]
-  #      helper.next_3_months_years("20100215").should == [[2, 2010], [3, 2010], [4, 2010]]
-  #      helper.next_3_months_years("20100201").should == [[2, 2010], [3, 2010], [4, 2010]]
-  #    end
-  #    it "should cross into the next year when given dates in November and December" do
-  #      helper.next_3_months_years("20101101").should == [[11, 2010], [12, 2010], [1, 2011]]
-  #      helper.next_3_months_years("20101215").should == [[12, 2010], [1, 2011], [2, 2011]]
-  #    end
-  #  end
+    describe "next_3_months_years" do
+      it "should return the same 3 month/ years when sent different days in the same month" do
+        helper.next_3_months_years("20100201").should == [[2, 2010], [3, 2010], [4, 2010]]
+        helper.next_3_months_years("20100215").should == [[2, 2010], [3, 2010], [4, 2010]]
+        helper.next_3_months_years("20100201").should == [[2, 2010], [3, 2010], [4, 2010]]
+      end
+      it "should cross into the next year when given dates in November and December" do
+        helper.next_3_months_years("20101101").should == [[11, 2010], [12, 2010], [1, 2011]]
+        helper.next_3_months_years("20101215").should == [[12, 2010], [1, 2011], [2, 2011]]
+      end
+    end
 
   describe "time_selectors" do
     it "should create a list of time selection values" do

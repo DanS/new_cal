@@ -12,19 +12,19 @@ describe ApplicationController do
       pending()
       #don't know how to set value of params for this test
       #get :assign_from_param_session_or_default('i', 0), {'x' => 77}, {'x' => 88}
-#      session['x'] = 88
-#      assigns(:params) = {'x' => 77}
+      #      session['x'] = 88
+      #      assigns(:params) = {'x' => 77}
       controller.assign_from_param_session_or_default('x', 99).should == 77
       session['x'].should == 77
     end
-      it "should set session to param value if param present" do
-        #don't know how to set value of params for this test
-        pending()
-        session['x'] = 88
-        params = double('params-double')
-        params['x'] = 77
-        controller.assign_from_param_session_or_default(:x, 99)
-        session['x'].should == 77
-      end
+    it "should set session to param value if param present" do
+      #don't know how to set value of params for this test
+      pending()
+      session['x'] = 88
+      params = double('params-double')
+      params['x'] = 77
+      controller.assign_from_param_session_or_default(:x, 99)
+      session['x'].should == 77
+    end
   end
 end

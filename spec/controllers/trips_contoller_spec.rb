@@ -8,10 +8,6 @@ describe TripsController do
   describe "GET calendar" do #replaces index action
 
     context "Calendar date range " do
-      it "assigns start_date to be the first of the current month when no date in session" do
-        get :calendar
-        assigns[:start_date].should == Date.today.strftime("%Y%m") + "01"
-      end
       it "assigns start date to session value when present" do
         test_date = (Date.today + 1.month).strftime("%Y%m") + '01'
         get :calendar, {}, {:start_date => test_date }
