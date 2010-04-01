@@ -1,4 +1,3 @@
-
 <% for month, year in next_3_months_years(@start_date) %>
   <%= calendar(:year => year, :month => month) do |day|
     if day < Date.today

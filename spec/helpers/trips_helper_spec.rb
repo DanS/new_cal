@@ -12,6 +12,12 @@ describe TripsHelper do
       helper.next_3_months_years("20100215").should == [[2, 2010], [3, 2010], [4, 2010]]
       helper.next_3_months_years("20100201").should == [[2, 2010], [3, 2010], [4, 2010]]
     end
+    it "should accept a date object as input as well as date string" do
+      def d2obj(d); Date.parse(d);end
+      helper.next_3_months_years(d2obj("20100201")).should == [[2, 2010], [3, 2010], [4, 2010]]
+      helper.next_3_months_years(d2obj("20100215")).should == [[2, 2010], [3, 2010], [4, 2010]]
+      helper.next_3_months_years(d2obj("20100201")).should == [[2, 2010], [3, 2010], [4, 2010]]
+    end
     it "should cross into the next year when given dates in November and December" do
       helper.next_3_months_years("20101101").should == [[11, 2010], [12, 2010], [1, 2011]]
       helper.next_3_months_years("20101215").should == [[12, 2010], [1, 2011], [2, 2011]]

@@ -1,10 +1,11 @@
 module TripsHelper
  
-  def next_3_months_years(start_date)
+  def next_3_months_years(date)
     #given a date, returns an array of 3 arrays, each array containing
     #the month number and year number
+    date = (date.strftime("%Y%m%d")) if date.class == Date
     output = []
-    temp_date = Date.strptime(start_date[0,6] + '01', "%Y%m%d")
+    temp_date = Date.strptime(date[0,6] + '01', "%Y%m%d")
     3.times do
       output += [[temp_date.month, temp_date.year]]
       temp_date += 1.month
