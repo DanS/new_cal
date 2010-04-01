@@ -22,28 +22,30 @@ module TripsHelper
     return time_selections
   end
 
-   def trips_in_week(week_num, year)
-      #returns an array of dates and associated trips for given week
-        week_num = "52" if week_num == "53"
-        day = Date.strptime("#{week_num}:#{year}", "%U:%Y")
-        dates = (0..6).to_a.collect {|i| day + i.days}
-        week = {}
-        dates.each do |day|
-          week[day] = Trip.all.select {|t| t.date.to_date == day}
-        end
-        return week
+  def trips_in_week(week_num, year)
+    #returns an array of dates and associated trips for given week
+    week_num = "52" if week_num == "53"
+    day = Date.strptime("#{week_num}:#{year}", "%U:%Y")
+    dates = (0..6).to_a.collect {|i| day + i.days}
+    week = {}
+    dates.each do |day|
+      week[day] = Trip.all.select {|t| t.date.to_date == day}
     end
+    return week
+  end
 
   def ymd_to_date(date_string)
     Date.strptime(date_string, "%Y%m%d")
   end
 
-  def next_month(date_string)
-    (ymd_to_date(date_string) + 1.month).strftime("%Y%m%d")
+  def next_month(date)
+     date = ymd_to_date(date) unless date.class == Date
+     (date + 1.month).strftime("%Y%m%d")
   end
 
-  def prev_month(date_string)
-    (ymd_to_date(date_string) - 1.month).strftime("%Y%m%d")
+  def prev_month(date)
+    date = ymd_to_date(date) unless date.class == Date
+    (date - 1.month).strftime("%Y%m%d")
   end
 
   def dates_between(start_string, end_string)
@@ -73,7 +75,7 @@ module TripsHelper
     dest_class = Trip.on_date(date).collect do |t|
       Destination.class_letter_for(t.destination)
     end.uniq.sort.join('') 
-      return ('day ' + dest_class).strip
+    return ('day ' + dest_class).strip
   end
 
   def class_for_trips(trips)

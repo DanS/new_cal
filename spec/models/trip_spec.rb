@@ -253,6 +253,5 @@ describe Trip do
       result = Trip.filtered(:destination => 'Memphis', :start_date => today + 2.day, :end_date => today + 3.days)
       result.should have_exactly(2).Trip
     end
-    it "should have some way to reset destination to all in session"
   end
 end

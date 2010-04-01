@@ -56,17 +56,18 @@ describe "trips/calendar.html.erb" do
       it "should contain links to create a new trip on that date on current and future dates" do
         months_to_check = next_3_months_years(Date.today.strftime("%Y%m%d"))
         render
+        month_index = 0
         response.should have_selector('div', :id => 'three-calendars') do |three_cal|
-          (1..3).each do |current_month|
-            three_cal.should have_selector("table:nth-child(#{current_month})", :class => "calendar" ) do |month_cal|
+          months_to_check.each do |current_month, current_year|
+            month_index += 1
+            three_cal.should have_selector("table:nth-child(#{month_index})", :class => "calendar" ) do |month_cal|
               today = Date.today
-              start_day = current_month == 1 ? today.mday : 1
-              days = days_in_month(*months_to_check[current_month - 1])
+              start_day = current_month == months_to_check[0][0] ? today.mday : 1
+              days = days_in_month(current_month, current_year)
               (start_day..days).each do |day_num|
-                day_class = day_class_for(Date.parse("#{today.year}-#{today.month}-#{day_num}"))
+                day_class = day_class_for(Date.parse("#{current_year}-#{current_month}-#{day_num}"))
                 month_cal.should have_selector('td', :id => "day_cell#{day_num}") do |day|
-                  current_date = sprintf("%d%02d%02d",
-                    *months_to_check[current_month - 1].reverse + [day_num])
+                  current_date = sprintf("%d%02d%02d", current_year, current_month, day_num)
                   day.should have_selector("a", :href => "/trips/new?date=#{current_date}",
                     :content => day_num.to_s)
                 end

@@ -48,21 +48,37 @@ describe TripsHelper do
   end
 
   describe "next_month" do
+    before(:each) do
+      @input_dates = ["20101001", "20101101", "20101201"]
+      @output_dates = [ "20101101", "20101201", "20110101"]
+    end
     it "should produce the date string for the following month" do
-      input_dates = ["20101001", "20101101", "20101201"]
-      output_dates = [ "20101101", "20101201", "20110101"]
       3.times do |i|
-        helper.next_month(input_dates[i]).should == output_dates[i]
+        helper.next_month(@input_dates[i]).should == @output_dates[i]
+      end
+    end
+    it "should handle a date object as well as a string date" do
+      input_dates = @input_dates.map {|d| Date.parse(d)}
+      3.times do |i|
+        helper.next_month(input_dates[i]).should == @output_dates[i]
       end
     end
   end
 
   describe "prev_month" do
+    before(:each)do
+      @input_dates = ["20110101", "20101201", "20101101"]
+      @output_dates = [ "20101201", "20101101", "20101001"]
+    end
     it "should produce the date string for the previous month" do
-      input_dates = ["20110101", "20101201", "20101101"]
-      output_dates = [ "20101201", "20101101", "20101001"]
       3.times do |i|
-        helper.prev_month(input_dates[i]).should == output_dates[i]
+        helper.prev_month(@input_dates[i]).should == @output_dates[i]
+      end
+    end
+    it "should handle a date object as well as a date string" do
+      input_dates = @input_dates.map {|d| Date.parse(d)}
+      3.times do |i|
+        helper.prev_month(input_dates[i]).should == @output_dates[i]
       end
     end
   end

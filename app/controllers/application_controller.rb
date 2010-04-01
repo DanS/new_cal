@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+  helper_method :date2string
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
@@ -38,5 +39,9 @@ class ApplicationController < ActionController::Base
   def plus_3_months(date)
     date = Date.parse(date) unless date.class == Date
     (date + 3.months).strftime("%Y%m%d")
+  end
+
+  def date2string(date)
+    date.strftime("%Y%m%d")
   end
 end
