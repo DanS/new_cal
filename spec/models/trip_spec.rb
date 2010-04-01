@@ -1,5 +1,7 @@
 require 'spec_helper'
-
+def d2str(date)
+  date.strftime("%Y%m%d")
+end
 describe Trip do
   before(:each) do
     @valid_attributes = {
@@ -207,7 +209,11 @@ describe Trip do
     end
     it "should only return trip between dates given" do
       result = Trip.between_dates(Date.today + 2.months, Date.today + 4.months)
-      result.should have_exactly(2).Trips
+      result.should have_exactly(3).Trips
+    end
+    it "should return trips on boundary dates" do
+      result = Trip.between_dates(Date.today + 1.month, Date.today + 1.month)
+      result.should have_exactly(1).Trips
     end
   end
 
@@ -226,11 +232,12 @@ describe Trip do
       (1..5).each do |i|
         Factory(:trip, :date => today + i.weeks , :notes => "#{i} trip")
       end
-      result = Trip.filtered(:start_d => today + 2.weeks, :end_d => today + 5.weeks)
+      result = Trip.filtered(:start_date => today + 2.weeks, :end_date => today + 4.weeks + 6.days)
       result.should have_exactly(3).Trip
-      result.collect {|t| t.notes}.should include('2 trip')
-      result.collect {|t| t.notes}.should include('3 trip')
-      result.collect {|t| t.notes}.should include('4 trip')
+      result_notes = result.collect {|t| t.notes}
+      result_notes.should include('2 trip')
+      result_notes.should include('3 trip')
+      result_notes.should include('4 trip')
     end
     it "should filter by both date and destination if both are present" do
       today = Date.today
@@ -239,10 +246,13 @@ describe Trip do
       trip_params.each  do |dest, date|
         Factory(:trip, :destination => dest, :date => date)
       end
-      result = Trip.filtered(:destination => 'Kirksville', :start_d => today + 3.day, :end_d => today + 5.weeks)
+      result = Trip.filtered(:destination => 'Kirksville', :start_date => today + 3.day, :end_date => today + 5.weeks)
       result.should have_exactly(2).Trip
-      result = Trip.filtered(:destination => 'Memphis', :start_d => today + 3.day, :end_d => today + 5.weeks)
+      result = Trip.filtered(:destination => 'Memphis', :start_date => today + 3.day, :end_date => today + 5.weeks)
       result.should have_exactly(1).Trip
+      result = Trip.filtered(:destination => 'Memphis', :start_date => today + 2.day, :end_date => today + 3.days)
+      result.should have_exactly(2).Trip
     end
+    it "should have some way to reset destination to all in session"
   end
 end

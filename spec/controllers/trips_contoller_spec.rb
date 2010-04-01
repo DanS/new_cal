@@ -8,21 +8,24 @@ describe TripsController do
   describe "GET calendar" do #replaces index action
 
     context "Calendar date range " do
+      before(:all) do
+        @date_string = (Date.today + 1.month).strftime("%Y%m") + '01'
+        @date_obj = Date.parse(@date_string)
+      end
       it "assigns start date to session value when present" do
-        test_date = (Date.today + 1.month).strftime("%Y%m") + '01'
-        get :calendar, {}, {:start_date => test_date }
-        assigns[:start_date].should == test_date
+        get :calendar, {}, {:start_date => @date_string }
+        assigns[:start_date].should == @date_obj
       end
       it "assigns start date to params value if both param and session values present" do
         param_value = '10001010'
         session_value = '20001010'
         get :calendar, {:start_date => param_value}, {:start_date => session_value}
-        assigns[:start_date].should == param_value
+        assigns[:start_date].should == Date.parse(param_value)
       end
       it "assigns start date to default value if start_date not in params or session" do
         #default start date is first day of current month
         get :calendar, {}, {}
-        assigns[:start_date].should == Date.today.strftime("%Y%m") + '01'
+        assigns[:start_date].should == Date.parse(Date.today.strftime("%Y%m") + '01')
       end
     end
     it "assigns destinations " do
@@ -71,12 +74,12 @@ describe TripsController do
       end
     end
     context "Filtering trips" do
-      it "should only include trips in @Trip that go to selected destination when filtering for that destination" do
+      it "should only include trips in @Trips that go to selected destination when filtering for that destination" do
         trip_destinations =  ["Rutledge", "Memphis", "Fairfield", "Quincy", "Kirksville"]
         trip_destinations.each  do |d|
           Factory(:trip, :destination => d, :date => Date.today + 1.day)
         end
-        get :calendar, :destination => 'Rutledge'
+        get :calendar, {:destination => 'Rutledge'}, {}
         trip_results = assigns[:trips].collect {|d| d.destination}
         trip_results.should include("Rutledge")
         for other_dest in trip_destinations.reject {|d| d == "Rutledge"}
@@ -234,37 +237,3 @@ describe TripsController do
 
 end
 
-#specs from a previous version of this code
-#
-# describe TripsController, 'POST create' do
-#   before(:each) do
-#     @trip_params = Factory.attributes_for(:trip)
-#     @trip_params.each do |k,v|
-#       @trip_params.delete(k)
-#       unless [:data, :depart, :return].include?(k)
-#         @trip_params[k.to_s] = v
-#       end
-#     end
-#     @trip = mock_model(Trip).as_null_object
-#     Trip.stub(:new).and_return(@trip)
-#   end
-#   it "creates a new trip" do
-#     Trip.should_receive(:new).with(@trip_params).and_return(@trip)
-#     post :create, :trip => @trip_params
-#   end
-#   context "displays existing trips" do
-#     it "does not show trips older than today" do
-#       pending
-#     end
-#     it "groups trips by date" do
-#       pending
-#     end
-#     it "orders trips on the same day by departure time" do
-#       pending
-#     end
-#     it "assigns a class to a day based on the trip destinations for that day" do
-#       pending
-#     end
-#
-#   end
-# end

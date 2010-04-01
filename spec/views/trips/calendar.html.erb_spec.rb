@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "trips/calendar.html.erb" do
-before(:each) do
+  before(:each) do
     assigns[:start_date] = Date.today.strftime("%Y%m") + "01"
     @trip = Factory.create(:trip)
     trips_by_date = Hash.new([])
@@ -14,7 +14,7 @@ before(:each) do
     assigns[:start_date] = Date.today.strftime("%Y%m%d")
   end
 
-   it "should render the navbar template" do
+  it "should render the navbar template" do
     template.should_receive(:render).with( :partial => "navbar",
       :locals => {:start_date => Date.today.strftime("%Y%m%d")})
     render 
@@ -25,14 +25,13 @@ before(:each) do
     render
   end
 
-   it "should render the destination_list template" do
+  it "should render the destination_list template" do
     template.should_receive(:render).with( :partial => "destination_list")
     render
   end
 
-   it "should render the trip_list template" do
+  it "should render the trip_list template" do
     template.should_receive(:render).with( :partial => "trip_list")
     render
   end
-
 end
