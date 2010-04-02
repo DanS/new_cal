@@ -21,7 +21,7 @@ describe "trips/calendar.html.erb" do
   end
   
   it "should render the calendar template" do
-    template.should_receive(:render).with( :partial => "three_calendars")
+    template.should_receive(:render).with( :partial => "month")
     render
   end
 

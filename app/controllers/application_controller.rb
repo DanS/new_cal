@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     #if param value is a string that can parse as a date a date object is returned
     def try2make_date(val)
       #if value can parse as a date, return a date obj, otherwise return value
-      return val unless val.class == String
+      return val unless val.class == String  && val =~ /\d{8}/
       begin
         Date.parse(val)
       rescue 

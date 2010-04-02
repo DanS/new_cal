@@ -12,6 +12,7 @@ describe TripsController do
         @date_string = (Date.today + 1.month).strftime("%Y%m") + '01'
         @date_obj = Date.parse(@date_string)
       end
+
       it "assigns start date to session value when present" do
         get :calendar, {}, {:start_date => @date_string }
         assigns[:start_date].should == @date_obj
@@ -26,6 +27,12 @@ describe TripsController do
         #default start date is first day of current month
         get :calendar, {}, {}
         assigns[:start_date].should == Date.parse(Date.today.strftime("%Y%m") + '01')
+      end
+    end
+    context "assigning cal-type" do
+      it "should assign a cal-type of month if cal_type not in params or session" do
+        get :calendar, {},{}
+        assigns[:cal_type].should == "month"
       end
     end
     it "assigns destinations " do

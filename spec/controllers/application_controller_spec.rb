@@ -34,5 +34,9 @@ describe ApplicationController do
       get :foo, {'x'=>"20101010"}, {} #assign value to params
       controller.param_session_default('x', "defaultValue").class.should == Date
     end
+    it "should not return a date object for non-numeric strings like 'month' " do
+      get :foo, {'x'=>'month'},{}
+      controller.param_session_default('x', 'month').class.should_not == Date
+    end
   end
 end

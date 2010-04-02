@@ -4,6 +4,7 @@ class TripsController < ApplicationController
   def calendar
     default_start = Date.today.strftime("%Y%m") + '01'
     @start_date = param_session_default("start_date", default_start)
+    @cal_type = param_session_default("cal_type", 'month')
     filters = {}
     filters[:destination] = param_session_default(:destination, nil)
     filters[:start_date] = param_session_default(:start_date, default_start)
