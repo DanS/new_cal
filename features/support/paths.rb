@@ -10,7 +10,8 @@ module NavigationHelpers
     
     when /the home\s?page/
       '/'
-    
+    when /\/\?start_date=(\d{8})/
+      "/?start_date=#{$1}"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
