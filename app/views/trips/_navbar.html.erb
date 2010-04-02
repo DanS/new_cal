@@ -1,11 +1,11 @@
 <div id="navbar">
-  <%= link_to '<', root_path( :start_date => prev_month(@start_date)) %>
+  <%= link_to '<', root_path( :start_date => prev_month(@start_date)), {:id => 'prev-month'} %>
   |
-      <%= link_to 'Month', root_path(:type => 'month') %>
+  <%= link_to 'Month', root_path(:type => 'month'), {:id => "month-view", } %>
   |
-      <%= link_to 'Week', root_path(:type => 'week') %>
+  <%= link_to 'Week', root_path(:type => 'week'), {:id => "week-view", } %>
   |
-      <%= link_to 'WIP', root_path(:type => 'wip') %>
+  <%= link_to 'WIP', root_path(:type => 'wip'), {:id => "wip-view", } %>
   |
-  <%= link_to '>', root_path( :start_date => next_month(@start_date)) %>
+  <%= link_to '>', root_path( :start_date => next_month(@start_date)), {:id => 'next-month'} %>
 </div>
