@@ -39,16 +39,17 @@ describe TripsController do
       assigns[:destination_list].keys.sort.should == destinations.keys.sort
       assigns[:destination_list].values.sort.should == destinations.values.sort
     end
-    it "assigns destination_color_lookup" do
-      look_hash = {"Kirksville"=>"K", "Rutledge"=>"R", "Fairfield"=>"F", "Other"=>"O",
-                   "Memphis"=>"M", "Ottumwa"=>"O", "Quincy"=>"Q"}
-      look_hash.each_pair do |place, letter|
-        Factory(:destination, :place => place, :letter => letter)
-      end
-      get :calendar
-      assigns[:destination_color_lookup].keys.sort.should == look_hash.keys.sort
-      assigns[:destination_color_lookup].values.sort.should == look_hash.values.sort
-    end
+    #not used
+#    it "assigns destination_color_lookup" do
+#      look_hash = {"Kirksville"=>"K", "Rutledge"=>"R", "Fairfield"=>"F", "Other"=>"O",
+#                   "Memphis"=>"M", "Ottumwa"=>"O", "Quincy"=>"Q"}
+#      look_hash.each_pair do |place, letter|
+#        Factory(:destination, :place => place, :letter => letter)
+#      end
+#      get :calendar
+#      assigns[:destination_color_lookup].keys.sort.should == look_hash.keys.sort
+#      assigns[:destination_color_lookup].values.sort.should == look_hash.values.sort
+#    end
     context "assigns trips_by_date" do
       before(:each) do
         (1..5).each do |i|

@@ -11,7 +11,7 @@ class TripsController < ApplicationController
     @trips = Trip.filtered(filters)
     @trips_by_date = Trip.by_date_string(filters)
     @destination_list = Trip.list_destinations
-    @destination_color_lookup = Hash[* Destination.all.map {|d| [d.place, d.letter]}.flatten]
+    #@destination_color_lookup = Hash[* Destination.all.map {|d| [d.place, d.letter]}.flatten]
   end
 
   # GET /trips/1
