@@ -39,17 +39,7 @@ describe TripsController do
       assigns[:destination_list].keys.sort.should == destinations.keys.sort
       assigns[:destination_list].values.sort.should == destinations.values.sort
     end
-    #not used
-#    it "assigns destination_color_lookup" do
-#      look_hash = {"Kirksville"=>"K", "Rutledge"=>"R", "Fairfield"=>"F", "Other"=>"O",
-#                   "Memphis"=>"M", "Ottumwa"=>"O", "Quincy"=>"Q"}
-#      look_hash.each_pair do |place, letter|
-#        Factory(:destination, :place => place, :letter => letter)
-#      end
-#      get :calendar
-#      assigns[:destination_color_lookup].keys.sort.should == look_hash.keys.sort
-#      assigns[:destination_color_lookup].values.sort.should == look_hash.values.sort
-#    end
+    
     context "assigns trips_by_date" do
       before(:each) do
         (1..5).each do |i|
@@ -74,21 +64,7 @@ describe TripsController do
         assigns[:trips_by_date][(Date.today + 5.days).strftime("%Y%m%d")].first.class.should == Trip
       end
     end
-    context "Filtering trips" do
-      it "should only include trips in @Trips that go to selected destination when filtering for that destination" do
-        trip_destinations =  ["Rutledge", "Memphis", "Fairfield", "Quincy", "Kirksville"]
-        trip_destinations.each  do |d|
-          Factory(:trip, :destination => d, :date => Date.today + 1.day)
-        end
-        get :calendar, {:destination => 'Rutledge'}, {}
-        trip_results = assigns[:trips].collect {|d| d.destination}
-        trip_results.should include("Rutledge")
-        for other_dest in trip_destinations.reject {|d| d == "Rutledge"}
-          trip_results.should_not include(other_dest)
-        end
-      end
-
-    end
+   
   end
 
   describe "GET show" do

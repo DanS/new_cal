@@ -8,10 +8,8 @@ class TripsController < ApplicationController
     filters[:destination] = param_session_default(:destination, nil)
     filters[:start_date] = param_session_default(:start_date, default_start)
     filters[:end_date] = param_session_default(:end_date, plus_3_months(@start_date))
-    @trips = Trip.filtered(filters)
     @trips_by_date = Trip.by_date_string(filters)
     @destination_list = Trip.list_destinations
-    #@destination_color_lookup = Hash[* Destination.all.map {|d| [d.place, d.letter]}.flatten]
   end
 
   # GET /trips/1
