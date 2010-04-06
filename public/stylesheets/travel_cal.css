@@ -45,7 +45,7 @@ a:hover { color: #fff; background-color:#000; }
     float: left;
 }
 
-#three-calendars{
+#three-calendar{
   width: 100%;
   padding: 0;
   margin: 0;
@@ -201,11 +201,11 @@ a.selected-tab  {
 /* week styling
 */
 
-.week-table {
+.week {
     width: 100%;
 }
 
-.week-table td {
+.week td {
     width: 12.5%;
     vertical-align: top;
 }

@@ -38,12 +38,18 @@ describe TripsHelper do
   end
 
   describe "trips_in_week" do
+    before(:each) do
+      @week_start = Date.parse("2010-02-07")
+    end
     it "should return trips for the given week" do
-      week_start = Date.parse("2010-02-07")
-      (1..6).to_a.each {|i| Factory.create(:trip, :date => week_start + i.days)}
-      trips = helper.trips_in_week(6, 2010)
+      (1..6).to_a.each {|i| Factory.create(:trip, :date => @week_start + i.days)}
+      trips = helper.trips_in_week(@week_start)
       trips.length.should == 7
       trips.values.select {|t| t[0].class == Trip}.length.should == 6
+    end
+    it "should have keys for all days in the week even if there are no trips" do
+      helper.trips_in_week(@week_start).keys.sort.should == ["20100207", "20100208", "20100209", "20100210",
+        "20100211", "20100212", "20100213" ]
     end
   end
   
@@ -89,17 +95,6 @@ describe TripsHelper do
     end
   end
 
-  
-  describe "dates_between" do
-    it "should return a array of strings describing all the dates between dates given" do
-      helper.dates_between('20100101', '20100107').should == ["20100101", "20100102",
-        "20100103", "20100104", "20100105", "20100106", "20100107"]
-      helper.dates_between('20091229', '20100107').should == ["20091229", "20091230",
-        "20091231", "20100101", "20100102", "20100103", "20100104", "20100105",
-        "20100106", "20100107"]
-    end
-  end
-  
   describe "class_for_day" do
     before(:each) do
       @today = Date.today

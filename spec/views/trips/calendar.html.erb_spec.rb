@@ -20,9 +20,17 @@ describe "trips/calendar.html.erb" do
     render 
   end
   
-  it "should render the calendar template" do
-    template.should_receive(:render).with( :partial => "month")
-    render
+  describe "should render the template named by the cal_type param" do
+    it "should render the month template when cal_type is month" do
+      assigns[:cal_type] = 'month'
+      template.should_receive(:render).with( :partial => "month")
+      render
+    end
+    it "should render the week template when cal_type is week" do
+      assigns[:cal_type] = 'week'
+      template.should_receive(:render).with( :partial => "week")
+      render
+    end
   end
 
   it "should render the destination_list template" do

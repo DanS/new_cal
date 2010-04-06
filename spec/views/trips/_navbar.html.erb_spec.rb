@@ -18,19 +18,19 @@ describe "trips/_navbar.html.erb" do
   it "should display a link for month view" do
     render
     response.should have_selector('div', :id=>'navbar')  do |navbar|
-      navbar.should have_selector('a', :href => "/?type=month")
+      navbar.should have_selector('a', :href => "/?cal_type=month")
     end
   end
   it "should display a link for week view" do
     render
     response.should have_selector('div', :id=>'navbar')  do |navbar|
-      navbar.should have_selector('a', :href => "/?type=week")
+      navbar.should have_selector('a', :href => "/?cal_type=week")
     end
   end
   it "should display a link for WIP view" do
     render
     response.should have_selector('div', :id=>'navbar')  do |navbar|
-      navbar.should have_selector('a', :href => "/?type=wip")
+      navbar.should have_selector('a', :href => "/?cal_type=wip")
     end
   end
 end

@@ -31,13 +31,30 @@ describe TripsController do
     end
     context "assigning cal-type" do
       it "should assign a cal-type of month if cal_type not in params or session" do
-        get :calendar, {},{}
+        get :calendar, {}
         assigns[:cal_type].should == "month"
+      end
+      it "should assign a cal_type to param value if present" do
+        get :calendar, {:cal_type => "params"},{:cal_type => 'session'}
+        assigns[:cal_type].should == 'params'
+      end
+      it "should assign a cal_type to session value if session present but not params" do
+        get :calendar, {}, {:cal_type => 'session'}
+        assigns[:cal_type].should == 'session'
+      end
+      it "should get only 1 week of trips when cal_type is week" do
+        get :calendar, {:cal_type => 'week'}
+        assigns[:trips_by_date].keys.length.should == 7
+      end
+      it "should have date keys for all days between start_date and end_date params with cal_type == week" do
+        get :calendar, {:start_date=>'20100404', :end_date=>'20100410', :cal_type=>'week'}
+        assigns[:trips_by_date].keys.sort.should == ["20100404", "20100405", "20100406", "20100407", "20100408",
+          "20100409", "20100410"]
       end
     end
     it "assigns destinations " do
       destinations = {'Quincy' => [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
-                      'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
+        'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
       destinations.each do |dest, value|
         value[0].times {Factory(:trip, :destination => dest)}
         Factory(:destination, :place => dest, :letter => value[1])

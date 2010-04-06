@@ -41,7 +41,26 @@ class ApplicationController < ActionController::Base
     (date + 3.months).strftime("%Y%m%d")
   end
 
+  def plus_1_week(date)
+    date = Date.parse(date) unless date.class == Date
+    (date + 6.days).strftime("%Y%m%d")
+  end
+
   def date2string(date)
     date.strftime("%Y%m%d")
   end
+
+  def dates_between(start_date, end_date)
+    #returns and array of strings representing all dates between start and end
+    start_date = ymd_to_date(start_date) if start_date.class == String
+    end_date = ymd_to_date(end_date) if end_date.class == String
+    output = {}
+    tmp_date = start_date
+    while tmp_date <= end_date
+      output[tmp_date.strftime("%Y%m%d")] = []
+      tmp_date += 1.day
+    end
+    return output
+  end
+
 end

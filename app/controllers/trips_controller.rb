@@ -8,8 +8,13 @@ class TripsController < ApplicationController
     filters = {}
     filters[:destination] = param_session_default(:destination, nil)
     filters[:start_date] = param_session_default(:start_date, default_start)
-    filters[:end_date] = param_session_default(:end_date, plus_3_months(@start_date))
-    @trips_by_date = Trip.by_date_string(filters)
+    unless @cal_type == 'month'
+      filters[:end_date] = param_session_default(:end_date, plus_1_week(@start_date))
+      @trips_by_date = dates_between(@start_date, filters[:end_date]).merge Trip.by_date_string(filters)
+    else
+      filters[:end_date] = param_session_default(:end_date, plus_3_months(@start_date))
+      @trips_by_date = Trip.by_date_string(filters)
+    end
     @destination_list = Trip.list_destinations
   end
 

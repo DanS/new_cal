@@ -1,7 +1,7 @@
 <h1>Rutledge Travel Calendar Version 5</h1>
 <%= render :partial => 'navbar', :locals => {:start_date => @start_date } %>
 <div id="three-calendars">
-  <%= render :partial => 'month' %>
+  <%= render :partial => @cal_type %>
   <%= render :partial => 'destination_list'  %>
 </div>
 <%= render :partial => 'trip_list' %>

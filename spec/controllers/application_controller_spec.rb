@@ -39,4 +39,15 @@ describe ApplicationController do
       controller.param_session_default('x', 'month').class.should_not == Date
     end
   end
+
+  describe "dates_between" do
+    it "should return a hash where the keys are strings describing all the dates between dates given" do
+      controller.dates_between('20100101', '20100107').keys.sort.should == ["20100101", "20100102",
+        "20100103", "20100104", "20100105", "20100106", "20100107"]
+      controller.dates_between('20091229', '20100107').keys.sort.should == ["20091229", "20091230",
+        "20091231", "20100101", "20100102", "20100103", "20100104", "20100105",
+        "20100106", "20100107"]
+    end
+  end
+
 end

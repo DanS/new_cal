@@ -14,8 +14,6 @@ describe "trips/_week.html.erb" do
       end
       @trips_by_date[key] = trips
     end
-  end
-  before(:each) do
     assigns[:trips_by_date] = @trips_by_date
   end
   it "should list the days of the week" do

@@ -23,14 +23,12 @@ module TripsHelper
     return time_selections
   end
 
-  def trips_in_week(week_num, year)
+  def trips_in_week(day)
     #returns an array of dates and associated trips for given week
-    week_num = "52" if week_num == "53"
-    day = Date.strptime("#{week_num}:#{year}", "%U:%Y")
     dates = (0..6).to_a.collect {|i| day + i.days}
     week = {}
     dates.each do |day|
-      week[day] = Trip.all.select {|t| t.date.to_date == day}
+      week[day.strftime("%Y%m%d")] = Trip.all.select {|t| t.date.to_date == day}
     end
     return week
   end
@@ -47,19 +45,6 @@ module TripsHelper
   def prev_month(date)
     date = ymd_to_date(date) unless date.class == Date
     (date - 1.month).strftime("%Y%m%d")
-  end
-
-  def dates_between(start_string, end_string)
-    #returns and array of strings representing all dates between start and end
-    start_date = ymd_to_date(start_string)
-    end_date = ymd_to_date(end_string)
-    output = []
-    tmp_date = start_date
-    while tmp_date <= end_date
-      output << tmp_date.strftime("%Y%m%d")
-      tmp_date += 1.day
-    end
-    return output
   end
 
   def time_as_string(time_obj)

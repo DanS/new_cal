@@ -11,6 +11,7 @@ describe "trips/calendar.html.erb" do
     @destinations = {"Rutledge(2)" => 'R', "Memphis(4)" => 'M', "La Plata(3)" => 'P',
       "Quincy(1)" => 'Q'}
     assigns[:destination_list] = @destinations
+    assigns[:cal_type] = 'month'
   end
   it "displays the header" do
     render
