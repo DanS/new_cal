@@ -37,7 +37,7 @@
 
   def self.by_date_string(params)
     trips_by_date = Hash.new {|hash, key| hash[key] = []}
-    to_destination(params[:destination]).upcoming.each do |t|
+      filtered(params).each do |t|
       date_str = t.date.strftime("%Y%m%d")
       trips_by_date[date_str] = trips_by_date[date_str] << t
     end

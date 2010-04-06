@@ -51,6 +51,12 @@ describe TripsController do
         assigns[:trips_by_date].keys.sort.should == ["20100404", "20100405", "20100406", "20100407", "20100408",
           "20100409", "20100410"]
       end
+      it "should not have date keys outside the date range" do
+        10.times {|i| Factory(:trip, :date => Date.today + i.days)}
+        get :calendar, {:start_date=>'20100404', :cal_type=>'week'}
+        assigns[:trips_by_date].keys.sort.should == ["20100404", "20100405", "20100406", "20100407", "20100408",
+          "20100409", "20100410"]
+      end
     end
     it "assigns destinations " do
       destinations = {'Quincy' => [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
