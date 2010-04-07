@@ -50,4 +50,11 @@ describe ApplicationController do
     end
   end
 
+  describe "end_of_week" do
+    it "should return the day 6 days from given date" do
+      controller.end_of_week(Date.parse('20100404')).should == '20100410'
+      controller.end_of_week(Date.parse('20101226')).should == '20110101'
+    end
+  end
+
 end

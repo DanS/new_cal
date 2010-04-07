@@ -208,8 +208,10 @@ describe Trip do
       Trip.between_dates(Date.today + 2.years, Date.today + 3.years)
     end
     it "should only return trip between dates given" do
+      trip_dates = Trip.find(:all).collect {|t| t.date}.sort
       result = Trip.between_dates(Date.today + 2.months, Date.today + 4.months)
       result.should have_exactly(3).Trips
+      result.collect {|t| t.date}.sort.should == trip_dates[1,3]
     end
     it "should return trips on boundary dates" do
       result = Trip.between_dates(Date.today + 1.month, Date.today + 1.month)

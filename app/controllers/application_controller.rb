@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     (date + 3.months).strftime("%Y%m%d")
   end
 
-  def plus_1_week(date)
+  def end_of_week(date)
     date = Date.parse(date) unless date.class == Date
     (date + 6.days).strftime("%Y%m%d")
   end
