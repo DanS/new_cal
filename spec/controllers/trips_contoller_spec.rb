@@ -28,6 +28,13 @@ describe TripsController do
         get :calendar, {}, {}
         assigns[:start_date].should == Date.parse(Date.today.strftime("%Y%m") + '01')
       end
+      it "assigns start_date to the first of the week if cal_type = week" do
+        (1..6).each do |n|
+          start_date = (20100404 + n).to_s
+          get :calendar, {:start_date => start_date, :cal_type => 'week'}
+          assigns[:start_date].should == "20100404"
+        end
+      end
     end
     context "assigning cal-type" do
       it "should assign a cal-type of month if cal_type not in params or session" do

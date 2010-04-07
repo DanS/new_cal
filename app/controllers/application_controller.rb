@@ -52,8 +52,8 @@ class ApplicationController < ActionController::Base
 
   def dates_between(start_date, end_date)
     #returns and array of strings representing all dates between start and end
-    start_date = ymd_to_date(start_date) if start_date.class == String
-    end_date = ymd_to_date(end_date) if end_date.class == String
+    start_date = Date.parse(start_date) if start_date.class == String
+    end_date = Date.parse(end_date) if end_date.class == String
     output = {}
     tmp_date = start_date
     while tmp_date <= end_date
@@ -63,4 +63,8 @@ class ApplicationController < ActionController::Base
     return output
   end
 
+  def first_day_of_week(date)
+    date = Date.parse(date) if date.class == String
+    (date - date.wday.days).strftime("%Y%m%d")
+  end
 end
