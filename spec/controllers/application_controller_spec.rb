@@ -27,8 +27,10 @@ describe ApplicationController do
       session['x'].should == "paramValue"
     end
     it "should set session value to nil and return nil if param value is 'clear' " do
-      get :foo, {'x'=>"clear"}, {'x'=>"sessionValue"} #assign values to params and session
+      get :foo, {'x'=>"paramValue"}, {'x'=>"sessionValue"} #assign values to params and session
+      get :foo, {'x'=>"clear"}, {'x'=>"sessionValue"} #see if "all" alls value
       controller.param_session_default('x', "defaultValue").should == nil
+      session['x'].should == nil
     end
     it "should return a date object if value is a string that can parse as a date" do
       get :foo, {'x'=>"20101010"}, {} #assign value to params

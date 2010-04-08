@@ -40,7 +40,7 @@ describe "trips/_destination_list.html.erb" do
     render
     response.should have_selector('table', :id => "destination-list" ) do |table|
       table.should have_selector("tr:nth-child(#{@destinations.length + 2})") do |row|
-        row.should have_selector("a", :content => 'All Destinations', :href => "/"  )
+        row.should have_selector("a", :content => 'All Destinations', :href => "/?destination=clear"  )
       end
     end
   end
