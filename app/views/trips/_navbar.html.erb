@@ -1,5 +1,9 @@
 <div id="navbar">
-  <%= link_to '<', root_path( :start_date => prev_month(@start_date)), {:id => 'prev-month'} %>
+  <% if @cal_type == 'month' %>
+    <%= link_to '<', root_path( :start_date => prev_month(@start_date)), {:id => 'prev-month'} %>
+  <% else %>
+    <%= link_to '<', root_path(:start_date => prev_week(@start_date)), {:id => 'prev-week'}%>
+  <% end %>
   |
   <%= link_to 'Month', root_path(:cal_type => 'month'), {:id => "month-view", } %>
   |
@@ -7,5 +11,9 @@
   |
   <%= link_to 'WIP', root_path(:cal_type => 'wip'), {:id => "wip-view", } %>
   |
-  <%= link_to '>', root_path( :start_date => next_month(@start_date)), {:id => 'next-month'} %>
+  <% if @cal_type == 'month' %>
+    <%= link_to '>', root_path( :start_date => next_month(@start_date)), {:id => 'next-month'} %>
+  <% else %>
+    <%= link_to '>', root_path( :start_date => next_week(@start_date)), {:id => 'next-week'} %>
+  <% end %>
 </div>

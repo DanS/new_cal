@@ -2,10 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 
 describe TripsHelper do
-  # #  before(:each) do
-  # #    @trips_helper = TripsHelper.new
-  # #  end
-  #
+  
   describe "next_3_months_years" do
     it "should return the same 3 month/ years when sent different days in the same month" do
       helper.next_3_months_years("20100201").should == [[2, 2010], [3, 2010], [4, 2010]]
@@ -95,6 +92,26 @@ describe TripsHelper do
     end
   end
 
+  describe "prev_week" do
+    it "should produce the date string for the previous week" do
+      @input_dates = ["20100404", "20100328", "20100321"]
+      @output_dates = [ "20100328", "20100321", "20100314"]
+      3.times do |i|
+        helper.prev_week(@input_dates[i]).should == @output_dates[i]
+      end
+    end
+  end
+  
+  describe "next_week" do
+    it "should produce the date string for the next week" do
+      @input_dates = [ "20100328", "20100321", "20100314"]
+      @output_dates = ["20100404", "20100328", "20100321"]
+      3.times do |i|
+        helper.next_week(@input_dates[i]).should == @output_dates[i]
+      end
+    end
+  end
+
   describe "class_for_day" do
     before(:each) do
       @today = Date.today
@@ -138,6 +155,5 @@ describe TripsHelper do
       helper.class_for_trips([]).should == ''
     end
   end
-
   
 end

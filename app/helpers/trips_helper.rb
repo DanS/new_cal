@@ -46,6 +46,16 @@ module TripsHelper
     date = ymd_to_date(date) unless date.class == Date
     (date - 1.month).strftime("%Y%m%d")
   end
+  
+  def prev_week(date)
+    date = ymd_to_date(date) unless date.class == Date
+    (date - 1.week).strftime("%Y%m%d")
+  end
+
+  def next_week(date)
+    date = ymd_to_date(date) unless date.class == Date
+    (date + 1.week).strftime("%Y%m%d")
+  end
 
   def time_as_string(time_obj)
     if time_obj.class == Time
@@ -67,4 +77,5 @@ module TripsHelper
   def class_for_trips(trips)
     trips.collect {|t| t.letter}.uniq.sort.join
   end
+
 end
