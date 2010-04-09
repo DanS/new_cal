@@ -33,11 +33,6 @@ describe "trips/calendar.html.erb" do
     end
   end
 
-  it "should render the destination_list template" do
-    template.should_receive(:render).with( :partial => "destination_list")
-    render
-  end
-
   it "should render the trip_list template" do
     template.should_receive(:render).with( :partial => "trip_list")
     render

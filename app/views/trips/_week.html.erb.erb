@@ -1,9 +1,9 @@
-<table id="week">
+<table id="week_calendar">
   <tr>
     <% @trips_by_date.keys.sort.each do |date| %>
       <td>
-        <table class="day_trips">
-          <tr><th class="day_label"> <%= Date.parse(date).strftime("%a %d %b %Y") %></th></tr>
+        <table class="day">
+          <tr><th class="day_label"> <%= Date.parse(date).strftime("%a %d %b<br />%Y") %></th></tr>
           <% @trips_by_date[date].sort {|a,b| a.depart <=> b.depart}.each do |trip|  %>
             <tr>
               <td>
@@ -14,5 +14,8 @@
         </table>
       </td>
     <% end %>
+    <td>
+      <%= render :partial => 'destination_list' %>
+    </td>
   </tr>
 </table>

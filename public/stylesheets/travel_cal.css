@@ -76,6 +76,19 @@ table#destination-list{
   float: left;
 }
 
+table#week_calendar#destination-list{
+  width: 12.5%;
+}
+
+table#week_calendar td {
+  width: 12.5%;
+  vertical-align: top;
+}
+
+table#week_calendar {
+ border: solid 1px black;
+}
+
 #trip-list{
   width: 100%;
 }
@@ -100,6 +113,7 @@ table#destination-list{
   padding-bottom: 12px;
   margin-bottom: 20px;
   background-color: #f0f0f0;
+  vertical-align: top;
 }
 
 #errorExplanation h2 {

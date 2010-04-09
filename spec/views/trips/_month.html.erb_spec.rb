@@ -18,6 +18,11 @@ describe "trips/calendar.html.erb" do
     response.should contain("Rutledge Travel Calendar Version 5")
   end
 
+  it "should render the destination_list template" do
+    template.should_receive(:render).with( :partial => "destination_list")
+    render
+  end
+
   context "calendar partial" do
     it "should display the current month and following 2 months" do
       render
@@ -32,7 +37,7 @@ describe "trips/calendar.html.erb" do
         Factory(:trip, :date => test_date)
         yesterdays_class = day_class_for(test_date)
         render
-        response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
           three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
             three_cal.should have_selector("td", :class => yesterdays_class, :content => test_date.mday.to_s )
           end
@@ -42,7 +47,7 @@ describe "trips/calendar.html.erb" do
     context "calendar days should be assigned class based on date and destinations\n" do
       it "should give days in the past a class of past" do
         render
-        response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
           three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
             today = Date.today
             (1..today.mday - 1).each do |day_number|
@@ -58,7 +63,7 @@ describe "trips/calendar.html.erb" do
         months_to_check = next_3_months_years(Date.today.strftime("%Y%m%d"))
         render
         month_index = 0
-        response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
           months_to_check.each do |current_month, current_year|
             month_index += 1
             three_cal.should have_selector("table:nth-child(#{month_index})", :class => "calendar" ) do |month_cal|
@@ -79,7 +84,7 @@ describe "trips/calendar.html.erb" do
       end
       it "should NOT contain a link to create a new trip if its in the past" do
         render
-        response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
           three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
             today = Date.today
             days = days_in_month(today.month, today.year)
@@ -98,7 +103,7 @@ describe "trips/calendar.html.erb" do
       it "should have a class representing the destination of a trip on today" do
         dest = Destination.create(:place => 'Rutledge', :letter => 'R', :color => '#FFC')
         render
-        response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
           three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
             today = Date.today
             days = days_in_month(today.month, today.year)
@@ -114,7 +119,7 @@ describe "trips/calendar.html.erb" do
         Factory(:trip, :destination => 'Quincy')
         assigns[:params] = {:destination => 'Rutledge'}
         render
-        response.should have_selector('div', :id => 'three-calendars') do |three_cal|
+        response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
           three_cal.should have_selector('table:nth-child(1)', :class => "calendar" ) do |month_cal|
             today = Date.today
             days = days_in_month(today.month, today.year)
