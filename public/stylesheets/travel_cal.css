@@ -81,13 +81,16 @@ table#week_calendar#destination-list{
 }
 
 table#week_calendar td {
+  border: 1px solid black;
   width: 12.5%;
-  height: 100%;
   vertical-align: top;
+  height: 100%;
 }
 
 table#week_calendar table.day {
+  border: 0;
   padding: 2px;
+  height: 30px;
 }
 table#week_calendar th{
   vertical-align: top;
