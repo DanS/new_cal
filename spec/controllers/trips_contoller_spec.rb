@@ -65,24 +65,28 @@ describe TripsController do
           "20100409", "20100410"]
       end
     end
-    it "assigns destinations " do
-      destinations = {'Quincy' => [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
-        'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
-      destinations.each do |dest, value|
-        value[0].times {Factory(:trip, :destination => dest)}
-        Factory(:destination, :place => dest, :letter => value[1])
+    describe "destination_list assignment" do
+      it "should assign destinations from trips from @trips_by_date" do
+      dates = ['20100411', '20100412', '20100503', '20100504']
+      destinations = ['Quincy', 'Rutledge' , 'La Plata', 'Rutledge']
+      ['Quincy', 'La Plata', 'Rutledge'].each {|d| Factory(:destination, :place => d, :letter => d.first)}
+      dates.each_with_index  do |date, i|
+        (i + 1).times {Factory(:trip, :date=>date, :destination=>destinations[i])}
       end
-      get :calendar
-      assigns[:destination_list].keys.sort.should == destinations.keys.sort
-      assigns[:destination_list].values.sort.should == destinations.values.sort
+      get :calendar, {:cal_type => 'month', :start_date => '20100401'}
+      result = assigns[:destination_list]
+      result.keys.sort.should == destinations.uniq.sort
+      result.values.sort.should == [[1, "Q"], [3, "L"], [6, "R"]]
     end
-    
+  end
     context "assigns trips_by_date" do
       before(:each) do
         (1..5).each do |i|
           date_str = Date.today + i.days
           i.times { Factory.create(:trip, :date => date_str)}
         end
+        Factory(:destination, :place => 'Other', :letter => 'O')
+        Factory(:destination, :place => 'Rutledge', :letter => 'R')
       end
       it "should have 5 date keys" do
         get :calendar

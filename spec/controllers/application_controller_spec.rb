@@ -59,4 +59,19 @@ describe ApplicationController do
     end
   end
 
+
+  describe "to_destination_list method" do
+    it "should convert a trips_by_date to a destination_list" do
+      trips_by_date = Hash.new {|hash, key| hash[key] = []}
+      destinations = ['Quincy', 'Kirksville', 'Memphis', 'Columbia']
+      Factory(:destination, :place => 'Other', :letter =>'O')
+      destinations.each {|d| Factory(:destination, :place => d, :letter => d.first)}
+      ['20100401', '20100408', '20100415', '20100422'].each_with_index do |date, i|
+        (i + 1).times {trips_by_date[date] << Factory(:trip, :destination => destinations[i])}
+      end
+      result = controller.to_destination_list(trips_by_date)
+      result.keys.sort.should == ['Columbia', 'Kirksville', 'Memphis', 'Quincy']
+      result.values.sort.should == [[1, "Q"], [2, "K"], [3, "M"], [4, "C"]]
+    end
+  end
 end

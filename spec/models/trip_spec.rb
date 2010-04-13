@@ -84,9 +84,6 @@ describe Trip do
 
   context "destination_list method" do
     it "should list number of trips to each destination in upcoming trips" do
-      #      destinations = {'Quincy(1)' => 'Q', 'Rutledge(2)' => 'R', 'La Plata(3)' => 'P', 'Kirksville(4)' => 'K',
-      #        'Memphis(1)' => 'M', 'Fairfield(1)' => 'F'}
-
       destinations = {'Quincy' =>  [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
         'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
       destinations.each_pair do |dest, values|

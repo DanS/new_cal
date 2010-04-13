@@ -67,4 +67,14 @@ class ApplicationController < ActionController::Base
     date = Date.parse(date) if date.class == String
     (date - date.wday.days).strftime("%Y%m%d")
   end
+
+  def to_destination_list(trips_by_date)
+    output = {}
+    collected_destinations = trips_by_date.values.flatten.collect {|t| [t.destination, t.letter]}
+    collected_destinations.uniq.each do |pair|
+      count = collected_destinations.select {|p| p == pair}.length
+      output[pair[0]] = [count, pair[1]]
+    end
+    output
+  end
 end

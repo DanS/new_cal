@@ -155,5 +155,4 @@ describe TripsHelper do
       helper.class_for_trips([]).should == ''
     end
   end
-  
 end

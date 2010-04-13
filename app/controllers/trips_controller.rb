@@ -16,7 +16,7 @@ class TripsController < ApplicationController
       filters[:end_date] = param_session_default(:end_date, plus_3_months(@start_date))
       @trips_by_date = Trip.by_date_string(filters)
     end
-    @destination_list = Trip.list_destinations
+    @destination_list = to_destination_list(@trips_by_date)
   end
 
   # GET /trips/1

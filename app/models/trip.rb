@@ -1,4 +1,4 @@
- class Trip < ActiveRecord::Base
+class Trip < ActiveRecord::Base
   validates_presence_of :date, :contact, :destination, :community
   named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date, depart'}
   named_scope :next_3_months, {:conditions =>
@@ -14,12 +14,18 @@
          julianday(date) <= julianday(?) + 0.5", d[0] || first, d[1] || last]}}
 
   def destination_id
-      begin
-        Destination.find_by_place(destination).id
-      rescue
-        Destination.find_by_place('Other').id
+    begin
+      Destination.find_by_place(destination).id
+    rescue
+      other_val = Destination.find_by_place('Other').id
+      if other_val
+        return other_val
+      else
+        raise "Destination table has no record where place == 'Other' "
       end
+    end
   end
+
 
   def letter
     Destination.find(destination_id).letter
@@ -37,7 +43,7 @@
 
   def self.by_date_string(params)
     trips_by_date = Hash.new {|hash, key| hash[key] = []}
-      filtered(params).each do |t|
+    filtered(params).each do |t|
       date_str = t.date.strftime("%Y%m%d")
       trips_by_date[date_str] = trips_by_date[date_str] << t
     end
