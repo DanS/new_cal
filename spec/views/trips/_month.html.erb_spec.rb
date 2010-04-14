@@ -15,7 +15,7 @@ describe "trips/calendar.html.erb" do
   end
   it "displays the header" do
     render
-    response.should contain("Rutledge Travel Calendar Version 5")
+    response.should contain("Travel Calendar Version 5")
   end
 
   it "should render the destination_list template" do
