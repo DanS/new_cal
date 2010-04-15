@@ -42,10 +42,11 @@ class Trip < ActiveRecord::Base
   end
 
   def self.by_date_string(params)
+    today = Date.today
     trips_by_date = Hash.new {|hash, key| hash[key] = []}
     filtered(params).each do |t|
       date_str = t.date.strftime("%Y%m%d")
-      trips_by_date[date_str] = trips_by_date[date_str] << t
+      trips_by_date[date_str] = trips_by_date[date_str] << t if t.date >= today
     end
     trips_by_date.default = []
     trips_by_date

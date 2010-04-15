@@ -59,7 +59,6 @@ describe ApplicationController do
     end
   end
 
-
   describe "to_destination_list method" do
     it "should convert a trips_by_date to a destination_list" do
       trips_by_date = Hash.new {|hash, key| hash[key] = []}
@@ -74,4 +73,5 @@ describe ApplicationController do
       result.values.sort.should == [[1, "Q"], [2, "K"], [3, "M"], [4, "C"]]
     end
   end
+
 end

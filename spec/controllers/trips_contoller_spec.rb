@@ -67,7 +67,8 @@ describe TripsController do
     end
     describe "destination_list assignment" do
       it "should assign destinations from trips from @trips_by_date" do
-      dates = ['20100411', '20100412', '20100503', '20100504']
+        date_offsets = [0,1,32,33]
+        dates = date_offsets.collect {|d| (Date.today + d.days).strftime("%Y%m%d")}
       destinations = ['Quincy', 'Rutledge' , 'La Plata', 'Rutledge']
       ['Quincy', 'La Plata', 'Rutledge'].each {|d| Factory(:destination, :place => d, :letter => d.first)}
       dates.each_with_index  do |date, i|
@@ -103,6 +104,11 @@ describe TripsController do
       it "should only contain trip objects" do
         get :calendar
         assigns[:trips_by_date][(Date.today + 5.days).strftime("%Y%m%d")].first.class.should == Trip
+      end
+      it "should not contain trips in the past" do
+        Factory(:trip, :date=>Date.today - 1.day)
+        get :calendar
+        assigns[:trips_by_date].length.should == 5
       end
     end
    
