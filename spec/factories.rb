@@ -41,3 +41,8 @@ end
 Factory.define :community do |community|
   community.name cmtys.rand
 end
+
+Factory.define :vehicle do |vehicle|
+  vehicle.sequence(:name) {|n| "#{car.rand}#{n}"}
+  vehicle.color 'red'
+end

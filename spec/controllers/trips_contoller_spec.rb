@@ -80,6 +80,13 @@ describe TripsController do
       result.values.sort.should == [[1, "Q"], [3, "L"], [6, "R"]]
     end
   end
+  describe "vehicles assignment" do
+    it "should assign @vehicles when cal_type is not month" do
+      (1..7).each {|i| Factory(:vehicle, :name=>"car#{i}")}
+      get :calendar, {:cal_type=>'week'}
+      assigns[:vehicles].sort.should == Vehicle.all.collect {|v| v.name}
+    end
+  end
     context "assigns trips_by_date" do
       before(:each) do
         (1..5).each do |i|
