@@ -1,5 +1,25 @@
+<table id="wip">
+  <tr id="wip-header">
+    <% @days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] %>
+    <% @days.each do |day|%>
+      <th colspan="<%= @vehicles.length %>">
+        <%= day %>
+      </th>
+    <% end %>
+  </tr>
+  <% (1..24).each do |hour| %>
+    <tr id="<%= "hour#{hour}"%>">
+      <% @days.each do |day| %>
+        <% @vehicles.each do |vehicle|%>
+          <td id="<%= "#{day}-#{hour}-#{vehicle}"%>"></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
 <div id="vehicle-legend">
   <%  @vehicles.each do |vehicle| %>
-  <span> <%= vehicle %> </span>
+    <span> <%= vehicle %> </span>
   <% end %>
 </div>
