@@ -1,3 +1,7 @@
+
+<%year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
+<h2> WIP for week beginning Sunday <%= "#{month} #{day.to_i.ordinalize} #{year}" %>
+</h2>
 <table id="wip">
   <tr id="wip-header">
     <% @days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] %>
