@@ -6,12 +6,15 @@ class Trip < ActiveRecord::Base
   named_scope :for_week_year, lambda {|wk, yr| {:conditions =>
         ["strftime('%W', date) = ? AND strftime('%Y', date) = ?", sprintf("%02d", wk), "#{yr}"]}}
   #default dates
-  first = Date.parse("2000-01-01")
-  last = Date.parse("2100-01-01")
+  first = "2000-01-01"
+  last = "2100-01-01"
   named_scope :to_destination, lambda {|*dest| {:conditions => ["destination like ?", dest[0] || "%"]}}
-  named_scope :between_dates, lambda {|*d| 
-    {:conditions => ["julianday(?) - 0.5 <= julianday(date) AND
-         julianday(date) <= julianday(?) + 0.5", d[0] || first, d[1] || last]}}
+#  named_scope :between_dates, lambda {|*d|
+#    {:conditions => ["julianday(?) - 0.5 <= julianday(date) AND
+#         julianday(date) <= julianday(?) + 0.5", d[0] || first, d[1] || last]}}
+
+  named_scope :between_dates, lambda {|*d|
+    {:conditions => ["date(?, 'start of day') <= date AND date <= date(?, 'start of day', '+1 day')", d[0] || first, d[1] || last]}}
 
   def destination_id
     begin
@@ -60,7 +63,20 @@ class Trip < ActiveRecord::Base
     self.all.select {|t| t.date.strftime("%Y-%m-%d") == date.to_s}.collect {|t| t.destination}.uniq
   end
 
+  def self.to_dashed_date_string(date)
+    case date
+    when nil
+      return nil
+    when Date
+      return date.strftime("%Y-%m-%d")
+    when String
+      return date.insert(4, '-').insert(-3,'-')
+    end
+  end
+
   def self.filtered(filters)
-    Trip.to_destination(filters[:destination]).between_dates(filters[:start_date], filters[:end_date])
+    start_date = to_dashed_date_string(filters[:start_date])
+    end_date = to_dashed_date_string(filters[:end_date])
+    Trip.to_destination(filters[:destination]).between_dates(start_date, end_date)
   end
 end

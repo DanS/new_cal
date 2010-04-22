@@ -253,4 +253,16 @@ describe Trip do
       result.should have_exactly(2).Trip
     end
   end
+
+  describe "to_dashed_date_string helper method" do
+    it "should return nil when given a nil" do
+      Trip.to_dashed_date_string(nil).should == nil
+    end
+    it "should return a dashed string when given an undashed string" do
+      Trip.to_dashed_date_string('20100421').should == '2010-04-21'
+    end
+    it "should return a dashed date string when given a date object" do
+      Trip.to_dashed_date_string(Date.parse('2010-04-21')).should == '2010-04-21'
+    end
+  end
 end
