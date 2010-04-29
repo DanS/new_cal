@@ -18,7 +18,7 @@ test: &TEST
   host: localhost
   port: 5432
   encoding: unicode
-  database: new_cal_development
+  database: new_cal_test
   pool: 5
   username: rails
   password: rails
@@ -29,7 +29,7 @@ production:
   host: localhost
   port: 5432
   encoding: unicode
-  database: new_cal_development
+  database: new_cal_production
   pool: 5
   username: rails
   password: rails
