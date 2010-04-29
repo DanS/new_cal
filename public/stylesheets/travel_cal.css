@@ -111,6 +111,23 @@ table#week_calendar {
   border: 1px dotted #BBBBBB;
 }
 
+table#wip{
+  border: 3px solid black;
+}
+
+table#wip th, table#wip td{
+  border: 1px solid black;
+}
+
+.vehicle-header {
+  font-weight: lighter;
+  font-size:x-small;
+}
+
+table#wip .hour {
+  font-size: x-small;
+}
+
 .day, .specialDay, .past {
   font-size: 10px;
   line-height: normal;

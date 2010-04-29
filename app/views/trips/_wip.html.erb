@@ -1,25 +1,42 @@
-
+<% hours = ["1:AM", "2:AM", "3:AM", "4:AM", "5:AM", "6:AM", "7:AM", "8:AM", "9:AM", "10:AM", "11:AM", "12:PM",
+     "1:PM", "2:PM", "3:PM", "4:PM", "5:PM", "6:PM", "7:PM", "8:PM", "9:PM", "10:PM", "11:PM", "12:AM"] %>
 <%year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
 <h2> WIP for week beginning Sunday <%= "#{month} #{day.to_i.ordinalize} #{year}" %>
 </h2>
 <table id="wip">
-  <tr id="wip-header">
-    <% @days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] %>
-    <% @days.each do |day|%>
-      <th colspan="<%= @vehicles.length %>">
-        <%= day %>
-      </th>
-    <% end %>
-  </tr>
-  <% (1..24).each do |hour| %>
-    <tr id="<%= "hour#{hour}"%>">
-      <% @days.each do |day| %>
-        <% @vehicles.each do |vehicle|%>
-          <td id="<%= "#{day}-#{hour}-#{vehicle}"%>"></td>
+  <thead>
+    <tr id="wip-header">
+      <% @days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] %>
+      <% @days.each do |day|%>
+        <% time_col = (day == 'Sun') ? 1:0 %>
+        <th colspan="<%= @vehicles.length + time_col%>">
+          <%= day %>
+        </th>
+      <% end %>
+    </tr>
+    <tr>
+      <td></td>  <!-- time column spacer -->
+      <% 7.times do %>
+        <% @vehicles.each do |vheader| %>
+          <th class="vehicle-header">
+            <%= vheader %>
+          </th>
         <% end %>
       <% end %>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% (1..24).each do |hour| %>
+      <tr id="<%= "hour#{hour}"%>">
+        <td class="hour"> <%= hours[hour - 1] %> </td>
+        <% @days.each do |day| %>
+          <% @vehicles.each do |vehicle|%>
+            <td id="<%= "#{day}-#{hour}-#{vehicle}"%>"></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <div id="vehicle-legend">
