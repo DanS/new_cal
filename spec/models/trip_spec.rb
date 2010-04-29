@@ -130,30 +130,7 @@ describe Trip do
     Trip.next_3_months[0].class.should == Trip
   end
 
-  context "for_week_year method" do
-    before(:each) do
-      days_to_start_of_next_week = 7 - Date.today.wday
-      @current_week_num = Date.today.cweek
-      days_of_week_to_test = [0, 2, 3, 6]
-      dates_in_next_4_weeks = [1,2,3,4].map do |week|
-        Date.today + ((week * 7) + days_of_week_to_test[week - 1] + days_to_start_of_next_week).days
-      end
-      @wk_yr_to_test = []
-      dates_in_next_4_weeks.each do |d|
-        Factory(:trip, :date => d)
-        @wk_yr_to_test << [d.cweek, d.year]
-      end
-    end
-    it "should not have any trips in the current week" do
-      Trip.for_week_year(@current_week_num, Date.today.year).count.should == 0
-    end
-    it "should have one trip in each of the next 4 weeks" do
-      @wk_yr_to_test.each do |wk_yr|
-        puts "Testing one trip in week #{wk_yr[0]} year #{wk_yr[1]}"
-        Trip.for_week_year(*wk_yr).count.should == 1
-      end
-    end
-  end
+  
 
   context "on_date method" do
     before(:each) do

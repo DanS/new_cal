@@ -3,18 +3,14 @@ class Trip < ActiveRecord::Base
   named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date, depart'}
   named_scope :next_3_months, {:conditions =>
       ["date >= ? AND date <= ?", Date.today, Date.today + 3.months]}
-  named_scope :for_week_year, lambda {|wk, yr| {:conditions =>
-        ["strftime('%W', date) = ? AND strftime('%Y', date) = ?", sprintf("%02d", wk), "#{yr}"]}}
-  #default dates
-  first = "2000-01-01"
-  last = "2100-01-01"
+  
   named_scope :to_destination, lambda {|*dest| {:conditions => ["destination like ?", dest[0] || "%"]}}
-#  named_scope :between_dates, lambda {|*d|
-#    {:conditions => ["julianday(?) - 0.5 <= julianday(date) AND
-#         julianday(date) <= julianday(?) + 0.5", d[0] || first, d[1] || last]}}
 
+  #default dates
+  earlest_date = Date.parse("2000-01-01")
+  oldest_date = Date.parse("2100-01-01")
   named_scope :between_dates, lambda {|*d|
-    {:conditions => ["date(?, 'start of day') <= date AND date <= date(?, 'start of day', '+1 day')", d[0] || first, d[1] || last]}}
+    {:conditions => ["date_trunc('day', date) BETWEEN ? AND ?", d[0] || earlest_date, d[1] || oldest_date]}}
 
   def destination_id
     begin
@@ -31,7 +27,7 @@ class Trip < ActiveRecord::Base
 
 
   def letter
-    Destination.find(destination_id).letter
+    Destination.find(destination_id).letter 
   end
 
   def self.list_destinations
