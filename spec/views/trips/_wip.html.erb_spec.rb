@@ -4,26 +4,26 @@ describe "trips/_wip.html.erb" do
   before(:each) do
     @vehicles = (1..7).collect {|i| "car#{i}"}
     assigns[:vehicles] = @vehicles
-    @days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu',  'Fri', 'Sat']
-    assigns[:days] = @days
     @start_date = (Date.today - Date.today.wday.days).strftime("%Y%m%d")
     assigns[:start_date] = @start_date
+    @days = (0..6).collect {|i| Date.parse(@start_date) + i.days}
+    assigns[:days] = @days
   end
 
   describe "WIP table" do
-    it "should have a table of days of the week" do
+    it "should have a table of days of the week with dates" do
       render
       response.should have_selector('table', :id => 'wip') do |wip|
         wip.should have_selector('tr:nth-child(1)') do |header|
           (1..7).each do |i|
-            header.should contain(@days[i - 1])
+            header.should contain(@days[i - 1].strftime(
+                "%b %d %a %Y"))
           end
         end
       end
     end
   
     it "should have a subheader for each vehicle under each day" do
-      assigns[:vehicles] = @vehicles
       render
       response.should have_selector('table', :id => 'wip') do |wip|
         wip.should have_selector('tr:nth-child(2)') do |secondRow|
@@ -60,14 +60,6 @@ describe "trips/_wip.html.erb" do
           end
         end
       end
-    end
-  end
-  
-  it "should display a vehicles legend" do
-    assigns[:vehicles] = @vehicles
-    render
-    for vehicle in @vehicles
-      response.should contain(vehicle)
     end
   end
   

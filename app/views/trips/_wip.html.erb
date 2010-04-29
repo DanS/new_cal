@@ -6,11 +6,11 @@
 <table id="wip">
   <thead>
     <tr id="wip-header">
-      <% @days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] %>
+      <% @days = (0..6).collect {|i| Date.parse(@start_date) + i.days}%>
       <% @days.each do |day|%>
         <% time_col = (day == 'Sun') ? 1:0 %>
         <th colspan="<%= @vehicles.length + time_col%>">
-          <%= day %>
+          <%= day.strftime("<span class=\"small\">%b %d</span> %a <span class=\"small\">%Y</span>") %>
         </th>
       <% end %>
     </tr>
@@ -38,9 +38,3 @@
     <% end %>
   </tbody>
 </table>
-
-<div id="vehicle-legend">
-  <%  @vehicles.each do |vehicle| %>
-    <span> <%= vehicle %> </span>
-  <% end %>
-</div>

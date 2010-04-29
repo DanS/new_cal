@@ -1,7 +1,7 @@
 require 'factory_girl'
 require RAILS_ROOT + "/spec/factories"
 cmtys = ['Dancing Rabbit', 'Sandhill', 'Red Earth Farms']
-cars = ['Silver Jetta', 'Black Jetta', 'Truck', 'Either Jetta', 'SH', 'Other']
+cars = ['Any', 'Silver Jetta', 'Black Jetta', 'Truck', 'Either Jetta', 'Sand Hill', 'Other']
 contacts = %w( Dan Alline Kurt Nathan Bear Alyssa Juan)
 letters = %w(E F K L M O Q R)
 colors = ['#FFCC66', '#FFFF99', '#99CC99', '#99CCFF', '#FF3D51', '#4F9C4F',

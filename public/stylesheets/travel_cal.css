@@ -124,8 +124,9 @@ table#wip th, table#wip td{
   font-size:x-small;
 }
 
-table#wip .hour {
+table#wip .hour , table#wip .small{
   font-size: x-small;
+  font-weight: normal;
 }
 
 .day, .specialDay, .past {
