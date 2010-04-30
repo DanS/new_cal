@@ -50,13 +50,11 @@ describe "trips/_wip.html.erb" do
     end
 
     it "should divide each day into a grid one column for each vehicle" do
-      pending()
-      assigns[:vehicles] = @vehicles
       render
       response.should have_selector('table', :id => 'wip') do |wip|
         wip.should have_selector('tr:nth-child(2)') do |secondRow|
           @vehicles.each do |v|
-            secondRow.should have_selector('td', :contents => v)
+            secondRow.should have_selector('th', :content => v)
           end
         end
       end
