@@ -113,6 +113,8 @@ table#week_calendar {
 
 table#wip{
   border: 3px solid black;
+  border-spacing: 0;
+  border-collapse: collapse;
 }
 
 table#wip th, table#wip td{
@@ -127,6 +129,10 @@ table#wip th, table#wip td{
 table#wip .hour , table#wip .small{
   font-size: x-small;
   font-weight: normal;
+}
+
+table#wip .hour{
+  padding-left: 3px;
 }
 
 .day, .specialDay, .past {
