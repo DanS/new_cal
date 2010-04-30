@@ -119,6 +119,7 @@ table#wip{
 
 table#wip th, table#wip td{
   border: 1px solid black;
+  vertical-align:top;
 }
 
 .vehicle-header {

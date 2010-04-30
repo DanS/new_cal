@@ -54,7 +54,7 @@ describe "trips/_wip.html.erb" do
       response.should have_selector('table', :id => 'wip') do |wip|
         wip.should have_selector('tr:nth-child(2)') do |secondRow|
           @vehicles.each do |v|
-            secondRow.should have_selector('th', :content => v)
+            secondRow.should have_selector('th', :content => v, :count => 7)
           end
         end
       end
@@ -65,10 +65,6 @@ describe "trips/_wip.html.erb" do
     y, m, d = Date.parse(@start_date).strftime("%Y %B %d").split
     render
     response.should contain( "WIP for week beginning Sunday #{m} #{d.to_i.ordinalize} #{y}")
-  end
-
-  it "should start on the Sunday of the current week" do
-
   end
   
 end

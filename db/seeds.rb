@@ -1,7 +1,17 @@
 require 'factory_girl'
 require RAILS_ROOT + "/spec/factories"
 cmtys = ['Dancing Rabbit', 'Sandhill', 'Red Earth Farms']
-cars = ['Any', 'Silver Jetta', 'Black Jetta', 'Truck', 'Either Jetta', 'Sand Hill', 'Other']
+cars = [
+  # name, firm_assignment, not_dr_vehicle
+  ['Any',         '0','0'],
+  ['Silver Jetta','1','0'],
+  ['Black Jetta', '1','0'],
+  ['Truck',       '1','0'],
+  ['Slippery',    '1','1']
+  ['Either Jetta','1','0'],
+  ['Sand Hill',   '1','1'],
+  ['Other' ,       '0','0'],
+  ]
 contacts = %w( Dan Alline Kurt Nathan Bear Alyssa Juan)
 letters = %w(E F K L M O Q R)
 colors = ['#FFCC66', '#FFFF99', '#99CC99', '#99CCFF', '#FF3D51', '#4F9C4F',
@@ -10,8 +20,8 @@ colors = ['#FFCC66', '#FFFF99', '#99CC99', '#99CCFF', '#FF3D51', '#4F9C4F',
 #create communities
 cmtys.each {|c| Community.create :name => c}
 #create vehicles
-cars.each do |v|
-  Vehicle.create :name => v
+cars.each_with_index do |v, i|
+  Vehicle.create :name => v[0], :firm_assignment => v[1], :not_dr_vehicle => v[2], :color => colors[i]
 end
 
 #create destinations: place => [letter, color]

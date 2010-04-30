@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100420162135) do
+ActiveRecord::Schema.define(:version => 20100430200108) do
 
   create_table "communities", :force => true do |t|
     t.string   "name"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20100420162135) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "color"
-    t.string   "needs_assignment"
+    t.string   "firm_assignment"
     t.string   "not_dr_vehicle"
   end
 

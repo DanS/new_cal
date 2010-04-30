@@ -46,5 +46,5 @@ Factory.define :vehicle do |vehicle|
   vehicle.sequence(:name) {|n| "#{car.rand}#{n}"}
   vehicle.color 'red'
   vehicle.not_dr_vehicle '0'
-  vehicle.needs_assignment '1'
+  vehicle.firm_assignment '1'
 end
