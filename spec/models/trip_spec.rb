@@ -29,6 +29,53 @@ describe Trip do
     end
   end
 
+  context "duration method" do
+    it "should return zero if either depart or return times are nil" do
+      trip = Factory(:trip, :depart => nil)
+      trip.duration.should == 0.0
+      trip = Factory(:trip, :return => nil)
+      trip.duration.should == 0.0
+    end
+    it "should return duration if given both depart and return times" do
+      trip = Factory(:trip, :depart => Time.parse("7AM"), :return => Time.parse("6PM"))
+      trip.duration.should == 11
+      trip = Factory(:trip, :depart => Time.parse("7PM"), :return => Time.parse("7:30PM"))
+      trip.duration.should == 0.5
+      trip = Factory(:trip, :depart => Time.parse("7AM"), :return => Time.parse("10:30AM"))
+      trip.duration.should == 3.5
+    end
+  end
+
+  context "by_hour method" do
+    before(:each) do
+      @start_date = Date.parse('20100502')
+      @end_date = @start_date + 1.week
+      @depart = Time.parse('10AM')
+      @return = Time.parse('3PM')
+      Factory(:vehicle, :name =>'Truck')
+      Factory(:trip, :date=>@start_date, :preferred_vehicle => 'Truck', :depart=> @depart,
+        :return=>@return)
+    end
+
+    it "should return an object that returns a class string when a date/vehicle/departure hour
+          specifies a trip" do
+      result = Trip.by_hour(@start_date, @end_date)
+      result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).should == 'Truck-trip'
+    end
+    
+    it "should return true for all hours the trip lasts" do
+      result = Trip.by_hour(@start_date, @end_date)
+      (10..15).each do |hour|
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == 'Truck-trip'
+      end
+    end
+
+    it "should return nil for hours with no trip" do
+      result = Trip.by_hour(@start_date, @end_date)
+      result.has_hour?(@start_date, 'Truck', 15).should == nil
+    end
+  end
+
   context "Link trips to destination thru a virtural attribute" do
     before(:each) do
       %w(two four six Other).each {|p| Factory(:destination, :place => p, :letter => p[0,1])}

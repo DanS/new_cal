@@ -25,6 +25,12 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def duration
+    return 0.0 unless self.depart && self.return
+    d_time = self.depart.hour + (self.depart.min == 0 ? 0: 0.5)
+    r_time = self.return.hour + (self.return.min == 0 ? 0: 0.5)
+    return r_time - d_time
+  end
 
   def letter
     Destination.find(destination_id).letter 
@@ -75,4 +81,35 @@ class Trip < ActiveRecord::Base
     end_date = to_dashed_date_string(filters[:end_date])
     Trip.to_destination(filters[:destination]).between_dates(start_date, end_date)
   end
+
+  class ByHour
+    #wrap a hash so it returns nil if key not present
+    attr_reader :hours
+    def initialize(hours)
+      @hours = hours
+    end
+    def has_hour?(date, vehicle, hour)
+      if @hours.has_key?(date) && @hours[date].has_key?(vehicle) && @hours[date][vehicle].has_key?(hour)
+        return @hours[date][vehicle][hour]
+      else
+        return nil
+      end
+    end
+  end
+
+  def self.by_hour(start_date, end_date)
+    trips_by_hour = {} #Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
+    filtered(:start_date=>start_date, :end_date=>end_date).map do |t|
+      date = t.date.strftime("%Y%m%d")
+      (t.depart.hour..t.return.hour).each do |hour|
+        unless trips_by_hour.has_key?(date); trips_by_hour[date] ={}; end
+        unless trips_by_hour[date].has_key?(t.preferred_vehicle)
+          trips_by_hour[date][t.preferred_vehicle] = {}
+        end
+        trips_by_hour[date][t.preferred_vehicle][hour] = t.preferred_vehicle + '-trip'
+      end
+    end
+    return ByHour.new(trips_by_hour)
+  end
+
 end

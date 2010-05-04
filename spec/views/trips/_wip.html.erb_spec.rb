@@ -8,6 +8,9 @@ describe "trips/_wip.html.erb" do
     assigns[:start_date] = @start_date
     @days = (0..6).collect {|i| Date.parse(@start_date) + i.days}
     assigns[:days] = @days
+    @trips_by_hour = mock('trips_by_hour_mock')
+    @trips_by_hour.stub("has_key?").and_return("car1-trip")
+      assigns[:trips_by_hour] = @trips_by_hour
   end
 
   describe "WIP table" do
@@ -60,6 +63,18 @@ describe "trips/_wip.html.erb" do
       end
     end
   end
+
+  it "should add a class to color hours with trips planned" do
+    today = @start_date.insert(4, '-').insert(7, '-')
+    render
+    response.should have_selector('table', :id => 'wip') do |wip|
+      (10..15).each do |h|
+        wip.should have_selector('td', :id => today + "-#{h}-car1", :class=>'car1-trip')
+      end
+    end
+  end
+
+  #<td class='car1-trip' id='2010-05-02-10-car1'/>
   
   it "should have a title 'WIP for date' " do
     y, m, d = Date.parse(@start_date).strftime("%Y %B %d").split
