@@ -6,7 +6,9 @@ Clicking the "Show Only Trips to" items changes the calendar so only trips to th
 
 The WIP view is planned to be helpful during the meetings where actual vehicle assignments for the trips are made.  
 
-Rake tasks are setup to generate the numerous color images and css classes need to provide all possible permutations of different destinations on a given day.  
+Rake tasks are setup to generate the numerous color images and css classes need to provide all possible permutations of different destinations on a given day.
+
+Developed using BDD methodology with rSpec.
 
 Current progress:
   Mostly functional except for WIP view.  No javascript added yet.  Plan to add javascript to the month calendar so that trips show up when hovering calendar days.  Also plan to make the WIP view functional and allow dragging and dropping of trips for easy manipulation during the meetings.
