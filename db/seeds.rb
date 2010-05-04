@@ -7,7 +7,7 @@ cars = [
   ['Silver Jetta','1','0'],
   ['Black Jetta', '1','0'],
   ['Truck',       '1','0'],
-  ['Slippery',    '1','1']
+  ['Slippery',    '1','1'],
   ['Either Jetta','1','0'],
   ['Sand Hill',   '1','1'],
   ['Other' ,       '0','0'],
