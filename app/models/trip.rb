@@ -106,7 +106,7 @@ class Trip < ActiveRecord::Base
         unless trips_by_hour[date].has_key?(t.preferred_vehicle)
           trips_by_hour[date][t.preferred_vehicle] = {}
         end
-        trips_by_hour[date][t.preferred_vehicle][hour] = t.preferred_vehicle + '-trip'
+        trips_by_hour[date][t.preferred_vehicle][hour] = t.preferred_vehicle.gsub(' ', '-') + '-trip'
       end
     end
     return ByHour.new(trips_by_hour)
