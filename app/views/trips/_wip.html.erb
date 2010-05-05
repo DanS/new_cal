@@ -31,7 +31,7 @@
         <td class="hour"> <%= hours[hour - 1] %> </td>
         <% @days.each do |day| %>
           <% @vehicles.each do |vehicle|%>
-            <% trip_class = @trips_by_hour.has_key?(day, vehicle, hour) %>
+            <% trip_class = @trips_by_hour.has_hour?(day, vehicle, hour) %>
             <td id="<%= "#{day}-#{hour}-#{vehicle}\" "%>
                 <%=  "class=\"#{trip_class}\""%>>
               

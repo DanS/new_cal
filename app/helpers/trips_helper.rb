@@ -34,12 +34,12 @@ module TripsHelper
   end
 
   def ymd_to_date(date_string)
-    Date.strptime(date_string, "%Y%m%d")
+    Date.strptime(date_string.gsub('-',''), "%Y%m%d")
   end
 
   def next_month(date)
-     date = ymd_to_date(date) unless date.class == Date
-     (date + 1.month).strftime("%Y%m%d")
+    date = ymd_to_date(date) unless date.class == Date
+    (date + 1.month).strftime("%Y%m%d")
   end
 
   def prev_month(date)

@@ -11,8 +11,12 @@ class TripsController < ApplicationController
     unless @cal_type == 'month'
       @vehicles = Vehicle.ordered.collect {|v| v.name}
       @start_date = first_day_of_week(@start_date)
-      filters[:end_date] = param_session_default(:end_date, end_of_week(@start_date))
+      @end_date = param_session_default(:end_date, end_of_week(@start_date))
+      filters[:end_date] = @end_date
       @trips_by_date = dates_between(@start_date, filters[:end_date]).merge Trip.by_date_string(filters)
+      if @cal_type == 'wip'
+        @trips_by_hour = Trip.by_hour(@start_date, @end_date)
+      end
     else
       filters[:end_date] =  plus_3_months(@start_date)
       @trips_by_date = Trip.by_date_string(filters)

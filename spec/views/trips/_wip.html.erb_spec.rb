@@ -9,7 +9,7 @@ describe "trips/_wip.html.erb" do
     @days = (0..6).collect {|i| Date.parse(@start_date) + i.days}
     assigns[:days] = @days
     @trips_by_hour = mock('trips_by_hour_mock')
-    @trips_by_hour.stub("has_key?").and_return("car1-trip")
+    @trips_by_hour.stub("has_hour?").and_return("car1-trip")
       assigns[:trips_by_hour] = @trips_by_hour
   end
 

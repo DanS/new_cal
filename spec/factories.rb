@@ -15,10 +15,10 @@ Factory.define :trip do |trip|
   trip.contact 'Joe'
   trip.notes 'Lorium Ipsum et cetera ' 
   trip.preferred_vehicle 'Truck'
-  trip.return Time.parse("17:15")
   trip.depart Time.parse("12:15")
+  trip.return Time.parse("17:15")
   trip.community 'Dancing Rabbit'
-end
+    end
 
 Factory.define :random_trip do |trip|
   trip.travelers((1..8).to_a.rand)

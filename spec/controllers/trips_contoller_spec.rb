@@ -65,6 +65,15 @@ describe TripsController do
           "20100409", "20100410"]
       end
     end
+    context "assigns trips_by_hour" do
+      it "should have a key for every date with a trip" do
+        dates = %w(20100502 20100503 20100504 20100505).map {|d| Date.parse(d)}
+        Factory(:destination)
+        dates.each {|d| Factory(:trip, :date => d)}
+        get :calendar, {:start_date=>'20100502', :cal_type=>'wip'}
+        assigns[:trips_by_hour].hours.keys.sort.should == dates.collect {|d| d.strftime("%Y%m%d")}
+      end
+    end
     describe "destination_list assignment" do
       it "should assign destinations from trips from @trips_by_date" do
         date_offsets = [0,1,32,33]
