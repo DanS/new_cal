@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper' )
 
-describe "trips/_wip.html.erb" do
+describe "trips/wip.html.erb" do
   before(:each) do
     @vehicles = (1..7).collect {|i| "car#{i}"}
     assigns[:vehicles] = @vehicles

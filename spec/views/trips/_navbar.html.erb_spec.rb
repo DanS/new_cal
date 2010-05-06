@@ -44,7 +44,7 @@ describe "trips/_navbar.html.erb" do
   it "should display a link for WIP view" do
     render
     response.should have_selector('div', :id=>'navbar')  do |navbar|
-      navbar.should have_selector('a', :href => "/?cal_type=wip")
+      navbar.should have_selector('a', :href => "/wip")
     end
   end
 end

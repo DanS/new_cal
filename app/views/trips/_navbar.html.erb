@@ -9,7 +9,7 @@
   |
   <%= link_to 'Week', root_path(:cal_type => 'week'), {:id => "week-view", } %>
   |
-  <%= link_to 'WIP', root_path(:cal_type => 'wip'), {:id => "wip-view", } %>
+  <%= link_to 'WIP', wip_path %>
   |
   <% if @cal_type == 'month' %>
     <%= link_to '>', root_path( :start_date => next_month(@start_date)), {:id => 'next-month'} %>

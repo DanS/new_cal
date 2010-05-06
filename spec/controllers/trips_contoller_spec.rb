@@ -65,37 +65,22 @@ describe TripsController do
           "20100409", "20100410"]
       end
     end
-    context "assigns trips_by_hour" do
-      it "should have a key for every date with a trip" do
-        dates = %w(20100502 20100503 20100504 20100505).map {|d| Date.parse(d)}
-        Factory(:destination)
-        dates.each {|d| Factory(:trip, :date => d)}
-        get :calendar, {:start_date=>'20100502', :cal_type=>'wip'}
-        assigns[:trips_by_hour].hours.keys.sort.should == dates.collect {|d| d.strftime("%Y%m%d")}
-      end
-    end
+    
     describe "destination_list assignment" do
       it "should assign destinations from trips from @trips_by_date" do
         date_offsets = [0,1,32,33]
         dates = date_offsets.collect {|d| (Date.today + d.days).strftime("%Y%m%d")}
-      destinations = ['Quincy', 'Rutledge' , 'La Plata', 'Rutledge']
-      ['Quincy', 'La Plata', 'Rutledge'].each {|d| Factory(:destination, :place => d, :letter => d.first)}
-      dates.each_with_index  do |date, i|
-        (i + 1).times {Factory(:trip, :date=>date, :destination=>destinations[i])}
+        destinations = ['Quincy', 'Rutledge' , 'La Plata', 'Rutledge']
+        ['Quincy', 'La Plata', 'Rutledge'].each {|d| Factory(:destination, :place => d, :letter => d.first)}
+        dates.each_with_index  do |date, i|
+          (i + 1).times {Factory(:trip, :date=>date, :destination=>destinations[i])}
+        end
+        get :calendar, {:cal_type => 'month', :start_date => '20100401'}
+        result = assigns[:destination_list]
+        result.keys.sort.should == destinations.uniq.sort
+        result.values.sort.should == [[1, "Q"], [3, "L"], [6, "R"]]
       end
-      get :calendar, {:cal_type => 'month', :start_date => '20100401'}
-      result = assigns[:destination_list]
-      result.keys.sort.should == destinations.uniq.sort
-      result.values.sort.should == [[1, "Q"], [3, "L"], [6, "R"]]
     end
-  end
-  describe "vehicles assignment" do
-    it "should assign @vehicles when cal_type is not month" do
-      (1..7).each {|i| Factory(:vehicle, :name=>"car#{i}")}
-      get :calendar, {:cal_type=>'week'}
-      assigns[:vehicles].sort.should == Vehicle.all.collect {|v| v.name}
-    end
-  end
     context "assigns trips_by_date" do
       before(:each) do
         (1..5).each do |i|
@@ -182,6 +167,25 @@ describe TripsController do
       Community.stub(:all).and_return(vehicles)
       get :edit, :id => "37"
       assigns[:vehicles].should == (['truck', 'Vdub', 'Porsche'])
+    end
+  end
+
+  describe "GET wip" do
+    context "assigns params" do
+      context "assigns trips_by_hour" do
+        it "should have a key for every date with a trip" do
+          dates = %w(20100502 20100503 20100504 20100505).map {|d| Date.parse(d)}
+          Factory(:destination)
+          dates.each {|d| Factory(:trip, :date => d)}
+          get :wip, {:start_date=>'20100502', :cal_type=>'wip'}
+          assigns[:trips_by_hour].hours.keys.sort.should == dates.collect {|d| d.strftime("%Y%m%d")}
+        end
+      end
+    end
+    it "should assign vehicle" do
+      5.times {Factory(:vehicle)}
+      get :wip, {:start_date => '20100502'}
+      assigns[:vehicles].should == Vehicle.ordered.collect {|v| v.name}
     end
   end
 

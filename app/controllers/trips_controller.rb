@@ -9,21 +9,27 @@ class TripsController < ApplicationController
     filters[:destination] = param_session_default(:destination, nil)
     filters[:start_date] = param_session_default(:start_date, default_start)
     unless @cal_type == 'month'
-      @vehicles = Vehicle.ordered.collect {|v| v.name}
       @start_date = first_day_of_week(@start_date)
       @end_date = param_session_default(:end_date, end_of_week(@start_date))
       filters[:end_date] = @end_date
       @trips_by_date = dates_between(@start_date, filters[:end_date]).merge Trip.by_date_string(filters)
-      if @cal_type == 'wip'
-        @trips_by_hour = Trip.by_hour(@start_date, @end_date)
-      end
     else
       filters[:end_date] =  plus_3_months(@start_date)
       @trips_by_date = Trip.by_date_string(filters)
     end
     @destination_list = to_destination_list(@trips_by_date)
   end
-
+  
+  # GET /trips/wip
+  def wip
+    default_start = Date.today.strftime("%Y%m") + '01'
+    @start_date = param_session_default("start_date", default_start)
+    @trips_by_hour = Trip.by_hour(@start_date, @end_date)
+    @start_date = first_day_of_week(@start_date)
+    @end_date = param_session_default(:end_date, end_of_week(@start_date))
+    @vehicles = Vehicle.ordered.collect {|v| v.name}
+  end
+  
   # GET /trips/1
   # GET /trips/1.xml
   def show

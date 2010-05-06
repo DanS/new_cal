@@ -43,7 +43,7 @@ Factory.define :community do |community|
 end
 
 Factory.define :vehicle do |vehicle|
-  vehicle.sequence(:name) {|n| "#{car.rand}#{n}"}
+  vehicle.sequence(:name) { |n| "car-#{n}" }
   vehicle.color 'red'
   vehicle.not_dr_vehicle '0'
   vehicle.firm_assignment '1'
