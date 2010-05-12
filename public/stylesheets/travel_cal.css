@@ -134,6 +134,7 @@ table#wip .hour , table#wip .small{
 
 table#wip .hour{
   padding-left: 3px;
+  text-align: right;
 }
 
 .day, .specialDay, .past {
