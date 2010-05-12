@@ -128,12 +128,12 @@ table#wip th, table#wip td{
 }
 
 table#wip .hour , table#wip .small{
-  font-size: x-small;
+  font-size: xx-small;
   font-weight: normal;
 }
 
 table#wip .hour{
-  padding-left: 3px;
+  padding: 0 2px 0 2px;
   text-align: right;
 }
 
