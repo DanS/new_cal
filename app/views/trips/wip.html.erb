@@ -4,8 +4,8 @@
   "5:00PM", "5:30PM", "6:00PM", "6:30PM", "7:00PM", "7:30PM", "8:00PM", "8:30PM", "9:00PM",
   "9:30PM", "10:00PM", "10:30PM", "11:00PM", "11:30PM"] %>
 <%year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
-<h2> WIP for week beginning Sunday <%= "#{month} #{day.to_i.ordinalize} #{year}" %>
-</h2>
+<h2> WIP for week beginning Sunday <%= "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
+<%= render :partial => 'navbar', :locals => {:start_date => @start_date, :cal_type => 'wip' } %>
 <table id="wip">
   <thead>
     <tr id="wip-header">

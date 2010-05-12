@@ -14,6 +14,12 @@ describe "trips/wip.html.erb" do
   end
 
   describe "WIP table" do
+
+    it "should render the navbar template" do
+      template.should_receive(:render).with( :partial => "navbar",
+        :locals => {:start_date => @start_date})
+      render
+    end
     it "should have a table of days of the week with dates" do
       render
       response.should have_selector('table', :id => 'wip') do |wip|
@@ -73,8 +79,8 @@ describe "trips/wip.html.erb" do
     render
     response.should have_selector('table', :id => 'wip') do |wip|
       wip.should have_selector('tr:nth-child(10)') do |twelvethRow|
-          twelvethRow.should have_selector('td', :id => today + "-10-car1", :class=>'car1-trip')
-        end
+        twelvethRow.should have_selector('td', :id => today + "-10-car1", :class=>'car1-trip')
+      end
     end
   end
 
