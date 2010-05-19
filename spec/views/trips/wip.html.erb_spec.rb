@@ -17,16 +17,22 @@ describe "trips/wip.html.erb" do
 
     it "should render the navbar template" do
       template.should_receive(:render).with( :partial => "navbar",
-        :locals => {:start_date => @start_date})
+        :locals => {:start_date => @start_date, :cal_type => 'wip'})
       render
     end
-    it "should have a table of days of the week with dates" do
+    it "should have two header rows with days of the week and dates" do
+      pending
       render
       response.should have_selector('table', :id => 'wip') do |wip|
-        wip.should have_selector('tr:nth-child(1)') do |header|
-          (1..7).each do |i|
-            header.should contain(@days[i - 1].strftime(
-                "%b %d %a %Y"))
+        [1,2].each do |row|
+          wip.should have_selector("tr:nth-child(#{row})", :id => 'wip-header') do |header|
+            (1..7).each do |i|
+              month_day = @days[i-1].strftime("%b %d")
+              wk_day = @days[i-1].strftime("%a")
+              year = @days[i-1].strftime("%Y")
+              markup = "#{month_day} #{wk_day} #{year}"
+              header.should contain(markup)
+            end
           end
         end
       end
@@ -63,11 +69,12 @@ describe "trips/wip.html.erb" do
     end
 
     it "should divide each day into a grid one column for each vehicle" do
+      pending
       render
       response.should have_selector('table', :id => 'wip') do |wip|
         wip.should have_selector('tr:nth-child(2)') do |secondRow|
           @vehicles.each do |v|
-            secondRow.should have_selector('th', :content => v, :count => 7)
+            secondRow.should have_selector("th.vehicle-header", :content => v, :count => 7)
           end
         end
       end

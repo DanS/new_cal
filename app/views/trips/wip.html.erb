@@ -7,29 +7,12 @@
 <h2> WIP for week beginning Sunday <%= "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
 <%= render :partial => 'navbar', :locals => {:start_date => @start_date, :cal_type => 'wip' } %>
 <table id="wip">
-  <thead>
-    <tr id="wip-header">
-      <td><!-- time column spacer --></td>  
-      <% @days = (0..6).collect {|i| Date.parse(@start_date) + i.days}%>
-      <% @days.each do |day|%>
-        <th colspan="<%= @vehicles.length %>">
-          <%= day.strftime("<span class=\"small\">%b %d</span> %a <span class=\"small\">%Y</span>") %>
-        </th>
-      <% end %>
-    </tr>
-    <tr>
-      <td><!-- time column spacer --></td>
-      <% 7.times do %>
-        <% @vehicles.each do |vheader| %>
-          <th class="vehicle-header">
-            <%= vheader %>
-          </th>
-        <% end %>
-      <% end %>
-    </tr>
-  </thead>
+  <%= render :partial => 'wip_header' %>
   <tbody>
     <% (1..48).each do |hour| %>
+    <% if hour == 25 %> #add second header halfway thru page
+      <%= render :partial => 'wip_header' %>
+    <% end %>
       <tr id="<%= "hour#{hour}"%>">
         <td class="hour"> <%= hours[hour - 1] %> </td>
         <% @days.map {|d| d.strftime("%Y%m%d")}.each do |day| %>
