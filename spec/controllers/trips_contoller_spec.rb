@@ -14,7 +14,7 @@ describe TripsController do
       end
 
       it "assigns start date to session value when present" do
-        get :calendar, {}, {:start_date => @date_string }
+        get :calendar, {}, {:start_date => @date_string}
         assigns[:start_date].should == @date_obj
       end
       it "assigns start date to params value if both param and session values present" do
@@ -42,7 +42,7 @@ describe TripsController do
         assigns[:cal_type].should == "month"
       end
       it "should assign a cal_type to param value if present" do
-        get :calendar, {:cal_type => "params"},{:cal_type => 'session'}
+        get :calendar, {:cal_type => "params"}, {:cal_type => 'session'}
         assigns[:cal_type].should == 'params'
       end
       it "should assign a cal_type to session value if session present but not params" do
@@ -56,36 +56,43 @@ describe TripsController do
       it "should have date keys for all days between start_date and end_date params with cal_type == week" do
         get :calendar, {:start_date=>'20100404', :end_date=>'20100410', :cal_type=>'week'}
         assigns[:trips_by_date].keys.sort.should == ["20100404", "20100405", "20100406", "20100407", "20100408",
-          "20100409", "20100410"]
+                                                     "20100409", "20100410"]
       end
       it "should not have date keys outside the date range" do
-        10.times {|i| Factory(:trip, :date => Date.today + i.days)}
+        10.times { |i| Factory(:trip, :date => Date.today + i.days) }
         get :calendar, {:start_date=>'20100404', :cal_type=>'week'}
         assigns[:trips_by_date].keys.sort.should == ["20100404", "20100405", "20100406", "20100407", "20100408",
-          "20100409", "20100410"]
+                                                     "20100409", "20100410"]
       end
     end
-    
+
     describe "destination_list assignment" do
-      it "should assign destinations from trips from @trips_by_date" do
-        date_offsets = [0,1,32,33]
-        dates = date_offsets.collect {|d| (Date.today + d.days).strftime("%Y%m%d")}
-        destinations = ['Quincy', 'Rutledge' , 'La Plata', 'Rutledge']
-        ['Quincy', 'La Plata', 'Rutledge'].each {|d| Factory(:destination, :place => d, :letter => d.first)}
-        dates.each_with_index  do |date, i|
-          (i + 1).times {Factory(:trip, :date=>date, :destination=>destinations[i])}
+
+      it "should assign destinations from destinations of upcoming trips" do
+        today = Date.today
+        dates = [1,2,32,35].collect {|n| today + n.days}
+        destinations = ['Quincy', 'Rutledge', 'La Plata', 'Rutledge'] #Rutledge intentionally duplicated
+
+        #create destinations
+        destinations.uniq.each { |d| Factory(:destination, :place => d, :letter => d.first) }
+        dates.each_with_index do |date, i|
+          (i + 1).times { Factory(:trip, :date=>date, :destination=>destinations[i]) }
         end
-        get :calendar, {:cal_type => 'month', :start_date => '20100401'}
+
+        #check that destinations show up in destination list
+        get :calendar, {:cal_type => 'month', :start_date => today}
         result = assigns[:destination_list]
         result.keys.sort.should == destinations.uniq.sort
         result.values.sort.should == [[1, "Q"], [3, "L"], [6, "R"]]
       end
+
     end
+
     context "assigns trips_by_date" do
       before(:each) do
         (1..5).each do |i|
           date_str = Date.today + i.days
-          i.times { Factory.create(:trip, :date => date_str)}
+          i.times { Factory.create(:trip, :date => date_str) }
         end
         Factory(:destination, :place => 'Other', :letter => 'O')
         Factory(:destination, :place => 'Rutledge', :letter => 'R')
@@ -112,7 +119,7 @@ describe TripsController do
         assigns[:trips_by_date].length.should == 5
       end
     end
-   
+
   end
 
   describe "GET show" do
@@ -135,13 +142,13 @@ describe TripsController do
     end
     it "assigns a list of communities" do
       names = ['a', 'b', 'c']
-      names.each {|n| Community.create :name => n}
+      names.each { |n| Community.create :name => n }
       get :new
       assigns[:communities].should == names
     end
     it "assigns a list of vehicles" do
       names = ['bug', 'beetle', 'rabbit']
-      names.each {|n| Vehicle.create(:name => n)}
+      names.each { |n| Vehicle.create(:name => n) }
       get :new
       assigns[:vehicles].should == names
     end
@@ -157,13 +164,13 @@ describe TripsController do
       assigns[:trip].should equal(mock_trip)
     end
     it "assigns @communities" do
-      communities =  ['DR', 'SH', 'RE'].collect {|c| Community.create :name => c}
+      communities =  ['DR', 'SH', 'RE'].collect { |c| Community.create :name => c }
       Community.stub(:all).and_return(communities)
       get :edit, :id => "37"
       assigns[:communities].should == (['DR', 'SH', 'RE'])
     end
     it "assigns @communities" do
-      vehicles =  ['truck', 'Vdub', 'Porsche'].collect {|v| Vehicle.create :name => v}
+      vehicles =  ['truck', 'Vdub', 'Porsche'].collect { |v| Vehicle.create :name => v }
       Community.stub(:all).and_return(vehicles)
       get :edit, :id => "37"
       assigns[:vehicles].should == (['truck', 'Vdub', 'Porsche'])
@@ -174,18 +181,18 @@ describe TripsController do
     context "assigns params" do
       context "assigns trips_by_hour" do
         it "should have a key for every date with a trip" do
-          dates = %w(20100502 20100503 20100504 20100505).map {|d| Date.parse(d)}
+          dates = %w(  20100502 20100503 20100504 20100505  ).map { |d| Date.parse(d) }
           Factory(:destination)
-          dates.each {|d| Factory(:trip, :date => d)}
+          dates.each { |d| Factory(:trip, :date => d) }
           get :wip, {:start_date=>'20100502', :cal_type=>'wip'}
-          assigns[:trips_by_hour].hours.keys.sort.should == dates.collect {|d| d.strftime("%Y%m%d")}
+          assigns[:trips_by_hour].hours.keys.sort.should == dates.collect { |d| d.strftime("%Y%m%d") }
         end
       end
     end
     it "should assign vehicle" do
-      5.times {Factory(:vehicle)}
+      5.times { Factory(:vehicle) }
       get :wip, {:start_date => '20100502'}
-      assigns[:vehicles].should == Vehicle.ordered.collect {|v| v.name}
+      assigns[:vehicles].should == Vehicle.ordered.collect { |v| v.name }
     end
   end
 
