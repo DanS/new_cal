@@ -4,7 +4,8 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environment'))
 require 'spec/autorun'
 require 'spec/rails'
-require File.expand_path(File.join(File.dirname(__FILE__) + "/factories"))
+#TODO fix kludgy unless Factory below 
+require File.expand_path(File.join(File.dirname(__FILE__) + "/factories")) unless Factory
 require 'my_spec_helpers'
 
 # Uncomment the next line to use webrat's matchers

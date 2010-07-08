@@ -1,5 +1,5 @@
 def rand_time
-  m = [0, 15, 30, 45].rand
+  m = [0, 15, 30, 45].random_element
   h = rand(24)
   Time.parse("#{h}:#{m}")
 end
@@ -13,7 +13,7 @@ Factory.define :trip do |trip|
   trip.destination 'Rutledge'
   trip.date Date.today
   trip.contact 'Joe'
-  trip.notes 'Lorium Ipsum et cetera ' 
+  trip.notes 'Lorium Ipsum et cetera '
   trip.preferred_vehicle 'Truck'
   trip.depart Time.parse("12:15")
   trip.return Time.parse("17:15")
@@ -21,15 +21,15 @@ Factory.define :trip do |trip|
     end
 
 Factory.define :random_trip do |trip|
-  trip.travelers((1..8).to_a.rand)
-  trip.destination @destinations.rand
+  trip.travelers((1..8).to_a.random_element)
+  trip.destination @destinations.random_element
   trip.date Date.today + rand(90).days
   trip.contact ['Joe', 'Dan', 'Sally', 'Temperance', 'Shirley']
   trip.notes 'Lorium Ipsum et cetera ' * rand(6)
-  trip.preferred_vehicle cars.rand
+  trip.preferred_vehicle cars.random_element
   trip.return rand_time
   trip.depart rand_time
-  trip.community cmtys.rand
+  trip.community cmtys.random_element
 end
 
 Factory.define :destination do |dest|
@@ -39,7 +39,7 @@ Factory.define :destination do |dest|
 end
 
 Factory.define :community do |community|
-  community.name cmtys.rand
+  community.name cmtys.random_element
 end
 
 Factory.define :vehicle do |vehicle|

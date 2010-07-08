@@ -1,5 +1,4 @@
-require 'factory_girl'
-require RAILS_ROOT + "/spec/factories"
+
 cmtys = ['Dancing Rabbit', 'Sandhill', 'Red Earth Farms']
 cars = [
   # name, firm_assignment, not_dr_vehicle

@@ -1,6 +1,6 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe "days_in_month" do
   it "should return 31 for january 2010" do
