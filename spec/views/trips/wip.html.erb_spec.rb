@@ -20,6 +20,7 @@ describe "trips/wip.html.erb" do
         :locals => {:start_date => @start_date, :cal_type => 'wip'})
       render
     end
+
     it "should have two header rows with days of the week and dates" do
       pending
       render

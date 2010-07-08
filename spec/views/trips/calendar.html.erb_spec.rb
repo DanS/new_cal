@@ -37,4 +37,5 @@ describe "trips/calendar.html.erb" do
     template.should_receive(:render).with( :partial => "trip_list")
     render
   end
+  
 end

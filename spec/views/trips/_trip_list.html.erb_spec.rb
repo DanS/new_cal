@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "trips/_trip_list.html.erb" do
+
   before(:each) do
     assigns[:start_date] = Date.today.strftime("%Y%m") + "01"
     @trip = Factory.create(:trip)
@@ -22,6 +23,7 @@ describe "trips/_trip_list.html.erb" do
         end
       end
     end
+
     it "should display edit and delete buttons in last cell of row" do
       render
       response.should have_selector('table', :id => 'trip-list') do |table|
@@ -31,6 +33,7 @@ describe "trips/_trip_list.html.erb" do
         end
       end
     end
+
     it "should display the details of an upcoming trip" do
       render
       response.should have_selector('table', :id => 'trip-list') do |table|
@@ -44,6 +47,7 @@ describe "trips/_trip_list.html.erb" do
         table.should have_selector('td', :content => "1")
       end
     end
+
     it "should style the destination cell so that it gets the destination color" do
       Destination.create :place => 'Rutledge', :letter => 'R', :color => '#CFF'
       render
@@ -53,6 +57,7 @@ describe "trips/_trip_list.html.erb" do
         end
       end
     end
+
     it "should have the date cell span all the rows with the same date" do
       tbd = {Date.today.strftime("%Y%m%d") => []}
       3.times { tbd[Date.today.strftime("%Y%m%d")] << Factory.create(:trip, :date => Date.today)}
@@ -64,6 +69,7 @@ describe "trips/_trip_list.html.erb" do
         end
       end
     end
+
     it "should display trips in order by date then time" do
       add_unordered_trips #defined in my_spec_helpers
       assigns[:trips_by_date] = Trip.by_date_string({})
@@ -79,14 +85,17 @@ describe "trips/_trip_list.html.erb" do
   end
 
   context "trips older than today should not display" do
+
     before(:each) do
       @yesterday = Date.today - 1.day
       Factory.create(:trip, :date => @yesterday, :notes => 'yesterdays trip')
     end
+
     it "should not display trips older than today in the list" do
       render
       response.should_not contain('yesterdays trip')
     end
+    
   end
 
   it "should accept trips that do not have a return time" do
@@ -97,4 +106,5 @@ describe "trips/_trip_list.html.erb" do
       table.should contain('No return time for this trip')
     end
   end
+  
 end

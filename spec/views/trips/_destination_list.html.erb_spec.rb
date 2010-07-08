@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "trips/_destination_list.html.erb" do
+
   before(:each) do
     @destinations = {'Quincy' =>  [1, 'Q'], 'Rutledge' => [2, 'R'], 'La Plata' => [3, 'P'], 'Kirksville' => [4, 'K'],
       'Memphis' => [1, 'M'], 'Fairfield' => [1, 'F']}
@@ -17,6 +18,7 @@ describe "trips/_destination_list.html.erb" do
       end
     end
   end
+
   it "should have color styles for destination in the destination list" do
     render
     response.should have_selector('table', :id => "destination-list" ) do |table|
@@ -25,6 +27,7 @@ describe "trips/_destination_list.html.erb" do
       end
     end
   end
+
   it "should display destinations in alphabetical order as links" do
     names_only = @destinations.keys.map {|d| d.gsub(/\(\d*\)/, '').gsub(' ', '_')}
     render
@@ -36,6 +39,7 @@ describe "trips/_destination_list.html.erb" do
       end
     end
   end
+
   it "should always show 'All Destinations' as the bottom selection" do
     render
     response.should have_selector('table', :id => "destination-list" ) do |table|
@@ -44,4 +48,5 @@ describe "trips/_destination_list.html.erb" do
       end
     end
   end
+  
 end

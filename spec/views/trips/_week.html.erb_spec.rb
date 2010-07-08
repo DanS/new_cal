@@ -1,6 +1,7 @@
 require 'spec_helper' 
 
 describe "trips/_week.html.erb" do
+
   before(:each) do
     @trips_by_date = Hash.new([])
     start_date = Date.parse('20100328')
@@ -19,12 +20,14 @@ describe "trips/_week.html.erb" do
     assigns[:trips_by_date] = @trips_by_date
     assigns[:destination_list] = {}
   end
+
   it "should list the days of the week" do
     render
     Date::ABBR_DAYNAMES.each do |day|
       response.should contain(day)
     end
   end
+
   it "should have the destination list after the seventh day" do
     render
     response.should have_selector('table', :id=>'week_calendar') do |table|
@@ -33,12 +36,14 @@ describe "trips/_week.html.erb" do
       end
     end
   end
+
   it "should list the month name, day numbers and year" do
     render
     @trips_by_date.keys.each do |date|
       response.should contain Date.parse(date).strftime("%a %d %b%Y")
     end
   end
+
   it "should list trips for each day sorted by departure time" do
     render
     response.should have_selector('table', :id=>'week_calendar') do |table|
@@ -54,6 +59,7 @@ describe "trips/_week.html.erb" do
       end
     end
   end
+  
   it "should trips have a class to color them according to destination" do
     @trips_by_date.each do |day, trips|
       trips.each do |trip|

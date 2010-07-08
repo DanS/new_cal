@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "trips/calendar.html.erb" do
+
   before(:each) do
     assigns[:start_date] = Date.today.strftime("%Y%m") + "01"
     @trip = Factory.create(:trip)
@@ -13,6 +14,7 @@ describe "trips/calendar.html.erb" do
     assigns[:destination_list] = @destinations
     assigns[:cal_type] = 'month'
   end
+
   it "displays the header" do
     render
     response.should contain("Travel Calendar Version 5")
@@ -24,12 +26,14 @@ describe "trips/calendar.html.erb" do
   end
 
   context "calendar partial" do
+
     it "should display the current month and following 2 months" do
       render
       for month in Date::MONTHNAMES[Date.today.month, 3]
         response.should contain(month)
       end
     end
+
     it "should not display trips older than today in the calendar" do unless Date.today.mday == 1
         #don't run on the first of the month because yesterday won't show up on the calendar
         Trip.delete_all
@@ -44,7 +48,9 @@ describe "trips/calendar.html.erb" do
         end
       end
     end
+
     context "calendar days should be assigned class based on date and destinations\n" do
+
       it "should give days in the past a class of past" do
         render
         response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
@@ -57,8 +63,11 @@ describe "trips/calendar.html.erb" do
           end
         end
       end
+
     end
+
     context "only current and future calendar days should have a link to create a new trip on that date" do
+
       it "should contain links to create a new trip on that date on current and future dates" do
         months_to_check = next_3_months_years(Date.today.strftime("%Y%m%d"))
         render
@@ -82,6 +91,7 @@ describe "trips/calendar.html.erb" do
           end
         end
       end
+
       it "should NOT contain a link to create a new trip if its in the past" do
         render
         response.should have_selector('div', :id => 'calendar-containers') do |three_cal|
@@ -97,9 +107,11 @@ describe "trips/calendar.html.erb" do
           end
         end
       end
+
     end
 
     context "calendar days should have colors representing trip designations on that day" do
+
       it "should have a class representing the destination of a trip on today" do
         dest = Destination.create(:place => 'Rutledge', :letter => 'R', :color => '#FFC')
         render
@@ -113,6 +125,7 @@ describe "trips/calendar.html.erb" do
           end
         end
       end
+
       it "should filter destination colors displayed when a destination filter is active" do
         dest = Destination.create(:place => 'Rutledge', :letter => 'R', :color => '#FFC')
         Destination.create(:place => 'Quincy', :letter => 'Q', :color => '#FCC')
@@ -133,6 +146,5 @@ describe "trips/calendar.html.erb" do
     end
 
   end
-
   
 end
