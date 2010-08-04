@@ -15,11 +15,6 @@ describe "trips/calendar.html.erb" do
     assigns[:cal_type] = 'month'
   end
 
-  it "displays the header" do
-    render
-    response.should contain("Travel Calendar Version 5")
-  end
-
   it "should render the destination_list template" do
     template.should_receive(:render).with( :partial => "destination_list")
     render

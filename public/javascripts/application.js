@@ -1,2 +1,5 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+// expand the title on page open
+$(document).ready(function(){
+  $('#banner h1').css("fontSize", "6px");
+  $('#banner h1').animate({fontSize:"28px"}, 1000);
+});
