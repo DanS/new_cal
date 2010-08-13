@@ -1,5 +1,6 @@
 class Trip < ActiveRecord::Base
-  validates_presence_of :date, :contact, :destination, :community
+  validates_presence_of :date, :contact, :destination, :community, :depart, :return
+  before_validation {|t| if t.return.nil?; t.return = t.depart + 2.hours; end }
   named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date, depart'}
   named_scope :next_3_months, {:conditions =>
       ["date >= ? AND date <= ?", Date.today, Date.today + 3.months]}
@@ -7,10 +8,10 @@ class Trip < ActiveRecord::Base
   named_scope :to_destination, lambda {|*dest| {:conditions => ["destination like ?", dest[0] || "%"]}}
 
   #default dates
-  earlest_date = Date.parse("2000-01-01")
+  earliest_date = Date.parse("2000-01-01")
   oldest_date = Date.parse("2100-01-01")
   named_scope :between_dates, lambda {|*d|
-    {:conditions => ["date_trunc('day', date) BETWEEN ? AND ?", d[0] || earlest_date, d[1] || oldest_date]}}
+    {:conditions => ["date_trunc('day', date) BETWEEN ? AND ?", d[0] || earliest_date, d[1] || oldest_date]}}
 
   def destination_id
     begin
@@ -90,9 +91,9 @@ class Trip < ActiveRecord::Base
     end
     def has_hour?(date, vehicle, hour)
       if @hours.has_key?(date) && @hours[date].has_key?(vehicle) && @hours[date][vehicle].has_key?(hour)
-        return @hours[date][vehicle][hour]
+        return "class=\"#{@hours[date][vehicle][hour]}\""
       else
-        return nil
+        return ""
       end
     end
   end

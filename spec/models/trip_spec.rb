@@ -1,7 +1,9 @@
 require 'spec_helper'
+
 def d2str(date)
   date.strftime("%Y%m%d")
 end
+
 describe Trip do
   before(:each) do
     @valid_attributes = {
@@ -21,21 +23,34 @@ describe Trip do
     Trip.create!(@valid_attributes)
   end
 
-  it "should not be valid without all required attributes" do
-    [:date, :contact, :community, :destination].each do |attrib|
-      @valid_attributes[attrib] = nil
-      trip = Trip.create(@valid_attributes)
-      trip.should_not be_valid
+  context "validation" do
+
+    it "should not be valid without all required attributes" do
+      #return is required but is automatically added if missing so can't be part of this test
+      [:date, :contact, :community, :destination, :depart].each do |attrib|
+        @valid_attributes[attrib] = nil
+        trip = Trip.create(@valid_attributes)
+        trip.should_not be_valid
+      end
+    end
+
+    it "should default to 2 hours if no return time given" do
+      t = Factory.build(:trip, :return => nil)
+      t.should be_valid
+      t.return.should_not be_nil
+      t.return.should == t.depart + 2.hours 
     end
   end
 
   context "duration method" do
-    it "should return zero if either depart or return times are nil" do
-      trip = Factory(:trip, :depart => nil)
-      trip.duration.should == 0.0
-      trip = Factory(:trip, :return => nil)
-      trip.duration.should == 0.0
-    end
+# TODO remove this code
+# depart and return times now required this test no longer applies
+#    it "should return zero if either depart or return times are nil" do
+#      trip = Factory(:trip, :depart => nil)
+#      trip.duration.should == 0.0
+#      trip = Factory(:trip, :return => nil)
+#      trip.duration.should == 0.0
+#    end
     it "should return duration if given both depart and return times" do
       trip = Factory(:trip, :depart => Time.parse("7AM"), :return => Time.parse("6PM"))
       trip.duration.should == 11
@@ -60,25 +75,25 @@ describe Trip do
     it "should return an object that returns a class string when a date/vehicle/departure hour
           specifies a trip" do
       result = Trip.by_hour(@start_date, @end_date)
-      result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).should == 'Truck-trip'
+      result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).should == "class=\"Truck-trip\""
     end
 
     it "should return true for all hours the trip lasts" do
       result = Trip.by_hour(@start_date, @end_date)
       (10..15).each do |hour|
-        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == 'Truck-trip'
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == "class=\"Truck-trip\""
       end
     end
 
-    it "should return nil for hours with no trip" do
+    it "should return empty string for hours with no trip" do
       result = Trip.by_hour(@start_date, @end_date)
-      result.has_hour?(@start_date, 'Truck', 15).should == nil
+      result.has_hour?(@start_date, 'Truck', 15).should == ""
     end
   end
 
-  context "Link trips to destination thru a virtural attribute" do
+  context "Link trips to destination thru a virtual attribute" do
     before(:each) do
-      %w(  two four six Other  ).each { |p| Factory(:destination, :place => p, :letter => p[0, 1]) }
+      %w(   two four six Other   ).each { |p| Factory(:destination, :place => p, :letter => p[0, 1]) }
     end
 
     it "should have a virtual attribute destination_id" do
@@ -176,7 +191,6 @@ describe Trip do
     Trip.next_3_months.count.should == 3
     Trip.next_3_months[0].class.should == Trip
   end
-
 
 
   context "on_date method" do

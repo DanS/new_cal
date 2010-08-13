@@ -9,7 +9,7 @@ describe "trips/wip.html.erb" do
     @days = (0..6).collect {|i| Date.parse(@start_date) + i.days}
     assigns[:days] = @days
     @trips_by_hour = mock('trips_by_hour_mock')
-    @trips_by_hour.stub("has_hour?").and_return("car1-trip")
+    @trips_by_hour.stub("has_hour?").and_return("class=\"car1-trip\"")
     assigns[:trips_by_hour] = @trips_by_hour
   end
 
@@ -87,7 +87,7 @@ describe "trips/wip.html.erb" do
     render
     response.should have_selector('table', :id => 'wip') do |wip|
       wip.should have_selector('tr:nth-child(10)') do |twelvethRow|
-        twelvethRow.should have_selector('td', :id => today + "-10-car1", :class=>'car1-trip')
+        twelvethRow.should have_selector('td', :id => today + "-10-car1", :class=>"car1-trip")
       end
     end
   end
@@ -95,7 +95,7 @@ describe "trips/wip.html.erb" do
   it "should have a title 'WIP for date' " do
     y, m, d = Date.parse(@start_date).strftime("%Y %B %d").split
     render
-    response.should contain( "WIP for week beginning Sunday #{m} #{d.to_i.ordinalize} #{y}")
+    response.should contain( "Vehicle use for week beginning Sunday #{m} #{d.to_i.ordinalize} #{y}")
   end
   
 end
