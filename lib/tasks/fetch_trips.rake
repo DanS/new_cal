@@ -34,6 +34,12 @@ task :fetch_trips, [:url] => :environment do |t, args|
           trip.update_attribute(keys[i].to_sym, td.text)
         end
       end
+
+      #noxious hack, scrapped site lacks data integrity
+      if !trip.valid?
+        trip.community = 'not given'
+      end
+
       trip.save!
     end
     first_row = false
