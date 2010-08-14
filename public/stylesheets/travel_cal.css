@@ -12,13 +12,6 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
-a:visited { color: #666; }
-a:hover {
-  color: #fff;
-  background-color:#000;
-}
-
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
@@ -175,18 +168,6 @@ table#wip .hour{
   list-style: square;
 }
 
-/*
-  A blue based theme, inspired by Blinksale and their ColorBurn widget. http://firewheeldesign.com
-
-  AUTHOR: Geoffrey Grosenbach http://nubyonrails.com
-
-  Colors:
-    Light Blue: bbccff
-    White: eeddee
-    Turq: 003355
-    Cream: ffffdd
-*/
-
 .calendar {
   margin: auto;
 }
@@ -232,20 +213,44 @@ My calendar customizations
   color: #CCCCCC;
   border-bottom: 1px dotted #bbbbbb;
 }
+
+/*stuff for fancy bouncing navbar blob*/
 #navbar {
+  margin: 0 0 10px 0;
+  padding: 0;
+  list-style-type: none;
   text-align: center;
-} 
-
-#navbar a, #navbar span {
-  color: #000000;
-  background-color: #CDD0D0;
+  position: relative;
+  z-index: 1;
+  float: none;
+  width: 100%;
 }
 
-#navbar a:hover{
-  color: white;
-  background-color: #656A6B;
-  font-weight: bold;
+#navbar ul{
+  margin: 0;
+  paddng: 0;
 }
+
+#navbar li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+#navbar a{
+  display: inline-block;
+  padding: 5px;
+  text-decoration: none;
+}
+
+#nav-blob{
+  top: 5px;
+  background-color: darkgray;
+  position: absolute;
+  z-index: -1;
+}
+
+/******************************************************/
 
 a.selected-tab  {
   font-weight: bold;

@@ -1,19 +1,27 @@
 <div id="navbar">
-  <% if @cal_type == 'month' %>
-    <%= link_to "&lt;", url_for( :start_date => prev_month(@start_date)), {:id => 'prev-month'} %>
-  <% else %>
-    <%= link_to "&lt;", url_for(:start_date => prev_week(@start_date)), {:id => 'prev-week'}%>
-  <% end %>
-  |
-  <%= link_to 'Month', root_path(:cal_type => 'month'), {:id => "month-view", } %>
-  |
-  <%= link_to 'Week', root_path(:cal_type => 'week'), {:id => "week-view", } %>
-  |
-  <%= link_to 'WIP', wip_path %>
-  |
-  <% if @cal_type == 'month' %>
-    <%= link_to "&gt;", url_for( :start_date => next_month(@start_date)), {:id => 'next-month'} %>
-  <% else %>
-    <%= link_to "&gt;", url_for( :start_date => next_week(@start_date)), {:id => 'next-week'} %>
-  <% end %>
+  <ul>
+    <li>
+      <% if @cal_type == 'month' %>
+        <%= link_to "&lt;", url_for(:start_date => prev_month(@start_date)), {:id => 'prev-month'} %>
+      <% else %>
+        <%= link_to "&lt;", url_for(:start_date => prev_week(@start_date)), {:id => 'prev-week'} %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to 'Month', root_path(:cal_type => 'month'), {:id => "month-view", } %>
+    </li>
+    <li>
+      <%= link_to 'Week', root_path(:cal_type => 'week'), {:id => "week-view", } %>
+    </li>
+    <li>
+      <%= link_to 'WIP', wip_path %>
+    </li>
+    <li>
+      <% if @cal_type == 'month' %>
+        <%= link_to "&gt;", url_for(:start_date => next_month(@start_date)), {:id => 'next-month'} %>
+      <% else %>
+        <%= link_to "&gt;", url_for(:start_date => next_week(@start_date)), {:id => 'next-week'} %>
+      <% end %>
+    </li>
+  </ul>
 </div>
