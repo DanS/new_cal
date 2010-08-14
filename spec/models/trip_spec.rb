@@ -75,19 +75,19 @@ describe Trip do
     it "should return an object that returns a class string when a date/vehicle/departure hour
           specifies a trip" do
       result = Trip.by_hour(@start_date, @end_date)
-      result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).should == "class=\"Truck-trip\""
+      result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).should == "class=\"Truck-trip Sun\""
     end
 
     it "should return true for all hours the trip lasts" do
       result = Trip.by_hour(@start_date, @end_date)
       (10..15).each do |hour|
-        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == "class=\"Truck-trip\""
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == "class=\"Truck-trip Sun\""
       end
     end
 
     it "should return empty string for hours with no trip" do
       result = Trip.by_hour(@start_date, @end_date)
-      result.has_hour?(@start_date, 'Truck', 15).should == ""
+      result.has_hour?('20200502', 'Truck', 15).should == "class=\"Sat\""
     end
   end
 

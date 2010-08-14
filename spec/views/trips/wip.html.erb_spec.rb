@@ -85,7 +85,7 @@ describe "trips/wip.html.erb" do
     end
   end
 
-  it "should have a title 'WIP for date' " do
+  it "should have a title 'Vehicle use for date' " do
     y, m, d = Date.parse(@start_date).strftime("%Y %B %d").split
     render
     response.should contain("Vehicle use for week beginning Sunday #{m} #{d.to_i.ordinalize} #{y}")

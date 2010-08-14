@@ -84,21 +84,24 @@ class Trip < ActiveRecord::Base
   end
 
   class ByHour
-    #wrap a hash so it returns nil if key not present
+    #TODO refactor this for better separation of concerns
+    #wrap a hash so it returns week_col_class if key not present
     attr_reader :hours
     def initialize(hours)
       @hours = hours
     end
     def has_hour?(date, vehicle, hour)
+      week_col_class = Date.parse(date).strftime("%a")
       if @hours.has_key?(date) && @hours[date].has_key?(vehicle) && @hours[date][vehicle].has_key?(hour)
-        return "class=\"#{@hours[date][vehicle][hour]}\""
+        return "class=\"#{@hours[date][vehicle][hour]} #{week_col_class}\""
       else
-        return ""
+        return "class=\"#{week_col_class}\""
       end
     end
   end
 
   def self.by_hour(start_date, end_date)
+    #TODO refactor this for better separation of concerns    
     trips_by_hour = {} #Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
     filtered(:start_date=>start_date, :end_date=>end_date).map do |t|
       date = t.date.strftime("%Y%m%d")

@@ -1,21 +1,21 @@
 <thead>
-    <tr id="wip-header">
-      <td><!-- time column spacer --></td>  
-      <% @days = (0..6).collect {|i| Date.parse(@start_date) + i.days}%>
-      <% @days.each do |day|%>
-        <th colspan="<%= @vehicles.length %>">
-          <%= day.strftime("<span class=\"small\">%b %d</span> %a <span class=\"small\">%Y</span>") %>
-        </th>
-      <% end %>
-    </tr>
-    <tr>
-      <td><!-- time column spacer --></td>
-      <% 7.times do %>
-        <% @vehicles.each do |vheader| %>
-          <th class="vehicle-header">
-            <%= vheader %>
-          </th>
-        <% end %>
-      <% end %>
-    </tr>
-  </thead>
+<tr id="wip-header">
+  <td><!-- time column spacer --></td>
+  <% @days.each do |day| %>
+    <% week_col_class = day.strftime("%a") %>
+    <%= tag('th', {:class=>week_col_class, :colspan=>@vehicles.length}, true) %>
+      <%= day.strftime("<span class=\"small\">%b %d</span> %a <span class=\"small\">%Y</span>") %>
+    </th>
+  <% end %>
+</tr>
+<tr>
+  <td><!-- time column spacer --></td>
+  <% ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].each do |week_col_class| %>
+    <% @vehicles.each do |vheader| %>
+      <%= tag('th', {:class=>week_col_class + " vehicle-header"}, true) %>
+        <%= vheader %>
+      </th>
+    <% end %>
+  <% end %>
+</tr>
+</thead>

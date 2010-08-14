@@ -26,6 +26,7 @@ class TripsController < ApplicationController
     @start_date = param_session_default("start_date", default_start)
     @trips_by_hour = Trip.by_hour(@start_date, @end_date)
     @start_date = first_day_of_week(@start_date)
+    @days = (0..6).collect { |i| Date.parse(@start_date) + i.days }
     @end_date = param_session_default(:end_date, end_of_week(@start_date))
     @vehicles = Vehicle.ordered.collect {|v| v.name}
   end
