@@ -89,6 +89,9 @@ describe Trip do
       result = Trip.by_hour(@start_date, @end_date)
       result.has_hour?('20200502', 'Truck', 15).should == "class=\"Sat\""
     end
+
+    it "should divide time into halfhour segments"
+
   end
 
   context "Link trips to destination thru a virtual attribute" do

@@ -270,4 +270,19 @@ a.selected-tab  {
   vertical-align: top;
 }
 
+/***********************/
+/* datepicker */
+#ui-datepicker-div{
+  z-index: 100;
+}
 
+.ui-datepicker-trigger {
+  margin-top: 3px;
+}
+
+/********************************/
+/* stuff for expanding title */
+#banner{
+  width: 100%;
+  height: 40px;
+}
