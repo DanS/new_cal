@@ -239,12 +239,12 @@ My calendar customizations
 
 #navbar a{
   display: inline-block;
-  padding: 5px;
+  padding: 0 5px 0 5px;
   text-decoration: none;
 }
 
 #nav-blob{
-  top: 5px;
+  top: -2px;
   background-color: darkgray;
   position: absolute;
   z-index: -1;
