@@ -105,7 +105,7 @@ class Trip < ActiveRecord::Base
     trips_by_hour = {} #Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
     filtered(:start_date=>start_date, :end_date=>end_date).map do |t|
       date = t.date.strftime("%Y%m%d")
-      (t.depart.hour..t.return.hour).each do |hour|
+      (t.depart.hour..t.return.hour).collect {|h| [h, h + 0.5]}.flatten.each do |hour|
         unless trips_by_hour.has_key?(date); trips_by_hour[date] ={}; end
         unless trips_by_hour[date].has_key?(t.preferred_vehicle)
           trips_by_hour[date][t.preferred_vehicle] = {}
