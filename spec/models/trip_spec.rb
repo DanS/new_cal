@@ -68,7 +68,7 @@ describe Trip do
       @depart = Time.parse('10AM')
       @return = Time.parse('3PM')
       Factory(:vehicle, :name =>'Truck')
-      Factory(:trip, :date=>@start_date, :preferred_vehicle => 'Truck', :depart=> @depart,
+      @trip = Factory(:trip, :date=>@start_date, :preferred_vehicle => 'Truck', :depart=> @depart,
               :return=>@return)
     end
 
@@ -83,9 +83,16 @@ describe Trip do
       [10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15].each do |hour|
         result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == "class=\"Truck-trip Sun\""
       end
+      #test all day trip
+      @trip.update_attribute(:depart, Time.parse("12AM"))
+      @trip.update_attribute(:return, Time.parse("11:30PM"))
+      result = Trip.by_hour(@start_date, @end_date)
+      (0..23).collect {|h| [h, h + 0.5]}.flatten.each do |hour|
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == "class=\"Truck-trip Sun\""
+      end
     end
 
-    it "should return empty string for hours with no trip" do
+    it "should return empty string for hour immediately after a trip" do
       result = Trip.by_hour(@start_date, @end_date)
       result.has_hour?('20200502', 'Truck', 15).should == "class=\"Sat\""
     end

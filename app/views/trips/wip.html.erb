@@ -5,19 +5,19 @@
   "9:30PM", "10:00PM", "10:30PM", "11:00PM", "11:30PM"] %>
 <% hours_as_number = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11,
                       11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5,  20, 20.5,
-                      21, 21.5, 22, 22.5, 23, 23.5] %>
+                      21, 21.5, 22, 22.5, 23, 23.5, 24] %>
 <%year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
 <h2> Vehicle use for week beginning Sunday <%= "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
 <%= render :partial => 'navbar', :locals => {:start_date => @start_date, :cal_type => 'wip' } %>
 <table id="wip">
   <%= render :partial => 'wip_header' %>
   <tbody>
-    <% (1..48).each do |hour| %>
-    <% if hour == 25 %>
+    <% (0..48).each do |hour| %>
+    <% if hour == 24 %>
       <%= render :partial => 'wip_header' %>
     <% end %>
       <tr id="<%= "hour#{hour}"%>">
-      <td class="hour"> <%= hours[hour - 1] %> </td>
+      <td class="hour"> <%= hours[hour] %> </td>
       <% @days.map {|d| d.strftime("%Y%m%d")}.each do |day| %>
          <% @vehicles.each do |vehicle|%>
            <% cell_class = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour])%>
