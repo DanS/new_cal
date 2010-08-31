@@ -27,10 +27,11 @@ class Trip < ActiveRecord::Base
   end
 
   def duration
-    return 0.0 unless self.depart && self.return
-    d_time = self.depart.hour + (self.depart.min == 0 ? 0: 0.5)
-    r_time = self.return.hour + (self.return.min == 0 ? 0: 0.5)
-    return r_time - d_time
+    #return an array of numbers representing hours and half hours of trip duration
+    #ranges can't deal with floats so numbers are doubled and odd numbers considered half hours
+    depart_time = self.depart.min == 0 ? self.depart.hour * 2: ((self.depart.hour + 0.5) * 2).to_i
+    return_time = self.return.min == 0 ? self.return.hour * 2: ((self.return.hour + 0.5) * 2).to_i
+    (depart_time...return_time).collect {|x|x % 2 == 0 ? x/2 : (x/2) + 0.5 }
   end
 
   def letter
@@ -105,8 +106,8 @@ class Trip < ActiveRecord::Base
     trips_by_hour = {} #Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
     filtered(:start_date=>start_date, :end_date=>end_date).map do |t|
       date = t.date.strftime("%Y%m%d")
-      (t.depart.hour...t.return.hour).collect {|h| [h, h + 0.5]}.flatten.each do |hour|
-        unless trips_by_hour.has_key?(date); trips_by_hour[date] ={}; end
+      t.duration.each do |hour|
+        unless trips_by_hour.has_key?(date); trips_by_hour[date] = {}; end
         unless trips_by_hour[date].has_key?(t.preferred_vehicle)
           trips_by_hour[date][t.preferred_vehicle] = {}
         end
