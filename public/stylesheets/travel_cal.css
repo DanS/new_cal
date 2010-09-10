@@ -104,8 +104,13 @@ table#week_calendar {
   border: 1px dotted #BBBBBB;
 }
 
-table#wip{
-  border: 3px solid black;
+/* wip view stuff */
+table#wip div {
+  overflow: hidden;
+}
+
+table#wip, table#wip table{
+  border: 1px solid black;
   border-spacing: 0;
   border-collapse: collapse;
 }
@@ -113,11 +118,13 @@ table#wip{
 table#wip th, table#wip td{
   border: 1px solid black;
   vertical-align:top;
+  height: 22px;
 }
 
-.vehicle-header {
+table#wip th.vehicle-header {
   font-weight: lighter;
   font-size:x-small;
+  height: 40px;
 }
 
 table#wip .hour , table#wip .small{
@@ -126,6 +133,7 @@ table#wip .hour , table#wip .small{
 }
 
 table#wip .hour{
+  height: 22px;
   padding: 0 2px 0 2px;
   text-align: right;
 }
@@ -228,7 +236,7 @@ My calendar customizations
 
 #navbar ul{
   margin: 0;
-  paddng: 0;
+  /*paddng: 0;*/
 }
 
 #navbar li {
