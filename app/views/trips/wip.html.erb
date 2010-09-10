@@ -1,9 +1,9 @@
-<% HOURS = ["12:00AM", "12:30AM", "1:00AM", "1:30AM", "2:00AM", "2:30AM", "3:00AM", "3:30AM", "4:00AM", "4:30AM",
+<% hours = ["12:00AM", "12:30AM", "1:00AM", "1:30AM", "2:00AM", "2:30AM", "3:00AM", "3:30AM", "4:00AM", "4:30AM",
             "5:00AM", "5:30AM", "6:00AM", "6:30AM", "7:00AM", "7:30AM", "8:00AM", "8:30AM", "9:00AM",
             "9:30AM", "10:00AM", "10:30AM", "11:00AM", "11:30AM", "12:00PM", "12:30PM", "1:00PM", "1:30PM", "2:00PM", "2:30PM", "3:00PM", "3:30PM", "4:00PM", "4:30PM",
             "5:00PM", "5:30PM", "6:00PM", "6:30PM", "7:00PM", "7:30PM", "8:00PM", "8:30PM", "9:00PM",
             "9:30PM", "10:00PM", "10:30PM", "11:00PM", "11:30PM"] %>
-<% HOURS_AS_NUMBER = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11,
+<% hours_as_number = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11,
                       11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5,
                       21, 21.5, 22, 22.5, 23, 23.5, 24] %>
 <% year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
@@ -16,7 +16,7 @@
         <tr><td>&nbsp;</td></tr>
         <tr class="wip-header"><th class="vehicle-header">Time</th></tr>
         <% (0..48).each do |hour| %>
-          <tr><td class="hour"> <%= HOURS[hour] %></td></tr>
+          <tr><td class="hour"> <%= hours[hour] %></td></tr>
         <% end %>
       </table>
     </td>
@@ -28,8 +28,10 @@
             <% (0..48).each do |hour| %>
               <tr id="<%= "hour#{hour}" %>">
                 <% @vehicles.each do |vehicle| %>
-                  <% cell_class = @trips_by_hour.has_hour?(day, vehicle, HOURS_AS_NUMBER[hour]) %>
-                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class }> </td>" %>
+                  <% cell_class = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) %>
+                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class }>
+                    
+                  </td>" %>
                 <% end %>
             <% end %>
             </tr>
