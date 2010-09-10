@@ -13,10 +13,16 @@
   <tr>
     <td>
       <table>
-        <tr><td>&nbsp;</td></tr>
-        <tr class="wip-header"><th class="vehicle-header">Time</th></tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr class="wip-header">
+          <th class="vehicle-header">Time</th>
+        </tr>
         <% (0..48).each do |hour| %>
-          <tr><td class="hour"> <%= hours[hour] %></td></tr>
+          <tr>
+            <td class="hour"> <%= hours[hour] %></td>
+          </tr>
         <% end %>
       </table>
     </td>
@@ -28,10 +34,12 @@
             <% (0..48).each do |hour| %>
               <tr id="<%= "hour#{hour}" %>">
                 <% @vehicles.each do |vehicle| %>
-                  <% cell_class = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) %>
-                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class }>
-                    
-                  </td>" %>
+                  <% cell_class, id, contact, destination = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) %>
+                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class }> " %>
+                  <% if id %>
+                    <%= link_to destination, edit_trip_path(id) %>
+                  <% end %>
+                  <%= "</td>" %>
                 <% end %>
             <% end %>
             </tr>

@@ -105,6 +105,11 @@ table#week_calendar {
 }
 
 /* wip view stuff */
+
+table#wip a{
+  font-size: xx-small;
+}
+
 table#wip div {
   overflow: hidden;
 }

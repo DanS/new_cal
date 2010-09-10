@@ -76,13 +76,13 @@ describe Trip do
 
     it "returns trip data for the first hour of the trip" do
       result = Trip.by_hour(@start_date, @end_date)
-      result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).last.should == [@trip.id, 'Sam', 'Quincy']
+      result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10)[1..3].should == [@trip.id, 'Sam', 'Quincy']
     end
 
     it "does not return trip data on hours other than the first hour" do
       result = Trip.by_hour(@start_date, @end_date)
       [10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5].each do |hour|
-        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).last.should == []
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).last.should == "class=\"Truck-trip Sun\""
       end
     end
 
@@ -100,14 +100,14 @@ describe Trip do
       result = Trip.by_hour(@start_date, @end_date)
       (0..23).collect {|h| [h, h + 0.5]}.flatten.each do |hour|
         puts "hour #{hour} = #{result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour)}"
-        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == ["class=\"Truck-trip Sun\"", [@trip.id, 'Sam', 'Quincy']]
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == ["class=\"Truck-trip Sun\"", @trip.id, 'Sam', 'Quincy']
       end
 
     end
 
     it "should return just the day class for hour immediately after a trip" do
       result = Trip.by_hour(@start_date, @end_date)
-      result.has_hour?('20200502', 'Truck', 15).should == ["class=\"Sat\"", [] ]
+      result.has_hour?('20200502', 'Truck', 15).should == ["class=\"Sat\""]
     end
 
   end
