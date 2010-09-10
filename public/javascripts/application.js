@@ -29,52 +29,31 @@ $(document).ready(function() {
   });
 
   //WIP accordion
-  var openDiv = function(div){
-    div.addClass('active').stop(true).animate({width: '355px'}, {queue:false, duration:400})
-            .addClass('active').css('text-align', 'center').find('span').show();
+  var openCloseDiv = function(openDiv, closeDiv){
+    if( openDiv != null){
+      openDiv.addClass('active').stop(true).animate({width: '355px'}, {queue:false, duration:400})
+            .addClass('active').css({'text-align': 'center', 'background-color':'transparent'}).find('span').show();
+    }
+    if( closeDiv != null){
+    closeDiv.removeClass('active').stop(true).animate({width: '40px'}, {queue:false, duration:400})
+      .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'}).find('span').hide();
+    }
   };
 
-  var closeDiv = function(div){
-    div.removeClass('active').stop(true).animate({width: '40px'}, {queue:false, duration:400})
-      .removeClass('active').css('text-align', 'left').find('span').hide();
-  };
-
-  closeDiv($("table#wip div[class^='col']"));
+  openCloseDiv(null, $("table#wip div[class^='col']"));
   var weekDayNum = new Date().getDay() + 1;
-  openDiv($("table#wip div.col" + weekDayNum));
-
-  var openLeft = function() {
-    var colNumber = parseInt(/(?:col)(\d+)/.exec($('table#wip div.active').attr('class'))[1]);
-    if (colNumber > 1) {
-      closeDiv($('.col' + colNumber));
-      openDiv($('.col' + --colNumber));
-    }
-  };
-
-  var openRight = function() {
-    var colNumber = parseInt(/(?:col)(\d+)/.exec($('div.active').attr('class'))[1]);
-    if (colNumber < 10) {
-      closeDiv($('.col' + colNumber));
-      openDiv($('.col' + ++colNumber));
-    }
-  };
+  openCloseDiv($("table#wip div.col" + weekDayNum), null);
 
   $('[class^=col]').hover(function() {
-    var activeCol = parseInt(/(?:col)(\d+)/.exec($('div.active').attr('class'))[1]);
-    var thisCol = parseInt(/(?:col)(\d+)/.exec(this.className)[1]);
     if($(this).hasClass('active')){return} //do nothing when over open div
     var currentDiv = $(this);
     currentDiv.addClass('waiting');
     setTimeout(function() {
       if (currentDiv.hasClass('waiting')) {
-        if (activeCol < thisCol) {
-          openRight();
-        } else {
-          openLeft();
-        }
+        openCloseDiv(currentDiv, $('table#wip div.active'));
         currentDiv.removeClass('waiting');
       }
-    }, 600)
+    }, 400)
   },
     function() {
       $(this).removeClass('waiting')
