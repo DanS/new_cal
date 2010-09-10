@@ -94,9 +94,10 @@ class Trip < ActiveRecord::Base
     def has_hour?(date, vehicle, hour)
       week_col_class = Date.parse(date).strftime("%a")
       if @hours.has_key?(date) && @hours[date].has_key?(vehicle) && @hours[date][vehicle].has_key?(hour)
-        return "class=\"#{@hours[date][vehicle][hour]} #{week_col_class}\""
+        t_id = @hours[date][vehicle][hour]
+        return ["class=\"#{vehicle.gsub(' ', '_') + '-trip'} #{week_col_class}\"", t_id]
       else
-        return "class=\"#{week_col_class}\""
+        return ["class=\"#{week_col_class}\"", []]
       end
     end
   end
@@ -111,7 +112,7 @@ class Trip < ActiveRecord::Base
         unless trips_by_hour[date].has_key?(t.preferred_vehicle)
           trips_by_hour[date][t.preferred_vehicle] = {}
         end
-        trips_by_hour[date][t.preferred_vehicle][hour] = t.preferred_vehicle.gsub(' ', '-') + '-trip'
+        trips_by_hour[date][t.preferred_vehicle][hour] = [t.id, t.contact, t.destination]
       end
     end
     return ByHour.new(trips_by_hour)
