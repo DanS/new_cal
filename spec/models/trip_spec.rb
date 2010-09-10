@@ -72,13 +72,24 @@ describe Trip do
           specifies a trip" do
       result = Trip.by_hour(@start_date, @end_date)
       result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).first.should == "class=\"Truck-trip Sun\""
+    end
+
+    it "returns trip data for the first hour of the trip" do
+      result = Trip.by_hour(@start_date, @end_date)
       result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', 10).last.should == [@trip.id, 'Sam', 'Quincy']
+    end
+
+    it "does not return trip data on hours other than the first hour" do
+      result = Trip.by_hour(@start_date, @end_date)
+      [10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5].each do |hour|
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).last.should == []
+      end
     end
 
     it "should return vehicle-trip class string for all hours and half hours, the trip lasts" do
       result = Trip.by_hour(@start_date, @end_date)
       [10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5].each do |hour|
-        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).should == ["class=\"Truck-trip Sun\"",[@trip.id, 'Sam', 'Quincy']]
+        result.has_hour?(@start_date.strftime("%Y%m%d"), 'Truck', hour).first.should == "class=\"Truck-trip Sun\""
       end
     end
 
