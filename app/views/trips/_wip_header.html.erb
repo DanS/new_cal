@@ -1,15 +1,11 @@
 <thead>
 <tr class="wip-header">
-  <% if day.wday == 0 %>
-  <% end %>
   <% week_col_class = day.strftime("%a") %>
   <%= tag('th', {:class=>week_col_class, :colspan=>@vehicles.length}, true) %>
   <%= day.strftime("<span class=\"small\">%b %d</span> %a <span class=\"small\">%Y</span>") %>
   </th>
 </tr>
 <tr>
-  <% if day.wday == 0 %>
-  <% end %>
   <% week_col_class = day.strftime("%a") %>
   <% @vehicles.each do |vheader| %>
     <%= tag('th', {:class=>week_col_class + " vehicle-header"}, true) %>
