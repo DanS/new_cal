@@ -42,18 +42,18 @@ $(document).ready(function() {
     }
   };
 
-  openCloseDiv(null, $("table#wip div[class^='col']"));
+  openCloseDiv(null, $("table.wip div[class^='col']"));
   var weekDayNum = new Date().getDay() + 1;
-  openCloseDiv($("table#wip div.col" + weekDayNum), null);
+  openCloseDiv($("table.wip div.col" + weekDayNum), null);
 
   $('[class^=col]').hover(function() {
     if($(this).hasClass('active')){return} //do nothing when over open div
-    var currentDiv = $(this);
-    currentDiv.addClass('waiting');
+    var currentClass = $('.' + $(this).attr('class'));
+    currentClass.addClass('waiting');
     setTimeout(function() {
-      if (currentDiv.hasClass('waiting')) {
-        openCloseDiv(currentDiv, $('table#wip div.active'));
-        currentDiv.removeClass('waiting');
+      if (currentClass.hasClass('waiting')) {
+        openCloseDiv(currentClass, $('table.wip div.active'));
+        currentClass.removeClass('waiting');
       }
     }, 400)
   },
