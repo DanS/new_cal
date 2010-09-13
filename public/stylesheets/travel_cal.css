@@ -120,6 +120,10 @@ table#wip, table#wip table{
   border-collapse: collapse;
 }
 
+table#wip table{
+  width: 100%;
+}
+
 table#wip th, table#wip td{
   border: 1px solid black;
   vertical-align:top;
@@ -142,6 +146,8 @@ table#wip .hour{
   padding: 0 2px 0 2px;
   text-align: right;
 }
+
+/************************/
 
 .day, .specialDay, .past {
   font-size: 10px;

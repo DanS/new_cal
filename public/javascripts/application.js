@@ -32,11 +32,13 @@ $(document).ready(function() {
   var openCloseDiv = function(openDiv, closeDiv){
     if( openDiv != null){
       openDiv.addClass('active').stop(true).animate({width: '355px'}, {queue:false, duration:400})
-            .addClass('active').css({'text-align': 'center', 'background-color':'transparent'}).find('span').show();
+            .addClass('active').css({'text-align': 'center', 'background-color':'transparent'})
+            .find('th.vehicle-header').css('font-size', 'xx-small').end().find('span, a').show();
     }
     if( closeDiv != null){
-    closeDiv.removeClass('active').stop(true).animate({width: '40px'}, {queue:false, duration:400})
-      .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'}).find('span').hide();
+    closeDiv.removeClass('active').stop(true).animate({width: '35px'}, {queue:false, duration:400})
+      .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
+          .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
     }
   };
 
