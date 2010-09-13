@@ -21,7 +21,9 @@
         </tr>
         <% (0..48).each do |hour| %>
           <tr>
-            <td class="hour"> <%= hours[hour] %></td>
+            <% if hour % 4 == 0 %>
+              <td class="hour"> <%= hours[hour] %></td>
+            <% end %>
           </tr>
         <% end %>
       </table>
@@ -37,7 +39,7 @@
                   <% cell_class, id, contact, destination = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) %>
                   <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class }> " %>
                   <% if id %>
-                    <%= link_to destination, edit_trip_path(id) %>
+                    <%#= link_to destination, edit_trip_path(id) %>
                   <% end %>
                   <%= "</td>" %>
                 <% end %>

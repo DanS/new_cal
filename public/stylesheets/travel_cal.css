@@ -127,7 +127,7 @@ table#wip table{
 table#wip th, table#wip td{
   border: 1px solid black;
   vertical-align:top;
-  height: 22px;
+  height: 6px;
 }
 
 table#wip th.vehicle-header {
@@ -142,7 +142,7 @@ table#wip .hour , table#wip .small{
 }
 
 table#wip .hour{
-  height: 22px;
+  height: 24px;
   padding: 0 2px 0 2px;
   text-align: right;
 }
