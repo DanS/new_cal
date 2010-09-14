@@ -125,7 +125,9 @@ table#wip table{
 }
 
 table#wip th, table#wip td{
-  border: 1px solid black;
+  border-bottom: 1px dotted darkgray;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   vertical-align:top;
   height: 6px;
 }
@@ -133,6 +135,7 @@ table#wip th, table#wip td{
 table#wip th.vehicle-header {
   font-weight: lighter;
   font-size:x-small;
+  border: solid 1px black;
   height: 40px;
 }
 

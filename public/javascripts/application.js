@@ -29,16 +29,16 @@ $(document).ready(function() {
   });
 
   //WIP accordion
-  var openCloseDiv = function(openDiv, closeDiv){
-    if( openDiv != null){
+  var openCloseDiv = function(openDiv, closeDiv) {
+    if (openDiv != null) {
       openDiv.addClass('active').stop(true).animate({width: '355px'}, {queue:false, duration:400})
             .addClass('active').css({'text-align': 'center', 'background-color':'transparent'})
             .find('th.vehicle-header').css('font-size', 'xx-small').end().find('span, a').show();
     }
-    if( closeDiv != null){
-    closeDiv.removeClass('active').stop(true).animate({width: '35px'}, {queue:false, duration:400})
-      .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
-          .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
+    if (closeDiv != null) {
+      closeDiv.removeClass('active').stop(true).animate({width: '35px'}, {queue:false, duration:400})
+            .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
+            .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
     }
   };
 
@@ -47,7 +47,9 @@ $(document).ready(function() {
   openCloseDiv($("table#wip div.col" + weekDayNum), null);
 
   $('[class^=col]').hover(function() {
-    if($(this).hasClass('active')){return} //do nothing when over open div
+    if ($(this).hasClass('active')) {
+      return
+    } //do nothing when over open div
     var currentDiv = $(this);
     currentDiv.addClass('waiting');
     setTimeout(function() {
@@ -57,9 +59,19 @@ $(document).ready(function() {
       }
     }, 400)
   },
-    function() {
-      $(this).removeClass('waiting')
-    }
-  )
+        function() {
+          $(this).removeClass('waiting')
+        }
+        );
+
+  //have only every 4th row border solid in WIP table
+  $('table#wip table').each(function(){
+    $(this).find('tr').each(function(i){
+      if((i + 3) % 4 == 0){
+        $(this).css("border-bottom", "1px solid black")
+      }
+    })
+  })
+
 
 });
