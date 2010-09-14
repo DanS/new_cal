@@ -124,6 +124,10 @@ table#wip table{
   width: 100%;
 }
 
+table#wip table td, table#wip table th{
+  width: 40px;
+}
+
 table#wip th, table#wip td{
   border-bottom: 1px dotted darkgray;
   border-left: 1px solid black;
