@@ -114,7 +114,6 @@ class Trip < ActiveRecord::Base
           trips_by_hour[date][t.preferred_vehicle] = {}
         end
         trips_by_hour[date][t.preferred_vehicle][hour] = data
-        data = [] #only include data on first time period
       end
     end
     return ByHour.new(trips_by_hour)

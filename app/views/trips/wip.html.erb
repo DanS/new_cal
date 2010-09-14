@@ -37,7 +37,8 @@
               <tr id="<%= "hour#{hour}" %>">
                 <% @vehicles.each do |vehicle| %>
                   <% cell_class, id, contact, destination = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) %>
-                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class }> " %>
+                  <% title = "#{contact} #{destination}" %>
+                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class } title=\"#{title}\"> " %>
                   <% if id %>
                     <%#= link_to destination, edit_trip_path(id) %>
                   <% end %>
