@@ -2,7 +2,7 @@
   <tr>
     <% ['Date', 'Time', 'Destination', 'Contact', 'Community', 'Preferred Vehicle',
       'Travelers', 'Notes', 'Actions'].each do |header| %>
-      <th> <%= header %> </th>
+      <th> <%=h header %> </th>
     <% end %>
   </tr>
   <% @trips_by_date.keys.sort.each do |date| %>
@@ -10,28 +10,28 @@
     <% days_trips.each_with_index do |trip, i| %>
       <tr>
         <% if i == 0  #date cell should span all rows with same date %>
-          <td rowspan="<%= days_trips.length %>">
-            <%= days_trips[0].date.strftime("%b %d %a")%>
+          <td rowspan="<%=h days_trips.length %>">
+            <%=h days_trips[0].date.strftime("%b %d %a")%>
           </td>
         <% end %>
         <td>
-          <%= trip.depart.strftime("%I:%M%p")%>
+          <%=h trip.depart.strftime("%I:%M%p")%>
           <br />
           <% if trip.return %>
-            <%= trip.return.strftime("%I:%M%p")%>
+            <%=h trip.return.strftime("%I:%M%p")%>
           <% end %>
         </td>
         <% letter = Destination.class_letter_for(trip.destination) %>
-        <td class=<%= "\"#{letter}\"" %>>
-          <%= trip.destination %>
+        <td class=<%=h "\"#{letter}\"" %>>
+          <%=h trip.destination %>
         </td>
         <% for attrib in [  'contact', 'community', 'preferred_vehicle',
             'travelers', 'notes'] %>
-          <td> <%= trip.send(attrib) %> </td>
+          <td> <%=h trip.send(attrib) %> </td>
         <% end %>
         <td>
-          <%= button_to 'Edit', edit_trip_path(trip), :method=>:get %>
-          <%= button_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %>
+          <%=h button_to 'Edit', edit_trip_path(trip), :method=>:get %>
+          <%=h button_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %>
         </td>
       <% end %>
     </tr>

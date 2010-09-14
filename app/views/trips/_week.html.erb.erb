@@ -3,11 +3,11 @@
     <% @trips_by_date.keys.sort.each do |date| %>
       <td>
         <table class="day">
-          <tr><th class="day_label"> <%= Date.parse(date).strftime("%a %d %b<br />%Y") %></th></tr>
+          <tr><th class="day_label"> <%=h Date.parse(date).strftime("%a %d %b<br />%Y") %></th></tr>
           <% @trips_by_date[date].sort {|a,b| a.depart <=> b.depart}.each do |trip|  %>
-            <tr <%= "class=#{trip.letter}" %>>
+            <tr <%=h "class=#{trip.letter}" %>>
               <td>
-                <%= "#{trip.destination} #{trip.depart.strftime("%I:%M%p")}" %>
+                <%=h "#{trip.destination} #{trip.depart.strftime("%I:%M%p")}" %>
               </td>
             </tr>
           <% end %>
