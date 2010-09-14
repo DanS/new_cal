@@ -107,7 +107,7 @@ table#week_calendar {
 /* wip view stuff */
 
 table#wip a{
-  font-size: xx-small;
+  font-size: x-small;
 }
 
 table#wip div {
@@ -144,7 +144,7 @@ table#wip th.vehicle-header {
 }
 
 table#wip .hour , table#wip .small{
-  font-size: xx-small;
+  font-size: x-small;
   font-weight: normal;
 }
 
