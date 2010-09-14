@@ -42,14 +42,15 @@ $(document).ready(function() {
     }
   };
 
+  //start with current day open
   openCloseDiv(null, $("table#wip div[class^='col']"));
   var weekDayNum = new Date().getDay() + 1;
   openCloseDiv($("table#wip div.col" + weekDayNum), null);
 
   $('[class^=col]').hover(function() {
     if ($(this).hasClass('active')) {
-      return
-    } //do nothing when over open div
+      return  //do nothing when over open div
+    }
     var currentDiv = $(this);
     currentDiv.addClass('waiting');
     setTimeout(function() {
@@ -57,21 +58,19 @@ $(document).ready(function() {
         openCloseDiv(currentDiv, $('table#wip div.active'));
         currentDiv.removeClass('waiting');
       }
-    }, 400)
-  },
-        function() {
-          $(this).removeClass('waiting')
-        }
-        );
+     }, 400)},
+     function() {
+      $(this).removeClass('waiting')
+     }
+   );
 
   //have only every 4th row border solid in WIP table
-  $('table#wip table').each(function(){
-    $(this).find('tr').each(function(i){
-      if((i + 3) % 4 == 0){
+  $('table#wip table').each(function() {
+    $(this).find('tr').each(function(i) {
+      if ((i + 3) % 4 == 0) {
         $(this).css("border-bottom", "1px solid black")
       }
     })
   })
-
 
 });
