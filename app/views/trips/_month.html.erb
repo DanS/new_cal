@@ -6,7 +6,7 @@
       date = day.strftime("%Y%m%d")
       trips = @trips_by_date[date]
       style_class = class_for_trips(trips)
-      tooltip = trips.map {|t| "#{t.depart.strftime("%I%p")} #{t.destination}"}.join(', ')
+      tooltip = trips.map {|t| "#{t.depart.strftime("%I%p").gsub(/^0/,'')} #{t.destination}"}.join(', ')
       [link_to(day.mday, :action => 'new', :controller => 'trips', :date =>date ),  {
           :id => "day_cell#{day.mday}", :class => 'day ' + style_class, :title => tooltip }]
     end
