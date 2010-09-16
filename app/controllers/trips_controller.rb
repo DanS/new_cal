@@ -5,9 +5,10 @@ class TripsController < ApplicationController
     default_start = Date.today.strftime("%Y%m") + '01'
     @start_date = param_session_default("start_date", default_start)
     @cal_type = param_session_default("cal_type", 'month')
-    filters = {}
-    filters[:destination] = param_session_default(:destination, nil)
-    filters[:start_date] = param_session_default(:start_date, default_start)
+    filters = {
+          :destination => param_session_default(:destination, nil),
+          :start_date => param_session_default(:start_date, default_start)
+    }
     unless @cal_type == 'month'
       @start_date = first_day_of_week(@start_date)
       @end_date = param_session_default(:end_date, end_of_week(@start_date))
@@ -19,7 +20,7 @@ class TripsController < ApplicationController
     end
     @destination_list = to_destination_list(@trips_by_date)
   end
-  
+
   # GET /trips/wip
   def wip
     default_start = Date.today.strftime("%Y%m") + '01'
@@ -28,9 +29,9 @@ class TripsController < ApplicationController
     @trips_by_hour = Trip.by_hour(@start_date, @end_date)
     @days = (0..6).collect { |i| Date.parse(@start_date) + i.days }
     @end_date = param_session_default(:end_date, end_of_week(@start_date))
-    @vehicles = Vehicle.ordered.collect {|v| v.name}
+    @vehicles = Vehicle.ordered.collect { |v| v.name }
   end
-  
+
   # GET /trips/1
   # GET /trips/1.xml
   def show
@@ -41,15 +42,15 @@ class TripsController < ApplicationController
   # GET /trips/new.xml
   def new
     @trip = Trip.new(:date => params[:date])
-    @communities = Community.all.collect {|c| c.name}
-    @vehicles = Vehicle.all.collect {|v| v.name}
+    @communities = Community.all.collect { |c| c.name }
+    @vehicles = Vehicle.all.collect { |v| v.name }
   end
 
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
-    @communities = Community.all.collect {|c| c.name}
-    @vehicles = Vehicle.all.collect {|v| v.name}
+    @communities = Community.all.collect { |c| c.name }
+    @vehicles = Vehicle.all.collect { |v| v.name }
   end
 
   # POST /trips
@@ -60,10 +61,10 @@ class TripsController < ApplicationController
       if @trip.save
         flash[:notice] = 'Trip was successfully created.'
         format.html { redirect_to(root_path) }
-        format.xml  { render :xml => @trip, :status => :created, :location => @trip }
+        format.xml { render :xml => @trip, :status => :created, :location => @trip }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @trip.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @trip.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -77,10 +78,10 @@ class TripsController < ApplicationController
       if @trip.update_attributes(params[:trip])
         flash[:notice] = 'Trip was successfully updated.'
         format.html { redirect_to(root_path) }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @trip.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @trip.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -93,7 +94,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(root_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

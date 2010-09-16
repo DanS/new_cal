@@ -4,9 +4,11 @@
       [day.mday, {:class => 'day past'}]
     else
       date = day.strftime("%Y%m%d")
-      style_class = class_for_trips(@trips_by_date[date])
+      trips = @trips_by_date[date]
+      style_class = class_for_trips(trips)
+      tooltip = trips.map {|t| "#{t.depart.strftime("%I%p")} #{t.destination}"}.join(', ')
       [link_to(day.mday, :action => 'new', :controller => 'trips', :date =>date ),  {
-          :id => "day_cell#{day.mday}", :class => 'day ' + style_class }]
+          :id => "day_cell#{day.mday}", :class => 'day ' + style_class, :title => tooltip }]
     end
   end %>
 <% end %>
