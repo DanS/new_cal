@@ -4,7 +4,7 @@
     <tr>
       <% count, letter = @destination_list[text] %>
       <%value =  text  + "(#{count})"%>
-      <td class=<%=h "\"#{letter}\"" %>>
+      <td class=<%=h "#{letter}" %>>
         <%=h link_to value, "/?destination=#{text.gsub(' ', '_')}" %>
       </td>
     </tr>
