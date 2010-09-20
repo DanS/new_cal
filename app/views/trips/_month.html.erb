@@ -1,23 +1,22 @@
-<% for month, year in next_3_months_years(@start_date) %>
-  <%= calendar(:year => year, :month => month) do |day|
-    if day < Date.today
-      [day.mday, {:class => 'day past'}]
-    else
-      date = day.strftime("%Y%m%d")
-      trips = @trips_by_date[date]
-      style_class = class_for_trips(trips)
-      tooltip = trips.map {|t| "#{t.depart.strftime("%I%p").gsub(/^0/,'')} #{t.destination}"}.join(', ')
-      [link_to(day.mday, :action => 'new', :controller => 'trips', :date =>date ),  {
-          :id => "day-cell#{date}", :class => 'day ' + style_class, :title => tooltip }]
-    end
-  end %>
-<% end %>
+  <% for month, year in next_3_months_years(@start_date) %>
+    <%= calendar(:year => year, :month => month) do |day|
+      if day < Date.today
+        [day.mday, {:class => 'day past'}]
+      else
+        date = day.strftime("%Y%m%d")
+        trips = @trips_by_date[date]
+        style_class = class_for_trips(trips)
+        tooltip = trips.map { |t| "#{t.depart.strftime("%I%p").gsub(/^0/, '')} #{t.destination}" }.join(', ')
+        [link_to(day.mday, :action => 'new', :controller => 'trips', :date =>date), {
+              :id => "day-cell#{date}", :class => 'day ' + style_class, :title => tooltip}]
+      end
+    end %>
+  <% end %>
 
   <%= render :partial => 'destination_list' %>
 
 <%#
-  TODO add a new trip button at the top 
+  TODO add a new trip button at the top
   TODO add filter description to title
-  TODO refactor tooltips to be more square, not include date
 %>
 

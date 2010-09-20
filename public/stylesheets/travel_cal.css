@@ -86,6 +86,10 @@ table#week_calendar#destination-list{
   width: 12.5%;
 }
 
+table.calendar{
+  width: 250px;
+}
+
 table#week_calendar td {
   border: 1px solid black;
   width: 12.5%;
