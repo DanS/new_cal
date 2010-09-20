@@ -8,9 +8,16 @@
       style_class = class_for_trips(trips)
       tooltip = trips.map {|t| "#{t.depart.strftime("%I%p").gsub(/^0/,'')} #{t.destination}"}.join(', ')
       [link_to(day.mday, :action => 'new', :controller => 'trips', :date =>date ),  {
-          :id => "day_cell#{day.mday}", :class => 'day ' + style_class, :title => tooltip }]
+          :id => "day-cell#{date}", :class => 'day ' + style_class, :title => tooltip }]
     end
   end %>
 <% end %>
 
   <%= render :partial => 'destination_list' %>
+
+<%#
+  TODO add a new trip button at the top 
+  TODO add filter description to title
+  TODO refactor tooltips to be more square, not include date
+%>
+

@@ -54,15 +54,28 @@ table.calendar{
   width: 20%;
 }
 
-#trip-list, #destination-list{
+table.popup{
+  text-align: left;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 600px;
+}
+
+table.popup td, table.popup th{
+  border: 1px solid black;
+  
+}
+
+.trip-list, #destination-list, .popup table{
   border: 2px solid black;
+  background-color: wheat;
 }
 
 table .calendar tr, table #destination-list tr{
   vertical-align: top;
 }
-table .calendar td, #destination-list td, #trip-list td {
-  border: 1px dotted #BBBBBB;
+table .calendar td, #destination-list td, #trip-list td, popup td {
+  border: 1px solid gray;
 }
 
 table#destination-list{
@@ -94,11 +107,11 @@ table#week_calendar {
  border: solid 1px black;
 }
 
-#trip-list{
+.trip-list{
   width: 100%;
 }
 
-#trip-list th{
+.trip-list th{
   font-weight: bold;
   background-color: gray;
   border: 1px dotted #BBBBBB;
@@ -238,6 +251,17 @@ My calendar customizations
 .past {
   color: #CCCCCC;
   border-bottom: 1px dotted #bbbbbb;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  background-color: wheat;
+  z-index: 9999;
+}
+
+.popup table {
+  width: 100%;
 }
 
 /*stuff for fancy bouncing navbar blob*/

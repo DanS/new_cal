@@ -38,6 +38,7 @@ module GenImgHelpers
   end
 
   def gen_image(name)
+    #TODO images should be a single pixel wide
     #creates img used to colorize calendar days
     #is a 'stack' of 1 to 8 colors, a different color for each letter in name
     # no idea how to spec or test this
