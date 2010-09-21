@@ -71,7 +71,7 @@ describe TripsController do
 
       it "should assign destinations from destinations of upcoming trips" do
         today = Date.today
-        dates = [1,2,32,35].collect {|n| today + n.days}
+        dates = [1, 2, 32, 35].collect { |n| today + n.days }
         destinations = ['Quincy', 'Rutledge', 'La Plata', 'Rutledge'] #Rutledge intentionally duplicated
 
         #create destinations
@@ -182,7 +182,7 @@ describe TripsController do
     context "assigns params" do
       context "assigns trips_by_hour" do
         it "should have a key for every date with a trip" do
-          dates = %w( 21000103 21000104 21000105 21000106  )
+          dates = %w(  21000103 21000104 21000105 21000106   )
           Factory(:destination)
           dates.each { |d| Factory(:trip, :date => Date.parse(d)) }
           get :wip, {:start_date=>'21000103', :cal_type=>'wip'}
@@ -193,8 +193,28 @@ describe TripsController do
     it "should assign vehicle" do
       5.times { Factory(:vehicle) }
       get :wip, {:start_date => '20100502'}
-      assigns[:vehicles].should == Vehicle.ordered.collect {|v| v.name }
+      assigns[:vehicles].should == Vehicle.ordered.collect { |v| v.name }
     end
+    describe "start_date behavior" do
+      before do
+        @first_day_of_week = (Date.today - Date.today.wday.days).strftime("%Y%m%d")
+        @first_day_with_dashes = (Date.today - Date.today.wday.days).strftime("%Y-%m-%d")
+      end
+      it "should not change if passed first day of current week" do
+        get :wip, {:start_date => @first_day_of_week}
+        assigns[:start_date].should == @first_day_with_dashes
+      end
+      it "should be first day of current week if passed an older date" do
+        get :wip, {:start_date => '20000101'}
+        assigns[:start_date].should == @first_day_with_dashes
+      end
+      it "should return first day of future week if passed a future date" do
+        get :wip, {:start_date =>'21000105'}
+        assigns[:start_date].should == '2100-01-03'
+      end
+
+    end
+
   end
 
   describe "POST create" do

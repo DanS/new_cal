@@ -29,6 +29,20 @@ class ApplicationController < ActionController::Base
     (date + 3.months).strftime("%Y%m%d")
   end
 
+  def start_date_for_week(date)
+      first_day_of_current_week = Date.today - Date.today.wday.days
+      if date < first_day_of_current_week
+        return first_day_of_current_week.strftime("%Y%m%d")
+      else
+        return (date - date.wday.days).strftime("%Y%m%d")
+      end
+    end
+
+  def first_day_of_week(date)
+    date = Date.parse(date) if date.class == String
+    (date - date.wday.days).strftime("%Y%m%d")
+  end
+
   def end_of_week(date)
     date = Date.parse(date) unless date.class == Date
     (date + 6.days).strftime("%Y%m%d")
@@ -51,11 +65,6 @@ class ApplicationController < ActionController::Base
     return output
   end
 
-  def first_day_of_week(date)
-    date = Date.parse(date) if date.class == String
-    (date - date.wday.days).strftime("%Y%m%d")
-  end
-
   def to_destination_list(trips_by_date)
     output = {}
     collected_destinations = trips_by_date.values.flatten.collect {|t| [t.destination, t.letter]}
@@ -64,15 +73,6 @@ class ApplicationController < ActionController::Base
       output[pair[0]] = [count, pair[1]]
     end
     output
-  end
-
-  def start_date_for_week(date)
-    first_day_of_current_week = Date.today - Date.today.wday.days
-    if date < first_day_of_current_week
-      return first_day_of_current_week.strftime("%Y%m%d")
-    else
-      return (date - date.wday.days).strftime("%Y%m%d")
-    end
   end
 
   private
