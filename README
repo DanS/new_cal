@@ -16,5 +16,9 @@ Current progress:
   When trying to start this app for the first time first do:
     rake db:migrate
     rake db:seed
+
     and if you want to run tests...
     rake db:test:prepare
+    
+    to load some fake data...
+    rake create_trips
