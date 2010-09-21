@@ -1,8 +1,10 @@
 class TripsController < ApplicationController
   # GET /calendar
   # GET /trips.xml
+  @@first_day_of_current_week = Date.today - Date.today.wday.days
+
   def calendar
-    default_start = Date.today.strftime("%Y%m") + '01'
+    default_start = @@first_day_of_current_week.strftime("%Y%m") + '01'
     @start_date = param_session_default("start_date", default_start)
     @cal_type = param_session_default("cal_type", 'month')
     filters = {
@@ -10,7 +12,7 @@ class TripsController < ApplicationController
           :start_date => param_session_default(:start_date, default_start)
     }
     unless @cal_type == 'month'
-      @start_date = first_day_of_week(@start_date)
+      @start_date = start_date_for_week(@start_date)
       @end_date = param_session_default(:end_date, end_of_week(@start_date))
       filters[:end_date] = @end_date
       @trips_by_date = dates_between(@start_date, filters[:end_date]).merge Trip.by_date_string(filters)
@@ -23,9 +25,9 @@ class TripsController < ApplicationController
 
   # GET /trips/wip
   def wip
-    default_start = Date.today.strftime("%Y%m") + '01'
-    @start_date = param_session_default("start_date", default_start)
-    @start_date = first_day_of_week(@start_date)
+    default_start = @@first_day_of_current_week.strftime("%Y%m%d")
+    @start_date = start_date_for_week(param_session_default("start_date", default_start))
+    @end_date = (Date.parse(@start_date) + 6.days).strftime("%Y%m%d")
     @trips_by_hour = Trip.by_hour(@start_date, @end_date)
     @days = (0..6).collect { |i| Date.parse(@start_date) + i.days }
     @end_date = param_session_default(:end_date, end_of_week(@start_date))

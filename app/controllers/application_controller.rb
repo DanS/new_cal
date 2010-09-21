@@ -66,6 +66,15 @@ class ApplicationController < ActionController::Base
     output
   end
 
+  def start_date_for_week(date)
+    first_day_of_current_week = Date.today - Date.today.wday.days
+    if date < first_day_of_current_week
+      return first_day_of_current_week.strftime("%Y%m%d")
+    else
+      return (date - date.wday.days).strftime("%Y%m%d")
+    end
+  end
+
   private
 
   def try2make_date(val)
