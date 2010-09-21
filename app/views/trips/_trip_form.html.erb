@@ -6,42 +6,42 @@
     <tr>
       <td>
         <p>
-          <%= f.label 'Date' %>
-          <%= f.text_field :date %>
+          <%=h f.label 'Date' %>
+          <%=h f.text_field :date %>
         </p>
         <p>
-          <%= f.label 'Departure Time' %>
-          <%= f.select :depart, time_selectors, {:selected=>time_as_string(@trip.depart)} %>
+          <%=h f.label 'Departure Time' %>
+          <%=h f.select :depart, time_selectors, {:selected=>time_as_string(@trip.depart)} %>
         </p>
         <p>
-          <%= f.label 'Return Time' %>
-          <%= f.select :return, time_selectors, {:selected=>time_as_string(@trip.return)} %>
+          <%=h f.label 'Return Time' %>
+          <%=h f.select :return, time_selectors, {:selected=>time_as_string(@trip.return)} %>
         </p>
         <p>
-          <%= f.label :destination %>
-          <%= f.text_field :destination %>
+          <%=h f.label :destination %>
+          <%=h f.text_field :destination %>
         </p>
         <p>
-          <%= f.label :travelers %>
-          <%= f.select(:travelers, (1..20)) %>
+          <%=h f.label :travelers %>
+          <%=h f.select(:travelers, (1..20)) %>
         </p>
         <p>
-          <%= f.label :contact %>
-          <%= f.text_field :contact %>
+          <%=h f.label :contact %>
+          <%=h f.text_field :contact %>
         </p>
       </td>
       <td>
         <div class="radio" name="select-community-vehicle">
           <p>
-            <%= f.label :community %><br />
+            <%=h f.label :community %><br />
             <% @communities.each do |cmty|%>
-              <%= f.radio_button( "community", cmty) %><%= cmty %> <br />
+              <%=h f.radio_button( "community", cmty) %><%=h cmty %> <br />
             <% end %>
           </p>
           <p>
-            <%= f.label :preferred_vehicle %><br />
+            <%=h f.label :preferred_vehicle %><br />
             <% @vehicles.each do |v| %>
-              <%= f.radio_button("preferred_vehicle", v)%> <%= v %> <br />
+              <%=h f.radio_button("preferred_vehicle", v)%> <%=h v %> <br />
             <% end %>
           </p>
         </div>
@@ -50,13 +50,13 @@
     <tr>
       <td colspan="2">
         <p>
-          <%= f.label :notes %><br />
-          <%= f.text_area :notes, :cols=>60, :rows=>8%>
+          <%=h f.label :notes %><br />
+          <%=h f.text_area :notes, :cols=>60, :rows=>8%>
         </p>
       </td>
     </tr>
   </table>
   <p>
-    <%= f.submit 'Save' %>
+    <%=h f.submit 'Save' %>
   </p>
 <% end %>

@@ -30,9 +30,9 @@ describe TripsController do
       end
       it "assigns start_date to the first of the week if cal_type = week" do
         (1..6).each do |n|
-          start_date = (20100404 + n).to_s
+          start_date = (21000103 + n).to_s
           get :calendar, {:start_date => start_date, :cal_type => 'week'}
-          assigns[:start_date].should == "20100404"
+          assigns[:start_date].should == "21000103"
         end
       end
     end
@@ -54,15 +54,16 @@ describe TripsController do
         assigns[:trips_by_date].keys.length.should == 7
       end
       it "should have date keys for all days between start_date and end_date params with cal_type == week" do
-        get :calendar, {:start_date=>'20100404', :end_date=>'20100410', :cal_type=>'week'}
-        assigns[:trips_by_date].keys.sort.should == ["20100404", "20100405", "20100406", "20100407", "20100408",
-                                                     "20100409", "20100410"]
+        get :calendar, {:start_date=>'21000103', :end_date=>'21000109', :cal_type=>'week'}
+        assigns[:trips_by_date].keys.sort.should == ["21000103", "21000104", "21000105", "21000106", "21000107",
+                                                     "21000108", "21000109"]
       end
       it "should not have date keys outside the date range" do
+        start_date = Date.parse('21000103')
         10.times { |i| Factory(:trip, :date => Date.today + i.days) }
-        get :calendar, {:start_date=>'20100404', :cal_type=>'week'}
-        assigns[:trips_by_date].keys.sort.should == ["20100404", "20100405", "20100406", "20100407", "20100408",
-                                                     "20100409", "20100410"]
+        get :calendar, {:start_date=>'21000103', :cal_type=>'week'}
+        assigns[:trips_by_date].keys.sort.should == ["21000103", "21000104", "21000105", "21000106", "21000107",
+                                                     "21000108", "21000109"]
       end
     end
 
@@ -181,18 +182,18 @@ describe TripsController do
     context "assigns params" do
       context "assigns trips_by_hour" do
         it "should have a key for every date with a trip" do
-          dates = %w(  20100502 20100503 20100504 20100505  ).map { |d| Date.parse(d) }
+          dates = %w( 21000103 21000104 21000105 21000106  )
           Factory(:destination)
-          dates.each { |d| Factory(:trip, :date => d) }
-          get :wip, {:start_date=>'20100502', :cal_type=>'wip'}
-          assigns[:trips_by_hour].hours.keys.sort.should == dates.collect { |d| d.strftime("%Y%m%d") }
+          dates.each { |d| Factory(:trip, :date => Date.parse(d)) }
+          get :wip, {:start_date=>'21000103', :cal_type=>'wip'}
+          assigns[:trips_by_hour].hours.keys.sort.should == dates
         end
       end
     end
     it "should assign vehicle" do
       5.times { Factory(:vehicle) }
       get :wip, {:start_date => '20100502'}
-      assigns[:vehicles].should == Vehicle.ordered.collect { |v| v.name }
+      assigns[:vehicles].should == Vehicle.ordered.collect {|v| v.name }
     end
   end
 

@@ -7,69 +7,49 @@
                       11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5,
                       21, 21.5, 22, 22.5, 23, 23.5, 24] %>
 <% year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
-<h2> Vehicle use for week beginning Sunday <%= "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
+<h2> Vehicle use for week beginning Sunday <%=h "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
 <%= render :partial => 'navbar', :locals => {:start_date => @start_date, :cal_type => 'wip'} %>
-
-<!--headers-->
-<div id="wip-table-headers">
-  <table class="wip">
-    <tr>
-      <td>
-        <table>
+<%= button_to 'Create New Trip', new_trip_path, {:id=>'create_trip_button'}%>
+<table id="wip">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr class="wip-header">
+          <th class="vehicle-header">Time</th>
+        </tr>
+        <% (0..47).each do |hour| -%>
           <tr>
-            <td>&nbsp;</td>
+            <% if hour % 4 == 0 -%>
+              <td class="hour"> <%=h hours[hour] -%></td>
+            <% end %>
           </tr>
-          <tr class="wip-header">
-            <th class="vehicle-header">Time</th>
-            </td>
-          </tr>
-        </table>
-        <% @days.map { |d| [d.strftime("%Y%m%d"), d] }.each do |day, d| %>
-        <td>
-          <div class="col<%= d.wday + 1 %>">
-            <table>
-              <%= render :partial => 'wip_header', :locals => {:day => d} %>
-            </table>
-          </div>
-        </td>
-      <% end %>
-    </tr>
-  </table>
-</div>
-
-<!--main table-->
-<div id="wip-table-body">
-  <table class="wip">
-    <tr>
+        <% end %>
+      </table>
+    </td>
+    <% @days.map { |d| [d.strftime("%Y%m%d"), d] }.each do |day, d| -%>
       <td>
-        <table>
-          <% (0..48).each do |hour| %>
-            <tr>
-              <th class="hour"> <%= hours[hour] %></th>
+        <div class="col<%= d.wday + 1 -%>">
+          <table>
+            <%= render :partial => 'wip_header', :locals => {:day => d} %>
+            <% (0..47).each do |hour| -%>
+              <tr id="<%= "hour#{hour}" %>">
+                <% @vehicles.each do |vehicle| -%>
+                  <% cell_class, id, contact, destination = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) -%>
+                  <% title = "#{contact} #{destination}" -%>
+                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class } title=\"#{title}\"> " %>
+                  <% if id -%>
+                    <%#= link_to destination, edit_trip_path(id) %>
+                  <% end -%>
+                  <%= "</td>" %>
+                <% end -%>
+            <% end -%>
             </tr>
-          <% end %>
-        </table>
+          </table>
+        </div>
       </td>
-      <% @days.map { |d| [d.strftime("%Y%m%d"), d] }.each do |day, d| %>
-        <td>
-          <div class="col<%= d.wday + 1 %>">
-            <table>
-              <% (0..48).each do |hour| %>
-                <tr id="<%= "hour#{hour}" %>">
-                  <% @vehicles.each do |vehicle| %>
-                    <% cell_class, id, contact, destination = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) %>
-                    <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class }> " %>
-                    <% if id %>
-                      <%= link_to destination, edit_trip_path(id) %>
-                    <% end %>
-                    <%= "</td>" %>
-                  <% end %>
-              <% end %>
-              </tr>
-            </table>
-          </div>
-        </td>
-      <% end %>
-    </tr>
-  </table>
-</div>
+    <% end -%>
+  </tr>
+</table>

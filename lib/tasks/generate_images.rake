@@ -37,7 +37,7 @@ namespace :generate_colors do
       f.write <<-EOF
   .#{comb}{
      background: url(../images/#{comb}.jpg);
-     #{comb.length > 1 ? 'background-repeat: no-repeat;' :''}
+     #{comb.length > 1 ? 'background-repeat: repeat;' :''}
   }
   
       EOF

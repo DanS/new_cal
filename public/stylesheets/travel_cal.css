@@ -41,11 +41,8 @@ pre {
   float: left;
 }
 
-#three-calendar{
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  vertical-align: top;
+#create_trip_button{
+  margin-bottom: 10px;
 }
 
 table.calendar{
@@ -54,15 +51,28 @@ table.calendar{
   width: 20%;
 }
 
-#trip-list, #destination-list{
+table.popup{
+  text-align: left;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 600px;
+}
+
+table.popup td, table.popup th{
+  border: 1px solid black;
+  
+}
+
+.trip-list, #destination-list, .popup table{
   border: 2px solid black;
+  background-color: wheat;
 }
 
 table .calendar tr, table #destination-list tr{
   vertical-align: top;
 }
-table .calendar td, #destination-list td, #trip-list td {
-  border: 1px dotted #BBBBBB;
+table .calendar td, #destination-list td, #trip-list td, popup td {
+  border: 1px solid gray;
 }
 
 table#destination-list{
@@ -71,6 +81,10 @@ table#destination-list{
 
 table#week_calendar#destination-list{
   width: 12.5%;
+}
+
+table.calendar{
+  width: 250px;
 }
 
 table#week_calendar td {
@@ -94,11 +108,11 @@ table#week_calendar {
  border: solid 1px black;
 }
 
-#trip-list{
+.trip-list{
   width: 100%;
 }
 
-#trip-list th{
+.trip-list th{
   font-weight: bold;
   background-color: gray;
   border: 1px dotted #BBBBBB;
@@ -106,57 +120,51 @@ table#week_calendar {
 
 /* wip view stuff */
 
-table.wip a{
-  font-size: xx-small;
+table#wip a{
+  font-size: x-small;
 }
 
-table.wip div {
+table#wip div {
   overflow: hidden;
 }
 
-div#wip-table-headers, div#wip-table-body{
-  width: 663px;
-}
-
-div#wip-table-body{
-  overflow: scroll;
-  height: 300px;
-}
-
-table.wip, table.wip table{
+table#wip, table#wip table{
   border: 1px solid black;
   border-spacing: 0;
   border-collapse: collapse;
 }
 
-table.wip table{
+table#wip table{
   width: 100%;
 }
 
-table.wip th, table.wip td{
-  border: 1px solid black;
-  vertical-align:top;
-  height: 22px;
+table#wip table td, table#wip table th{
+  width: 40px;
 }
 
-table.wip th.vehicle-header {
+table#wip th, table#wip td{
+  border-bottom: 1px dotted darkgray;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  vertical-align:top;
+  height: 6px;
+}
+
+table#wip th.vehicle-header {
   font-weight: lighter;
   font-size:x-small;
+  border: solid 1px black;
   height: 40px;
 }
 
-table.wip th.vehicle-header, table.wip .hour, table.wip table td{
-  width: 55px;
-}
-
-table.wip .hour , table.wip .small{
-  font-size: xx-small;
+table#wip .hour , table#wip .small{
+  font-size: x-small;
   font-weight: normal;
 }
 
-table.wip .hour{
-  height: 22px;
-  padding: 0 1px 0 1px;
+table#wip .hour{
+  height: 24px;
+  padding: 0 2px 0 2px;
   text-align: right;
 }
 
@@ -246,6 +254,17 @@ My calendar customizations
   border-bottom: 1px dotted #bbbbbb;
 }
 
+.popup {
+  display: none;
+  position: absolute;
+  background-color: wheat;
+  z-index: 9999;
+}
+
+.popup table {
+  width: 100%;
+}
+
 /*stuff for fancy bouncing navbar blob*/
 #navbar {
   margin: 0 0 10px 0;
@@ -260,7 +279,6 @@ My calendar customizations
 
 #navbar ul{
   margin: 0;
-  /*paddng: 0;*/
 }
 
 #navbar li {
@@ -316,5 +334,5 @@ a.selected-tab  {
 /* stuff for expanding title */
 #banner{
   width: 100%;
-  height: 40px;
+  height: 15px;
 }

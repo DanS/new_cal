@@ -74,4 +74,14 @@ describe ApplicationController do
     end
   end
 
+  describe "start_date_for_week method" do
+    it "returns first day of current week if passed date is older than that" do
+      controller.start_date_for_week(Date.parse('20000101')).should ==
+            (Date.today - Date.today.wday.days).strftime("%Y%m%d")
+    end
+    it "returns first day of future week if passed date newer than current week" do
+      controller.start_date_for_week(Date.parse('21000105')).should ==
+            (Date.parse('21000103')).strftime("%Y%m%d")
+    end
+  end
 end

@@ -47,7 +47,7 @@ module GenImgHelpers
     height_of_each_color = 31.0 / name.length
     for color_key in name.split(//)
       color = colors[color_key]
-      vert_list << Image.new(35,height_of_each_color) {self.background_color = color}
+      vert_list << Image.new(1,height_of_each_color) {self.background_color = color}
     end
 
     img = vert_list.append(true)
