@@ -11,4 +11,10 @@ Rake tasks are setup to generate the numerous color images and css classes need 
 Developed using BDD methodology with rSpec.
 
 Current progress:
-  Mostly functional except for WIP view.  No javascript added yet.  Plan to add javascript to the month calendar so that trips show up when hovering calendar days.  Also plan to make the WIP view functional and allow dragging and dropping of trips for easy manipulation during the meetings.
+  Mostly functional.  Some jQuery/ javascript stuff added.  Month calendar now has tooltips on days, new trip has a date picker, and the WIP has a sideways accordion.  Still plenty of rough edges and work to do.ds
+
+  When trying to start this app for the first time first do:
+    rake db:migrate
+    rake db:seed
+    and if you want to run tests...
+    rake db:test:prepare
