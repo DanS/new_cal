@@ -23,7 +23,7 @@
         <% (0..47).each do |hour| -%>
           <tr>
             <% if hour % 4 == 0 -%>
-              <td class="hour"> <%=h hours[hour] -%></td>
+              <td class="hour"> <%= hours[hour] -%></td>
             <% end %>
           </tr>
         <% end %>
