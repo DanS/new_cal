@@ -8,9 +8,10 @@ class TripsController < ApplicationController
     @start_date = param_session_default("start_date", default_start)
     @cal_type = param_session_default("cal_type", 'month')
     filters = {
-          :destination => param_session_default(:destination, nil),
-          :start_date => param_session_default(:start_date, default_start)
+    :destination => param_session_default(:destination, nil),
+    :start_date => param_session_default(:start_date, default_start)
     }
+    @destination = filters[:destination] || "Everywhere"
     unless @cal_type == 'month'
       @start_date = start_date_for_week(@start_date)
       @end_date = param_session_default(:end_date, end_of_week(@start_date))
