@@ -30,8 +30,8 @@
         <%= content_tag('td',trip.send(attrib), {:class=>"#{attrib}-column"}) %>
       <% end %>
       <td class="button-column">
-        <%= h button_to 'Edit', edit_trip_path(trip), :method=>:get %>
-        <%= h button_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %>
+        <%= button_to 'Edit', edit_trip_path(trip), :method=>:get %>
+        <%= button_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %>
       </td>
     <% end %>
     </tr>
