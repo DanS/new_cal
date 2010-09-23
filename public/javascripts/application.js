@@ -21,10 +21,10 @@ var TT = {
           TT.current = $(this);
           TT.tip = TT.current.find('.popup');
           TT.timer = setTimeout(function() {
-            TT.tip.css('top', coords.top + TT.current.outerHeight());
+            TT.tip.css('top', coords.top + (0.5 * TT.current.outerHeight()));
             TT.leftCoord = coords.left + (0.5 * TT.current.outerWidth()) - ( 0.5 * TT.tip.outerWidth());
             if (TT.leftCoord < 50) { //if too far left
-              TT.xCenter = 50
+              TT.leftCoord = 50
             }
             if (TT.leftCoord + TT.tip.outerWidth() > windowWidth) { //if too far right
               TT.leftCoord = ( windowWidth - TT.tip.outerWidth())
