@@ -112,6 +112,16 @@ table#week_calendar {
   width: 100%;
 }
 
+table.trip-list, .trip-list th, .trip-list td{
+  border: 1px solid black;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table.trip-list{
+  margin-top :10px;
+}
+
 .trip-list th{
   font-weight: bold;
   background-color: gray;

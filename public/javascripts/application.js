@@ -8,10 +8,10 @@ var TT = {
 
   setTips : function() {
     $('[id^=day-cell]').each(function() {
-      $(this).removeAttr('title');
       var date = /(?:day-cell)(\d+)/.exec($(this).attr('id'))[1];
       var assocRow = $('.row' + date);
       if (assocRow.children().length > 0) {
+        $(this).removeAttr('title');
         var tb = $('<table class="popup"></table>');
         assocRow.clone(true).appendTo(tb);
         tb.appendTo($(this));
@@ -37,10 +37,9 @@ var TT = {
         })
       }
     });
-    TT.popupHeader = $('table.trip-list tr:first')
-        .find('th:first').remove().end()//remove date from header
-        .find('th:nth-child(5)').html('Vehicle').end()//shorten column name
-        .clone();
+    TT.popupHeader = $('table.trip-list tr:first').clone();
+    TT.popupHeader.find('th:first').remove().end()//remove date from header
+        .find('th:nth-child(5)').html('Vehicle').end();//shorten column name
     TT.popupHeader.prependTo('table.popup');
     $('.popup td.date-column').remove();
   }
