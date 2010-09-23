@@ -1,13 +1,12 @@
 <table id="week_calendar">
   <tr>
     <% @trips_by_date.keys.sort.each do |date| %>
-      <td>
+      <%= tag 'td', {:id=>"day-cell#{date}"}, true %>
         <table class="day">
           <tr><th class="day_label"> <%= Date.parse(date).strftime("%a %d %b<br />%Y") %></th></tr>
           <% @trips_by_date[date].sort {|a,b| a.depart <=> b.depart}.each do |trip|  %>
             <tr <%= "class=#{trip.letter}" %>>
-              <td>
-                <%=h "#{trip.destination} #{trip.depart.strftime("%I:%M%p")}" %>
+              <%= content_tag 'td', "#{trip.destination} #{trip.depart.strftime("%I:%M%p")}"%>
               </td>
             </tr>
           <% end %>

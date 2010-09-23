@@ -1,10 +1,11 @@
+var windowWidth = $(window).width();
+$(window).resize(function(){
+  windowWidth = $(window).width();
+});
+
 //add tooltips to the month calendar
 var TT = {
   delay : 600,
-  windowW : $(window).width,
-
-  showTooltip : function(coords) {
-  },
 
   setTips : function() {
     $('[id^=day-cell]').each(function() {
@@ -12,9 +13,9 @@ var TT = {
       var assocRow = $('.row' + date);
       if (assocRow.children().length > 0) {
         $(this).removeAttr('title');
-        var tb = $('<table class="popup"></table>');
-        assocRow.clone(true).appendTo(tb);
-        tb.appendTo($(this));
+        var popupTable = $('<table class="popup"></table>');
+        assocRow.clone(true).appendTo(popupTable);
+        popupTable.appendTo($(this));
         var coords = $(this).offset();
         $(this).hover(function() {
           TT.current = $(this);
@@ -23,10 +24,10 @@ var TT = {
             TT.tip.css('top', coords.top + TT.current.outerHeight());
             TT.leftCoord = coords.left + (0.5 * TT.current.outerWidth()) - ( 0.5 * TT.tip.outerWidth());
             if (TT.leftCoord < 50) { //if too far left
-              TT.leftCoord = 50
+              TT.xCenter = 50
             }
-            if (TT.leftCoord + 600 > TT.windowW) { //if too far right
-              TT.leftCoord = ( TT.windowW - 650)
+            if (TT.leftCoord + TT.tip.outerWidth() > windowWidth) { //if too far right
+              TT.leftCoord = ( windowWidth - TT.tip.outerWidth())
             }
             TT.tip.css('left', TT.leftCoord);
             TT.tip.show(400);
