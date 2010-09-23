@@ -18,6 +18,7 @@ class TripsController < ApplicationController
       @trips_by_date = Trip.by_date_string(filters)
     end
     @destination_list = to_destination_list(@trips_by_date)
+    @destination = filters[:destination] || 'Everywhere'# for showing trips to .... on calendar template
   end
   
   # GET /trips/wip
