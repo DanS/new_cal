@@ -10,34 +10,37 @@ var TT = {
     $('[id^=day-cell]').each(function() {
       $(this).removeAttr('title');
       var date = /(?:day-cell)(\d+)/.exec($(this).attr('id'))[1];
-      var tb = $('<table class="popup"></table>');
-      $('.row' + date).clone(true).appendTo(tb);
-      tb.appendTo($(this));
-      var coords = $(this).offset();
-      $(this).hover(function() {
-        TT.current = $(this);
-        TT.tip = TT.current.find('.popup');
-        TT.timer = setTimeout(function() {
-          TT.tip.css('top', coords.top + TT.current.outerHeight());
-          TT.leftCoord = coords.left + (0.5 * TT.current.outerWidth()) - ( 0.5 * TT.tip.outerWidth());
-          if (TT.leftCoord < 50) { //if too far left
-            TT.leftCoord = 50
-          }
-          if (TT.leftCoord + 600 > TT.windowW){ //if too far right
-            TT.leftCoord = ( TT.windowW - 650)
-          }
-          TT.tip.css('left', TT.leftCoord);
-          TT.tip.show(400);
-        }, TT.delay);
-      }, function() {
-        clearTimeout(TT.timer);
-        TT.tip.hide(400);
-      })
+      var assocRow = $('.row' + date);
+      if (assocRow.children().length > 0) {
+        var tb = $('<table class="popup"></table>');
+        assocRow.clone(true).appendTo(tb);
+        tb.appendTo($(this));
+        var coords = $(this).offset();
+        $(this).hover(function() {
+          TT.current = $(this);
+          TT.tip = TT.current.find('.popup');
+          TT.timer = setTimeout(function() {
+            TT.tip.css('top', coords.top + TT.current.outerHeight());
+            TT.leftCoord = coords.left + (0.5 * TT.current.outerWidth()) - ( 0.5 * TT.tip.outerWidth());
+            if (TT.leftCoord < 50) { //if too far left
+              TT.leftCoord = 50
+            }
+            if (TT.leftCoord + 600 > TT.windowW) { //if too far right
+              TT.leftCoord = ( TT.windowW - 650)
+            }
+            TT.tip.css('left', TT.leftCoord);
+            TT.tip.show(400);
+          }, TT.delay);
+        }, function() {
+          clearTimeout(TT.timer);
+          TT.tip.hide(400);
+        })
+      }
     });
     TT.popupHeader = $('table.trip-list tr:first')
-          .find('th:first').remove().end() //remove date from header
-          .find('th:nth-child(5)').html('Vehicle').end() //shorten column name
-          .clone();
+        .find('th:first').remove().end()//remove date from header
+        .find('th:nth-child(5)').html('Vehicle').end()//shorten column name
+        .clone();
     TT.popupHeader.prependTo('table.popup');
     $('.popup td.date-column').remove();
   }
@@ -62,14 +65,14 @@ $(document).ready(function() {
     $('#nav-blob').animate(
     {width: $(this).width() + 10, left: $(this).position().left},
     {duration: 'slow', easing: 'easeOutElastic', queue: false}
-          );
+        );
   }, function() {
     // Mouse out function
     var leftPosition = $('#navbar a:first').position().left;
     $('#nav-blob').animate(
     {width:'hide'},
     {duration:'slow', easing: 'easeOutCirc', queue:false}
-          ).animate({left: leftPosition}, 'fast');
+        ).animate({left: leftPosition}, 'fast');
   });
 
   //add date picker to trip form
@@ -80,13 +83,13 @@ $(document).ready(function() {
   var openCloseDiv = function(openDiv, closeDiv) {
     if (openDiv != null) {
       openDiv.addClass('active').stop(true).animate({width: '450px'}, {queue:false, duration:400})
-            .addClass('active').css({'text-align': 'center', 'background-color':'transparent'})
-            .find('th.vehicle-header').css('font-size', 'x-small').end().find('span, a').show();
+          .addClass('active').css({'text-align': 'center', 'background-color':'transparent'})
+          .find('th.vehicle-header').css('font-size', 'x-small').end().find('span, a').show();
     }
     if (closeDiv != null) {
       closeDiv.removeClass('active').stop(true).animate({width: '45px'}, {queue:false, duration:400})
-            .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
-            .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
+          .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
+          .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
     }
   };
 
@@ -108,10 +111,10 @@ $(document).ready(function() {
       }
     }, 400)
   },
-        function() {
-          $(this).removeClass('waiting')
-        }
-        );
+                         function() {
+                           $(this).removeClass('waiting')
+                         }
+      );
 
   //have only every 4th row border solid in WIP table
   $('table#wip table').each(function() {
