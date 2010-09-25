@@ -3,11 +3,11 @@
   <% @destination_list.keys.sort.each do |text| %>
     <tr>
       <% count, letter = @destination_list[text] %>
-      <%value =  text  + "(#{count})"%>
+      <%value = "<span> #{text}</span> (#{count})"%>
       <td class=<%= "#{letter}" %>>
         <%= link_to value, "/?destination=#{text.gsub(' ', '_')}" %>
       </td>
     </tr>
   <% end %>
-    <tr><td><a href="/?destination=clear">All Destinations</a></td></tr>
+    <tr><td><a href="/?destination=clear" class="selected">All Destinations</a></td></tr>
 </table>

@@ -8,12 +8,8 @@
   <% @trips_by_date.keys.sort.each do |date| %>
     <% days_trips = @trips_by_date[date].sort { |a, b| a.depart.strftime("%H%M") <=> b.depart.strftime("%H%M") } %>
     <% days_trips.each_with_index do |trip, i| %>
-      <%= tag 'tr', {:class=>"row#{date}"}, true %>
-      <% if i == 0 #date cell should span all rows with same date  %>
-        <%= tag('td', {:rowspan=>days_trips.length, :class=>'date-column'}, true) %>
-          <%= h days_trips[0].date.strftime("%b %d %a") %>
-        </td>
-      <% end %>
+      <%= tag 'tr', {:class=>"row#{date} trip"}, true %>
+        <%= content_tag 'td', days_trips[0].date.strftime("%b %d %a")%>
       <td class="time-column">
         <%= h trip.depart.strftime("%I:%M%p") %>
         <br/>

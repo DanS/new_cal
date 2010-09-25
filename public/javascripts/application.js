@@ -1,5 +1,5 @@
 var windowWidth = $(window).width();
-$(window).resize(function(){
+$(window).resize(function() {
   windowWidth = $(window).width();
 });
 
@@ -46,6 +46,54 @@ var TT = {
   }
 };
 
+var showOnly = function(letter, dest) {
+  showAll();
+  //set 'showing to' title
+  $('span#showing-dest').html(dest);
+  //calendar
+  $('[id^=day-cell]').each(function(i, e) { //iterate thru all calendar days
+    var fullClass = null;
+    var match = null;
+    if (fullClass = $(e).attr('class')) {//if day has a class
+      if (match = /(?:\s)([A-Z]+)/.exec(fullClass)) { // if class has a destination element
+        var colorClass = match[1];
+        if (colorClass) {
+          $(e).removeClass(colorClass).data('colorClass', colorClass);
+          var re = new RegExp(letter);
+          if (re.exec(colorClass)) {
+            $(e).addClass(letter);
+            $(e).data('temp', letter)
+          }
+        }
+      }
+    }
+  });
+  //trip-list
+  $('table.trip-list tr.trip').each(function(i, e) {
+    if ($(e).find('td:nth-child(3)').attr('class') != letter) {
+      $(e).hide()
+    }
+  })
+};
+
+var showAll = function() {
+  //title
+  $('span#showing-dest').html('Everywhere');
+  //calendar
+  $('[id^=day-cell]').each(function(i, e) {
+    var temp = $(e).data('temp');
+    if (temp) {
+      $(e).removeClass(temp).removeData('temp');
+    }
+    var colorClass  = $(this).data('colorClass');
+    if (colorClass) {
+      $(this).addClass(colorClass);
+    }
+  });
+  //trip-list
+  $('table.trip-list tr.trip').show();
+};
+
 $(document).ready(function() {
   // expand the title on page open
   $('#banner h1').css("fontSize", "6px");
@@ -56,6 +104,24 @@ $(document).ready(function() {
 
   //add date picker to trip form
   $('#trip_date').datepicker({
+  });
+
+  //set click action on destination list
+  $('table#destination-list a').css('text-decoration', 'none').click(function(e) {
+    e.preventDefault();
+  });
+  $('table#destination-list td').each(function(i, e) {
+    var letter = $(this).attr('class');
+    var dest = $(this).find('a span').html();
+    var that = $(this)
+    $(this).click(function() {
+      $('table#destination-list td a').removeClass('selected');
+      that.find('a').addClass('selected');
+      showOnly(letter, dest);
+    });
+    $('table#destination-list tr:last').click(function() {
+      showAll(letter);
+    });
   });
 
   //WIP accordion
@@ -79,7 +145,7 @@ $(document).ready(function() {
 
   $('[class^=col]').hover(function() {
     if ($(this).hasClass('active')) {
-      return  //do nothing when over open div
+      return;  //do nothing when over open div
     }
     var currentDiv = $(this);
     currentDiv.addClass('waiting');
