@@ -5,8 +5,9 @@
         <table class="day">
           <tr><th class="day_label"> <%= Date.parse(date).strftime("%a %d %b<br />%Y") %></th></tr>
           <% @trips_by_date[date].sort {|a,b| a.depart <=> b.depart}.each do |trip|  %>
-            <tr <%= "class=#{trip.letter}" %>>
-              <%= content_tag 'td', "#{trip.destination} #{trip.depart.strftime("%I:%M%p")}"%>
+            <tr>
+              <%= content_tag 'td', "#{trip.destination} #{trip.depart.strftime("%I:%M%p")}",
+                  {:class=>"week-trip #{trip.letter}"}%>
               </td>
             </tr>
           <% end %>

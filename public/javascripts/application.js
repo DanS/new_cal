@@ -50,23 +50,27 @@ var showOnly = function(letter, dest) {
   showAll();
   //set 'showing to' title
   $('span#showing-dest').html(dest);
-  //calendar
-  $('[id^=day-cell]').each(function(i, e) { //iterate thru all calendar days
-    var fullClass = null;
-    var match = null;
-    if (fullClass = $(e).attr('class')) {//if day has a class
-      if (match = /(?:\s)([A-Z]+)/.exec(fullClass)) { // if class has a destination element
-        var colorClass = match[1];
-        if (colorClass) {
-          $(e).removeClass(colorClass).data('colorClass', colorClass);
-          var re = new RegExp(letter);
-          if (re.exec(colorClass)) {
-            $(e).addClass(letter);
-            $(e).data('temp', letter)
+  //month calendar
+  $('table.calendar [id^=day-cell]').each(function(i, e) { //iterate thru all calendar days
+      var fullClass = null;
+      var match = null;
+      if (fullClass = $(e).attr('class')) {//if day has a class
+        if (match = /(?:\s)([A-Z]+)/.exec(fullClass)) { // if class has a destination element
+          var colorClass = match[1];
+          if (colorClass) {
+            $(e).removeClass(colorClass).data('colorClass', colorClass);
+            var re = new RegExp(letter);
+            if (re.exec(colorClass)) {
+              $(e).addClass(letter);
+              $(e).data('temp', letter)
+            }
           }
         }
       }
-    }
+  });
+  // week calendar
+  $('table.day td.week-trip').each(function(i,e){
+    if( ! $(e).hasClass(letter)){$(e).hide()}
   });
   //trip-list
   $('table.trip-list tr.trip').each(function(i, e) {
@@ -79,17 +83,19 @@ var showOnly = function(letter, dest) {
 var showAll = function() {
   //title
   $('span#showing-dest').html('Everywhere');
-  //calendar
-  $('[id^=day-cell]').each(function(i, e) {
+  //month calendar
+  $('table.calendar [id^=day-cell]').each(function(i, e) {
     var temp = $(e).data('temp');
     if (temp) {
       $(e).removeClass(temp).removeData('temp');
     }
-    var colorClass  = $(this).data('colorClass');
+    var colorClass = $(this).data('colorClass');
     if (colorClass) {
       $(this).addClass(colorClass);
     }
   });
+  // week calendar
+  $('table.day td.week-trip').show();
   //trip-list
   $('table.trip-list tr.trip').show();
 };
