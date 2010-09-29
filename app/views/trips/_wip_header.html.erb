@@ -8,7 +8,8 @@
 <tr>
   <% week_col_class = day.strftime("%a") %>
   <% @vehicles.each do |vheader| %>
-    <%= tag('th', {:class=>week_col_class + " vehicle-header"}, true) %>
+    <% vehicle_color_class = vheader.gsub(' ', '-') + '-trip' %>
+    <%= tag('th', {:class=>"#{week_col_class} #{vehicle_color_class} vehicle-header"}, true) %>
     <%= vheader %>
     </th>
   <% end %>

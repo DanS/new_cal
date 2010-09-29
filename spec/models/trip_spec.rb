@@ -40,6 +40,12 @@ describe Trip do
       t.return.should_not be_nil
       t.return.should == t.depart + 2.hours 
     end
+
+    it "depart and return times should not be allowed" do
+      time = Time.parse('8AM')
+      t = Factory.build(:trip, :depart=>time, :return=>time)
+      t.should_not be_valid
+    end
   end
 
   context "duration method" do

@@ -2,7 +2,7 @@ desc "create random trips"
 task :create_trips => :environment do
 
   cmtys = ['Dancing Rabbit', 'Sandhill', 'Red Earth Farms']
-  cars = ['Silver Jetta', 'Black Jetta', 'Truck', 'Either Jetta', 'SH', 'Other']
+  cars = ['Silver Jetta', 'Black Jetta', 'Truck', 'Either Jetta', 'Sand Hill', 'Other']
   contacts = %w( Dan Alline Kurt Nathan Bear Alyssa Juan)
   destinations = [ 'Rutledge', 'La Plata', 'Memphis', 'Kirksville', 'Quincy', 'Fairfield','Ottumwa', 'Other']
 
@@ -13,7 +13,7 @@ task :create_trips => :environment do
     h = rand(24)
     m = [0, 30 ].rand
     t.depart = Time.parse("#{h}:#{m}")
-    t.return = t.depart + (rand(8).hours) 
+    t.return = t.depart + ((rand(8) + 1).hours) 
     t.contact = contacts.rand
     t.community = cmtys.rand
     t.preferred_vehicle = cars.rand

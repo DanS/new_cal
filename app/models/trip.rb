@@ -1,5 +1,8 @@
 class Trip < ActiveRecord::Base
   validates_presence_of :date, :contact, :destination, :community, :depart, :return
+  validates_each :return do |record, attr, value|
+    record.errors.add attr, "Return time can't be the same as departure time" if value == record.depart
+  end
   before_validation {|t| if t.return.nil?; t.return = t.depart + 2.hours; end }
   named_scope :upcoming, {:conditions => ["date >= ?", Date.today], :order => 'date, depart'}
   named_scope :next_3_months, {:conditions =>
