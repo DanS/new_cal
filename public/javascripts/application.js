@@ -107,8 +107,9 @@ $(document).ready(function() {
   TT.setTips();
 
   //add date picker to trip form
-  $('#trip_date').datepicker({
-  });
+  Date.firstDayOfWeek = 0;
+  Date.format = 'mm/dd/yyyy';
+  $('#trip_date').datepicker();
 
   //set click action on destination list
   $('table#destination-list a').css('text-decoration', 'none').click(function(e) {

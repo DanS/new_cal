@@ -44,6 +44,7 @@ class TripsController < ApplicationController
     @trip = Trip.new(:date => params[:date])
     @communities = Community.all.collect {|c| c.name}
     @vehicles = Vehicle.all.collect {|v| v.name}
+    @today = Date.today.strftime("%m/%d/%Y")
   end
 
   # GET /trips/1/edit

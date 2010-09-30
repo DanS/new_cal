@@ -7,7 +7,8 @@
       <td>
         <p>
           <%= f.label 'Date' %>
-          <%= f.text_field :date %>
+          <% date = f.object.date ? f.object.date.strftime("%m/%d/%Y") : @today %>
+          <%= f.text_field :date, :value => date %>
         </p>
         <p>
           <%= f.label 'Departure Time' %>
