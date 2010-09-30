@@ -39,10 +39,8 @@ var TT = {
       }
     });
     TT.popupHeader = $('table.trip-list tr:first').clone();
-    TT.popupHeader.find('th:first').remove().end()//remove date from header
-        .find('th:nth-child(5)').html('Vehicle').end();//shorten column name
+    TT.popupHeader.find('th:nth-child(6)').html('Vehicle').end();//shorten column name
     TT.popupHeader.prependTo('table.popup');
-    $('.popup td.date-column').remove();
   }
 };
 
