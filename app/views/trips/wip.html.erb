@@ -7,9 +7,9 @@
                       11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5,
                       21, 21.5, 22, 22.5, 23, 23.5, 24] %>
 <% year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
-<h2> Vehicle use for week beginning Sunday <%=h "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
+<h2> Vehicle use for week beginning Sunday <%= h "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
 <%= render :partial => 'navbar', :locals => {:start_date => @start_date, :cal_type => 'wip'} %>
-<%= button_to 'Create New Trip', new_trip_path, {:id=>'create_trip_button'}%>
+<%= button_to 'Create New Trip', new_trip_path, {:id=>'create_trip_button'} %>
 <table id="wip">
   <tr>
     <td>
@@ -39,7 +39,11 @@
                 <% @vehicles.each do |vehicle| -%>
                   <% cell_class, id, contact, destination = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) -%>
                   <% title = "#{contact} #{destination}" -%>
-                  <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class } title=\"#{title}\"> " %>
+                  <% if id %>
+                    <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class } title=\"#{title}\"> " %>
+                  <% else %>
+                    <%= "<td id=\"#{day}-#{hour}-#{vehicle}\" #{cell_class } > " %>
+                  <% end %>
                   <% if id -%>
                     <%#= link_to destination, edit_trip_path(id) %>
                   <% end -%>
