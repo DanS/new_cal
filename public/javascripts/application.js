@@ -161,11 +161,7 @@ $(document).ready(function() {
       }
     }, 400)
   },
-                         function() {
-                           $(this).removeClass('waiting')
-                         }
-      );
-
+    function() {$(this).removeClass('waiting')});
   //have only every 4th row border solid in WIP table
   $('table#wip table').each(function() {
     $(this).find('tr').each(function(i) {

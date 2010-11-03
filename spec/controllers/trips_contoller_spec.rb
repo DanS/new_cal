@@ -18,10 +18,11 @@ describe TripsController do
         assigns[:start_date].should == @date_obj
       end
       it "assigns start date to params value if both param and session values present" do
+        #param value adjusted to first of the month
         param_value = '10001010'
         session_value = '20001010'
         get :calendar, {:start_date => param_value}, {:start_date => session_value}
-        assigns[:start_date].should == Date.parse(param_value)
+        assigns[:start_date].should == Date.parse('10001001')
       end
       it "assigns start date to default value if start_date not in params or session" do
         #default start date is first day of current month
@@ -33,6 +34,13 @@ describe TripsController do
           start_date = (21000103 + n).to_s
           get :calendar, {:start_date => start_date, :cal_type => 'week'}
           assigns[:start_date].should == "21000103"
+        end
+      end
+      it "assigns start_date to the first of the month if cal_type = month" do
+        (1..6).each do |n|
+          start_date = (21000103 + n).to_s
+          get :calendar, {:start_date => start_date, :cal_type => 'month'}
+          assigns[:start_date].should == Date.parse("21000101")
         end
       end
     end

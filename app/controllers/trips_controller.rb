@@ -14,6 +14,7 @@ class TripsController < ApplicationController
       filters[:end_date] = @end_date
       @trips_by_date = dates_between(@start_date, filters[:end_date]).merge Trip.by_date_string(filters)
     else
+      @start_date = @start_date - (@start_date.day - 1).days #ensure start on 1st of month
       filters[:end_date] =  plus_3_months(@start_date)
       @trips_by_date = Trip.by_date_string(filters)
     end
