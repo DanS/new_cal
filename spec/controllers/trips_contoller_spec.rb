@@ -10,7 +10,7 @@ describe TripsController do
     context "Calendar date range " do
       before(:all) do
         @date_string = (Date.today + 1.month).strftime("%Y%m") + '01'
-        @date_obj = Date.parse(@date_string)
+        @date_obj    = Date.parse(@date_string)
       end
 
       it "assigns start date to session value when present" do
@@ -19,7 +19,7 @@ describe TripsController do
       end
       it "assigns start date to params value if both param and session values present" do
         #param value adjusted to first of the month
-        param_value = '10001010'
+        param_value   = '10001010'
         session_value = '20001010'
         get :calendar, {:start_date => param_value}, {:start_date => session_value}
         assigns[:start_date].should == Date.parse('10001001')
@@ -42,6 +42,12 @@ describe TripsController do
           get :calendar, {:start_date => start_date, :cal_type => 'month'}
           assigns[:start_date].should == Date.parse("21000101")
         end
+      end
+      it "assigns start_date to first day of month when switching views" do
+        Factory(:destination)
+        Factory(:trip, :date=>Date.parse('21000301'))
+        get :calendar, {:cal_type => 'month', :start_date => '21000322'},{:start_date => '21000322', :cal_type => 'wip'}
+        assigns[:trips_by_date].keys.should include("21000301")
       end
     end
     context "assigning cal-type" do
@@ -78,8 +84,8 @@ describe TripsController do
     describe "destination_list assignment" do
 
       it "should assign destinations from destinations of upcoming trips" do
-        today = Date.today
-        dates = [1, 2, 32, 35].collect { |n| today + n.days }
+        today        = Date.today
+        dates        = [1, 2, 32, 35].collect { |n| today + n.days }
         destinations = ['Quincy', 'Rutledge', 'La Plata', 'Rutledge'] #Rutledge intentionally duplicated
 
         #create destinations
@@ -90,7 +96,7 @@ describe TripsController do
 
         #check that destinations show up in destination list
         get :calendar, {:cal_type => 'month', :start_date => today}
-        result = assigns[:destination_list]
+        result       = assigns[:destination_list]
         result.keys.sort.should == destinations.uniq.sort
         result.values.sort.should == [[1, "Q"], [3, "L"], [6, "R"]]
       end
@@ -205,7 +211,7 @@ describe TripsController do
     end
     describe "start_date behavior" do
       before do
-        @first_day_of_week = (Date.today - Date.today.wday.days).strftime("%Y%m%d")
+        @first_day_of_week     = (Date.today - Date.today.wday.days).strftime("%Y%m%d")
         @first_day_with_dashes = (Date.today - Date.today.wday.days).strftime("%Y-%m-%d")
       end
       it "should not change if passed first day of current week" do
