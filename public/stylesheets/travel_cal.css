@@ -1,6 +1,6 @@
 body {
   background-color: #fff;
-  color: #333;
+  color: #333;;
 }
 
 body, p, ol, ul, td {
@@ -48,10 +48,15 @@ pre {
   margin-bottom: 10px;
 }
 
+div.calendar-containers{
+  width: 900px;
+}
+
 table.calendar {
   border: 1px solid black;
   float: left;
   width: 20%;
+  margin: 2px 2px 2px 2px;
 }
 
 table.popup {
@@ -81,14 +86,11 @@ table .calendar td, #destination-list td, #trip-list td, popup td {
 
 table#destination-list {
   float: left;
+  margin: 2px 2px 2px 2px;
 }
 
 table#week_calendar#destination-list {
   width: 12.5%;
-}
-
-table.calendar {
-  width: 250px;
 }
 
 table#week_calendar td {
@@ -114,7 +116,8 @@ table#week_calendar {
 }
 
 .trip-list {
-  width: 100%;
+  width: 970px;
+  margin: 10px 2px 2px 2px;
 }
 
 table.trip-list, .trip-list th, .trip-list td {
