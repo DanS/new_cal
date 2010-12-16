@@ -1,3 +1,8 @@
+var windowWidth = $(window).width();
+$(window).resize(function() {
+  windowWidth = $(window).width();
+});
+
 //add tooltips to the month calendar
 var TT = {
   delay : 600,
@@ -131,11 +136,6 @@ $(document).ready(function() {
     });
     
     setTripListWidth();
-  });
-
-  var windowWidth = $(window).width();
-  $(window).resize(function() {
-    windowWidth = $(window).width();
   });
 
   //WIP accordion
