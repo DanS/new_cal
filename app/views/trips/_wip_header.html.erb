@@ -2,7 +2,7 @@
 <tr class="wip-header">
   <% week_col_class = day.strftime("%a") %>
   <% if day.wday == 0 %>
-    <td class="hour"></td>
+    <td class="corner-spacer"></td>
   <% end #allow for time column  %>
   <%= tag('th', {:class=>week_col_class, :colspan=>@vehicles.length}, true) %>
   <%= day.strftime("<span class=\"small\">%b %d</span> %a <span class=\"small\">%Y</span>") %>

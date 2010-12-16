@@ -149,6 +149,11 @@ table#wip a {
   font-size: x-small;
 }
 
+table#wip td.corner-spacer {
+  border-bottom: none;
+  background-color: white;
+}
+
 table#wip div {
   overflow: hidden;
 }
