@@ -102,6 +102,7 @@ var showAll = function() {
 
 var setTripListWidth = function() {
   var width = $('table.calendar:first').outerWidth(true) * 3 + $('table#destination-list').outerWidth(true);
+  width = width > 500 ? width : 1000; //ensure width set on week view
   $('table.trip-list').css("width", width);
 }
 
