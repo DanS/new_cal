@@ -12,23 +12,6 @@
 <%= button_to 'Create New Trip', new_trip_path, {:id=>'create_trip_button'} %>
 <table id="wip">
   <tr>
-    <td>
-      <table>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr class="wip-header">
-          <th class="vehicle-header">Time</th>
-        </tr>
-        <% (0..47).each do |hour| -%>
-          <tr>
-            <% if hour % 4 == 0 -%>
-              <td class="hour"> <%= hours[hour] -%></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
-    </td>
     <% @days.map { |d| [d.strftime("%Y%m%d"), d] }.each do |day, d| -%>
       <td>
         <div class="col<%= d.wday + 1 -%>">
@@ -36,6 +19,11 @@
             <%= render :partial => 'wip_header', :locals => {:day => d} %>
             <% (0..47).each do |hour| -%>
               <tr id="<%= "hour#{hour}" %>">
+                <% if d.wday == 0 %>
+                  <% if hour % 4 == 0 %>
+                    <td class="hour" rowspan="4"><%= hours[hour] %></td>
+                  <% end %>
+                <% end %>
                 <% @vehicles.each do |vehicle| -%>
                   <% cell_class, id, contact, destination = @trips_by_hour.has_hour?(day, vehicle, hours_as_number[hour]) -%>
                   <% title = "#{contact} #{destination}" -%>

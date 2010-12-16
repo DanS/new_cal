@@ -48,8 +48,9 @@ pre {
   margin-bottom: 10px;
 }
 
-div.calendar-containers{
-  width: 900px;
+div#calendar-containers {
+  /*only allow calendars to display side by side*/
+  width: 1000px;
 }
 
 table.calendar {
@@ -87,6 +88,10 @@ table .calendar td, #destination-list td, #trip-list td, popup td {
 table#destination-list {
   float: left;
   margin: 2px 2px 2px 2px;
+}
+
+table#destination-list td a:visited{
+  color: black;
 }
 
 table#week_calendar#destination-list {
@@ -127,7 +132,9 @@ table.trip-list, .trip-list th, .trip-list td {
 }
 
 table.trip-list {
+  clear: both;
   margin-top: 10px;
+  width: 895px;
 }
 
 .trip-list th {
@@ -158,6 +165,7 @@ table#wip table {
 
 table#wip table td, table#wip table th {
   width: 40px;
+  height: 6px;
 }
 
 table#wip th, table#wip td {
@@ -168,7 +176,7 @@ table#wip th, table#wip td {
   height: 6px;
 }
 
-table#wip th.vehicle-header {
+table#wip th.vehicle-header, table#wip th.time-header {
   font-weight: lighter;
   font-size: x-small;
   border: solid 1px black;

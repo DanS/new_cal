@@ -1,11 +1,17 @@
 <thead>
 <tr class="wip-header">
   <% week_col_class = day.strftime("%a") %>
+  <% if day.wday == 0 %>
+    <td class="hour"></td>
+  <% end #allow for time column  %>
   <%= tag('th', {:class=>week_col_class, :colspan=>@vehicles.length}, true) %>
   <%= day.strftime("<span class=\"small\">%b %d</span> %a <span class=\"small\">%Y</span>") %>
   </th>
 </tr>
 <tr>
+    <% if day.wday == 0 %>
+      <td class="time-header">Time</td>
+    <% end #allow for time column  %>
   <% week_col_class = day.strftime("%a") %>
   <% @vehicles.each do |vheader| %>
     <% vehicle_color_class = vheader.gsub(' ', '-') + '-trip' %>

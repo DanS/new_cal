@@ -1,8 +1,3 @@
-var windowWidth = $(window).width();
-$(window).resize(function() {
-  windowWidth = $(window).width();
-});
-
 //add tooltips to the month calendar
 var TT = {
   delay : 600,
@@ -50,25 +45,27 @@ var showOnly = function(letter, dest) {
   $('span#showing-dest').html(dest);
   //month calendar
   $('table.calendar [id^=day-cell]').each(function(i, e) { //iterate thru all calendar days
-      var fullClass = null;
-      var match = null;
-      if (fullClass = $(e).attr('class')) {//if day has a class
-        if (match = /(?:\s)([A-Z]+)/.exec(fullClass)) { // if class has a destination element
-          var colorClass = match[1];
-          if (colorClass) {
-            $(e).removeClass(colorClass).data('colorClass', colorClass);
-            var re = new RegExp(letter);
-            if (re.exec(colorClass)) {
-              $(e).addClass(letter);
-              $(e).data('temp', letter)
-            }
+    var fullClass = null;
+    var match = null;
+    if (fullClass = $(e).attr('class')) {//if day has a class
+      if (match = /(?:\s)([A-Z]+)/.exec(fullClass)) { // if class has a destination element
+        var colorClass = match[1];
+        if (colorClass) {
+          $(e).removeClass(colorClass).data('colorClass', colorClass);
+          var re = new RegExp(letter);
+          if (re.exec(colorClass)) {
+            $(e).addClass(letter);
+            $(e).data('temp', letter)
           }
         }
       }
+    }
   });
   // week calendar
-  $('table.day td.week-trip').each(function(i,e){
-    if( ! $(e).hasClass(letter)){$(e).hide()}
+  $('table.day td.week-trip').each(function(i, e) {
+    if (! $(e).hasClass(letter)) {
+      $(e).hide()
+    }
   });
   //trip-list
   $('table.trip-list tr.trip').each(function(i, e) {
@@ -97,6 +94,11 @@ var showAll = function() {
   //trip-list
   $('table.trip-list tr.trip').show();
 };
+
+var setTripListWidth = function() {
+  var width = $('table.calendar:first').outerWidth(true) * 3 + $('table#destination-list').outerWidth(true);
+  $('table.trip-list').css("width", width);
+}
 
 $(document).ready(function() {
   // expand the title on page open
@@ -127,6 +129,13 @@ $(document).ready(function() {
     $('table#destination-list tr:last').click(function() {
       showAll(letter);
     });
+    
+    setTripListWidth();
+  });
+
+  var windowWidth = $(window).width();
+  $(window).resize(function() {
+    windowWidth = $(window).width();
   });
 
   //WIP accordion
@@ -137,9 +146,13 @@ $(document).ready(function() {
           .find('th.vehicle-header').css('font-size', 'x-small').end().find('span, a').show();
     }
     if (closeDiv != null) {
-      closeDiv.removeClass('active').stop(true).animate({width: '45px'}, {queue:false, duration:400})
-          .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
-          .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
+      $.each(closeDiv, function(i, colDiv) {
+        var divWidth = $(colDiv).find('.time-header').length > 0 ? '100px' : '45px'
+        $(colDiv).removeClass('active').stop(true).animate({width: divWidth}, {queue:false, duration:400})
+            .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
+            .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
+      });
+      $('.hour, .time-header').css({'background-color': 'white'});
     }
   };
 
@@ -161,7 +174,9 @@ $(document).ready(function() {
       }
     }, 400)
   },
-    function() {$(this).removeClass('waiting')});
+                         function() {
+                           $(this).removeClass('waiting')
+                         });
   //have only every 4th row border solid in WIP table
   $('table#wip table').each(function() {
     $(this).find('tr').each(function(i) {
