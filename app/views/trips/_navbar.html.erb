@@ -15,6 +15,5 @@
     <%= link_to "&gt;", url_for(:start_date => next_month(@start_date)), {:id => 'next-month'} %>
   <% else %>
     <%= link_to "&gt;", url_for(:start_date => next_week(@start_date)), {:id => 'next-week'} %>
-    -
   <% end %>
 </div>
