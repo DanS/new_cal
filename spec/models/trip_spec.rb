@@ -41,9 +41,16 @@ describe Trip do
       t.return.should == t.depart + 2.hours 
     end
 
-    it "depart and return times should not be allowed" do
+    it "rejects identical depart and return times" do
       time = Time.parse('8AM')
       t = Factory.build(:trip, :depart=>time, :return=>time)
+      t.should_not be_valid
+    end
+
+    it "rejects return times before departure times" do
+      departure_time = Time.parse('11AM')
+      return_time = Time.parse('8AM')
+      t = Factory.build(:trip, :depart=>departure_time, :return=>return_time)
       t.should_not be_valid
     end
   end
