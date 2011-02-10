@@ -126,7 +126,7 @@ $(document).ready(function() {
   $('table#destination-list td').each(function(i, e) {
     var letter = $(this).attr('class');
     var dest = $(this).find('a span').html();
-    var that = $(this)
+    var that = $(this);
     $(this).click(function() {
       $('table#destination-list td a').removeClass('selected');
       that.find('a').addClass('selected');

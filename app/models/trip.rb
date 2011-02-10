@@ -101,8 +101,8 @@ class Trip < ActiveRecord::Base
     def has_hour?(date, vehicle, hour)
       week_col_class = Date.parse(date).strftime("%a")
       if @hours.has_key?(date) && @hours[date].has_key?(vehicle) && @hours[date][vehicle].has_key?(hour)
-        t_data = @hours[date][vehicle][hour]
-        return ["class=\"#{vehicle.gsub(' ', '-') + '-trip'} #{week_col_class}\""] + t_data
+        trip_data = @hours[date][vehicle][hour]
+        return ["class=\"#{vehicle.gsub(' ', '-') + '-trip'} #{week_col_class}\""] + trip_data
       else
         return ["class=\"#{week_col_class}\""]
       end
