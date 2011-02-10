@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '2.3.8'
 #gem 'sqlite3-ruby'
 #path given below is path to pg_conf file
-gem 'pg' #install manually like this:==> PATH=/Library/PostgreSQL/8.4/bin/:$PATH gem install pg
 gem 'rmagick'
 
 # Bundle edge Rails instead:
@@ -29,7 +28,7 @@ gem 'rmagick'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-#  gem 'jasmine'
+  gem 'pg' #install manually like this:==> PATH=/Library/PostgreSQL/8.4/bin/:$PATH gem install pg
   gem 'rspec', '1.3.0'
   gem 'rspec-rails', '1.3.2'
   gem 'webrat'
