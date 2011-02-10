@@ -327,6 +327,11 @@ a:hover {
   font-weight: bold;
 }
 
+td.day a:hover {
+  /*don't bold text inside calendar*/
+  font-weight: normal;
+}
+
 a.selected{
   font-weight: bold;
   color: black
