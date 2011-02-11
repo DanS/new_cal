@@ -97,15 +97,15 @@ var showAll = function() {
   $('table.trip-list tr.trip').show();
 };
 
-var setTripListWidth = function() {
-  windowWidth = $(window).width();
-  $(window).resize(function() {
-    windowWidth = $(window).width();
-  });
-  var width = $('table.calendar:first').outerWidth(true) * 3 + $('table#destination-list').outerWidth(true);
-  width = width > 500 ? width : 1000; //ensure width set on week view
-  $('table.trip-list').css("width", width);
-};
+//var setTripListWidth = function() {
+//  windowWidth = $(window).width();
+//  $(window).resize(function() {
+//    windowWidth = $(window).width();
+//  });
+//  var width = $('table.calendar:first').outerWidth(true) * 3 + $('table#destination-list').outerWidth(true);
+//  width = width > 500 ? width : 1000; //ensure width set on week view
+//  $('table.trip-list').css("width", width);
+//};
 
 $(document).ready(function() {
 
@@ -134,7 +134,7 @@ $(document).ready(function() {
       showAll(letter);
     });
 
-    setTripListWidth();
+//    setTripListWidth();
 
     setTimeout(function() {
       // expand the title on page open

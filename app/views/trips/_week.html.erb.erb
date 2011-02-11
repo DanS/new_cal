@@ -1,4 +1,5 @@
-<table id="week_calendar">
+<div id="week_calendar">
+<table>
   <tr>
     <% @trips_by_date.keys.sort.each do |date| %>
       <%= tag 'td', {:id=>"day-cell#{date}"}, true %>
@@ -19,3 +20,4 @@
     </td>
   </tr>
 </table>
+</div>

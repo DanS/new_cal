@@ -1,13 +1,19 @@
-<table id="destination-list">
-  <tr><th>Show Only Trips to</th></tr>
-  <% @destination_list.keys.sort.each do |text| %>
+<div id="destination-list">
+  <table>
     <tr>
-      <% count, letter = @destination_list[text] %>
-      <%value = "<span> #{text}</span> (#{count})"%>
-      <td class=<%= "#{letter}" %>>
-        <%= link_to value, "/?destination=#{text.gsub(' ', '_')}" %>
-      </td>
+      <th>Show Only Trips to</th>
     </tr>
-  <% end %>
-    <tr><td><a href="/?destination=clear" class="selected">All Destinations</a></td></tr>
-</table>
+    <% @destination_list.keys.sort.each do |text| %>
+      <tr>
+        <% count, letter = @destination_list[text] %>
+        <% value = "<span> #{text}</span> (#{count})" %>
+        <td class=<%= "#{letter}" %>>
+          <%= link_to value, "/?destination=#{text.gsub(' ', '_')}" %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><a href="/?destination=clear" class="selected">All Destinations</a></td>
+    </tr>
+  </table>
+</div>

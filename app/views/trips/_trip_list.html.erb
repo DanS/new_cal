@@ -1,35 +1,37 @@
-<table class="trip-list">
-  <tr>
-    <% ['Date', 'Time', 'Destination', 'Contact', 'Community', 'Preferred Vehicle',
-        'Travelers', 'Notes', 'Actions'].each do |header| %>
-      <th> <%= header %> </th>
-    <% end %>
-  </tr>
-  <% @trips_by_date.keys.sort.each do |date| %>
-    <% days_trips = @trips_by_date[date].sort { |a, b| a.depart.strftime("%H%M") <=> b.depart.strftime("%H%M") } %>
-    <% days_trips.each_with_index do |trip, i| %>
-      <%= tag 'tr', {:class=>"row#{date} trip"}, true %>
-        <%= content_tag 'td', days_trips[0].date.strftime("%b %d %a")%>
-      <td class="time-column">
-        <%= h trip.depart.strftime("%I:%M%p") %>
-        <br/>
-        <% if trip.return %>
-          <%= h trip.return.strftime("%I:%M%p") %>
-        <% end %>
-      </td>
-      <% letter = Destination.class_letter_for(trip.destination) %>
-      <td class=<%= h "#{letter} destination-column" %>>
-        <%= h trip.destination %>
-      </td>
-      <% for attrib in ['contact', 'community', 'preferred_vehicle',
-                        'travelers', 'notes'] %>
-        <%= content_tag('td',trip.send(attrib), {:class=>"#{attrib}-column"}) %>
+<div id="trip-list">
+  <table>
+    <tr>
+      <% ['Date', 'Time', 'Destination', 'Contact', 'Community', 'Preferred Vehicle',
+          'Travelers', 'Notes', 'Actions'].each do |header| %>
+        <th> <%= header %> </th>
       <% end %>
-      <td class="button-column">
-        <%= button_to 'Edit', edit_trip_path(trip), :method=>:get %>
-        <%= button_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %>
-      </td>
-    <% end %>
     </tr>
-  <% end %>
-</table>
+    <% @trips_by_date.keys.sort.each do |date| %>
+      <% days_trips = @trips_by_date[date].sort { |a, b| a.depart.strftime("%H%M") <=> b.depart.strftime("%H%M") } %>
+      <% days_trips.each_with_index do |trip, i| %>
+        <%= tag 'tr', {:class=>"row#{date} trip"}, true %>
+        <%= content_tag 'td', days_trips[0].date.strftime("%b %d %a") %>
+        <td class="time-column">
+          <%= h trip.depart.strftime("%I:%M%p") %>
+          <br/>
+          <% if trip.return %>
+            <%= h trip.return.strftime("%I:%M%p") %>
+          <% end %>
+        </td>
+        <% letter = Destination.class_letter_for(trip.destination) %>
+        <td class=<%= h "#{letter} destination-column" %>>
+          <%= h trip.destination %>
+        </td>
+        <% for attrib in ['contact', 'community', 'preferred_vehicle',
+                          'travelers', 'notes'] %>
+          <%= content_tag('td', trip.send(attrib), {:class=>"#{attrib}-column"}) %>
+        <% end %>
+        <td class="button-column">
+          <%= button_to 'Edit', edit_trip_path(trip), :method=>:get %>
+          <%= button_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
