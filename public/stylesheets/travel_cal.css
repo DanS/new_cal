@@ -50,20 +50,25 @@ pre {
 
 div#calendar-containers {
   /*only allow calendars to display side by side*/
+  float: left;
   width: 1000px;
 }
 
-table.calendar {
+table {
   border: 1px solid black;
+  /*margin: 2px;*/
+  border-spacing: 0;
+  /*border-collapse: collapse;*/
+}
+
+
+table.calendar {
   float: left;
-  width: 27%;
-  margin: 2px 2px 2px 2px;
+  width: 100%;
 }
 
 table.popup {
   text-align: left;
-  border-spacing: 0;
-  border-collapse: collapse;
   width: 600px;
 }
 
@@ -71,8 +76,7 @@ table.popup td, table.popup th {
   border: 1px solid black;
 }
 
-.trip-list, #destination-list, .popup table {
-  border: 1px solid black;
+#trip-list, #destination-list, .popup table {
   background-color: wheat;
 }
 
@@ -80,17 +84,28 @@ table .calendar tr, table #destination-list tr {
   vertical-align: top;
 }
 
-table .calendar td, #destination-list td, #trip-list td, popup td {
-  border: 1px solid gray;
-}
-
-div#destination-list {
+div#month {
   float: left;
-  margin: 2px;
+  /*margin: 2px;*/
+  margin-right: 1%;
+  width: 27%;
 }
 
-div#month-calendars div#destination-list{
-  width: 17%;
+ #destination-list td, #trip-list td, table.popup td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+div#month-calendars {
+  float: left;
+  width: 100%;
+}
+
+div#destination-list{
+  float: left;
+  width: 16%;
+  margin-bottom: 10px;
 }
 
 div#destination-list table, div#destination-list tr, div#destination-list td {
@@ -106,7 +121,6 @@ div#week_calendar#destination-list {
 }
 
 div#week_calendar td {
-  border: 1px solid black;
   width: 12.5%;
   vertical-align: top;
   height: 100%;
@@ -158,12 +172,6 @@ table#wip td.corner-spacer {
 
 table#wip div {
   overflow: hidden;
-}
-
-table#wip, table#wip table {
-  border: 1px solid black;
-  border-spacing: 0;
-  border-collapse: collapse;
 }
 
 table#wip table {
@@ -239,10 +247,6 @@ table#wip .hour {
 #errorExplanation ul li {
   font-size: 12px;
   list-style: square;
-}
-
-.calendar {
-  margin: auto;
 }
 
 .monthName th {
