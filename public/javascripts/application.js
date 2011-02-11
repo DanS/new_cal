@@ -1,4 +1,8 @@
 var windowWidth;
+  windowWidth = $(window).width();
+  $(window).resize(function() {
+    windowWidth = $(window).width();
+  });
 
 //add tooltips to the month calendar
 var TT = {
@@ -98,99 +102,94 @@ var showAll = function() {
 };
 
 //var setTripListWidth = function() {
-//  windowWidth = $(window).width();
-//  $(window).resize(function() {
-//    windowWidth = $(window).width();
-//  });
-//  var width = $('table.calendar:first').outerWidth(true) * 3 + $('table#destination-list').outerWidth(true);
+//  var width = $('table.calendar:first').outerWidth(true) * 3 + $('div#destination-list').outerWidth(true);
 //  width = width > 500 ? width : 1000; //ensure width set on week view
 //  $('table.trip-list').css("width", width);
 //};
 
 $(document).ready(function() {
+    //set tooltips on month view
+    TT.setTips();
 
-  //set tooltips on month view
-  TT.setTips();
+    //add date picker to trip form
+    Date.firstDayOfWeek = 0;
+    Date.format = 'mm/dd/yyyy';
+    $('#trip_date').datepicker();
 
-  //add date picker to trip form
-  Date.firstDayOfWeek = 0;
-  Date.format = 'mm/dd/yyyy';
-  $('#trip_date').datepicker();
-
-  //set click action on destination list
-  $('table#destination-list a').css('text-decoration', 'none').click(function(e) {
-    e.preventDefault();
-  });
-  $('table#destination-list td').each(function(i, e) {
-    var letter = $(this).attr('class');
-    var dest = $(this).find('a span').html();
-    var that = $(this);
-    $(this).click(function() {
-      $('table#destination-list td a').removeClass('selected');
-      that.find('a').addClass('selected');
-      showOnly(letter, dest);
+    //set click action on destination list
+    $('div#destination-list a').css('text-decoration', 'none').click(function(e) {
+      e.preventDefault();
     });
-    $('table#destination-list tr:last').click(function() {
-      showAll(letter);
-    });
+    $('div#destination-list table td').each(function(i, e) {
+      var letter = $(this).attr('class');
+      var dest = $(this).find('a span').html();
+      var that = $(this);
+      $(this).click(function() {
+        $('div#destination-list table td a').removeClass('selected');
+        that.find('a').addClass('selected');
+        showOnly(letter, dest);
+      });
+      $('div#destination-list table tr:last').click(function() {
+        showAll(letter);
+      });
 
 //    setTripListWidth();
 
-    setTimeout(function() {
-      // expand the title on page open
-      $('#banner h1').css("fontSize", "6px");
-      $('#banner h1').animate({fontSize:"28px"}, 1000);
-    }, 50);
+      setTimeout(function() {
+        // expand the title on page open
+        $('#banner h1').css("fontSize", "6px");
+        $('#banner h1').animate({fontSize:"28px"}, 1000);
+      }, 50);
+
+    });
+
+    //WIP accordion
+    var openCloseDiv = function(openDiv, closeDiv) {
+      if (openDiv != null) {
+        openDiv.addClass('active').stop(true).animate({width: '450px'}, {queue:false, duration:400})
+            .addClass('active').css({'text-align': 'center', 'background-color':'transparent'})
+            .find('th.vehicle-header').css('font-size', 'x-small').end().find('span, a').show();
+      }
+      if (closeDiv != null) {
+        $.each(closeDiv, function(i, colDiv) {
+          var divWidth = $(colDiv).find('.time-header').length > 0 ? '100px' : '45px'
+          $(colDiv).removeClass('active').stop(true).animate({width: divWidth}, {queue:false, duration:400})
+              .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
+              .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
+        });
+        $('.hour, .time-header').css({'background-color': 'white'});
+      }
+    };
+
+    //start with current day open
+    openCloseDiv(null, $("table#wip div[class^='col']"));
+    var weekDayNum = new Date().getDay() + 1;
+    openCloseDiv($("table#wip div.col" + weekDayNum), null);
+
+    $('[class^=col]').hover(function() {
+      if ($(this).hasClass('active')) {
+        return;  //do nothing when over open div
+      }
+      var currentDiv = $(this);
+      currentDiv.addClass('waiting');
+      setTimeout(function() {
+        if (currentDiv.hasClass('waiting')) {
+          openCloseDiv(currentDiv, $('table#wip div.active'));
+          currentDiv.removeClass('waiting');
+        }
+      }, 400)
+    },
+                           function() {
+                             $(this).removeClass('waiting')
+                           });
+    //have only every 4th row border solid in WIP table
+    $('table#wip table').each(function() {
+      $(this).find('tr').each(function(i) {
+        if ((i + 3) % 4 == 0) {
+          $(this).css("border-bottom", "1px solid black")
+        }
+      })
+    })
 
   });
-
-  //WIP accordion
-  var openCloseDiv = function(openDiv, closeDiv) {
-    if (openDiv != null) {
-      openDiv.addClass('active').stop(true).animate({width: '450px'}, {queue:false, duration:400})
-          .addClass('active').css({'text-align': 'center', 'background-color':'transparent'})
-          .find('th.vehicle-header').css('font-size', 'x-small').end().find('span, a').show();
-    }
-    if (closeDiv != null) {
-      $.each(closeDiv, function(i, colDiv) {
-        var divWidth = $(colDiv).find('.time-header').length > 0 ? '100px' : '45px'
-        $(colDiv).removeClass('active').stop(true).animate({width: divWidth}, {queue:false, duration:400})
-            .removeClass('active').css({'text-align': 'left', 'background-color': 'gray'})
-            .find('th.vehicle-header').css('font-size', '0').end().find('span, a').hide();
-      });
-      $('.hour, .time-header').css({'background-color': 'white'});
-    }
-  };
-
-  //start with current day open
-  openCloseDiv(null, $("table#wip div[class^='col']"));
-  var weekDayNum = new Date().getDay() + 1;
-  openCloseDiv($("table#wip div.col" + weekDayNum), null);
-
-  $('[class^=col]').hover(function() {
-    if ($(this).hasClass('active')) {
-      return;  //do nothing when over open div
-    }
-    var currentDiv = $(this);
-    currentDiv.addClass('waiting');
-    setTimeout(function() {
-      if (currentDiv.hasClass('waiting')) {
-        openCloseDiv(currentDiv, $('table#wip div.active'));
-        currentDiv.removeClass('waiting');
-      }
-    }, 400)
-  },
-                         function() {
-                           $(this).removeClass('waiting')
-                         });
-  //have only every 4th row border solid in WIP table
-  $('table#wip table').each(function() {
-    $(this).find('tr').each(function(i) {
-      if ((i + 3) % 4 == 0) {
-        $(this).css("border-bottom", "1px solid black")
-      }
-    })
-  })
-
-});
 
