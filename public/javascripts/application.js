@@ -1,3 +1,5 @@
+var windowWidth;
+
 //add tooltips to the month calendar
 var TT = {
   delay : 600,
@@ -96,21 +98,16 @@ var showAll = function() {
 };
 
 var setTripListWidth = function() {
-  var width = $('table.calendar:first').outerWidth(true) * 3 + $('table#destination-list').outerWidth(true);
-  width = width > 500 ? width : 1000; //ensure width set on week view
-  $('table.trip-list').css("width", width);
-}
-
-$(document).ready(function() {
-  //set the width of major elements
-  var windowWidth = $(window).width();
+  windowWidth = $(window).width();
   $(window).resize(function() {
     windowWidth = $(window).width();
   });
+  var width = $('table.calendar:first').outerWidth(true) * 3 + $('table#destination-list').outerWidth(true);
+  width = width > 500 ? width : 1000; //ensure width set on week view
+  $('table.trip-list').css("width", width);
+};
 
-  // expand the title on page open
-  $('#banner h1').css("fontSize", "6px");
-  $('#banner h1').animate({fontSize:"28px"}, 1000);
+$(document).ready(function() {
 
   //set tooltips on month view
   TT.setTips();
@@ -138,6 +135,13 @@ $(document).ready(function() {
     });
 
     setTripListWidth();
+
+    setTimeout(function() {
+      // expand the title on page open
+      $('#banner h1').css("fontSize", "6px");
+      $('#banner h1').animate({fontSize:"28px"}, 1000);
+    }, 50);
+
   });
 
   //WIP accordion
