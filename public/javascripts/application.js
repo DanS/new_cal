@@ -1,8 +1,3 @@
-var windowWidth = $(window).width();
-$(window).resize(function() {
-  windowWidth = $(window).width();
-});
-
 //add tooltips to the month calendar
 var TT = {
   delay : 600,
@@ -107,6 +102,12 @@ var setTripListWidth = function() {
 }
 
 $(document).ready(function() {
+  //set the width of major elements
+  var windowWidth = $(window).width();
+  $(window).resize(function() {
+    windowWidth = $(window).width();
+  });
+
   // expand the title on page open
   $('#banner h1').css("fontSize", "6px");
   $('#banner h1').animate({fontSize:"28px"}, 1000);
@@ -135,7 +136,7 @@ $(document).ready(function() {
     $('table#destination-list tr:last').click(function() {
       showAll(letter);
     });
-    
+
     setTripListWidth();
   });
 
