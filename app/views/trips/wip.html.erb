@@ -9,7 +9,6 @@
 <% year, month, day = Date.parse(@start_date).strftime("%Y %B %d").split %>
 <h2> Vehicle use for week beginning Sunday <%= h "#{month} #{day.to_i.ordinalize} #{year}" %></h2>
 <%= render :partial => 'navbar', :locals => {:start_date => @start_date, :cal_type => 'wip'} %>
-<%= button_to 'Create New Trip', new_trip_path, {:id=>'create_trip_button'} %>
 <table id="wip">
   <tr>
     <% @days.map { |d| [d.strftime("%Y%m%d"), d] }.each do |day, d| -%>
