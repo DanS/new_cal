@@ -1,5 +1,7 @@
-<h2>Showing Trips to</h2>
+<div id="trips-to"><h2>
+  Showing Trips to
   <%= content_tag 'span', @destination, {:id=>"showing-dest"} %>
+</h2></div>
 <%= render :partial => 'navbar', :locals => {:start_date => @start_date} %>
 <div id="calendar-containers">
   <%= render :partial => @cal_type %>

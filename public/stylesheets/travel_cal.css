@@ -58,7 +58,7 @@ table {
   border: 1px solid gray;
   /*margin: 2px;*/
   border-spacing: 0;
-  /*border-collapse: collapse;*/
+  border-collapse: collapse;
 }
 
 
@@ -86,7 +86,6 @@ table .calendar tr, table #destination-list tr {
 
 div#month {
   float: left;
-  /*margin: 2px;*/
   margin-right: 1%;
   width: 27%;
 }
@@ -192,7 +191,7 @@ table#wip table td, table#wip table th {
   height: 6px;
 }
 
-table#wip th, table#wip td {
+table#wip table th, table#wip table td {
   border-bottom: 1px dotted darkgray;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
@@ -388,7 +387,13 @@ a.selected-tab {
 
 /********************************/
 /* stuff for expanding title */
+/* keep stuff from moving around as title changes size */
 #banner {
   width: 100%;
-  height: 15px;
+  height: 20px;
+}
+
+div#banner h1{
+  margin: 0;
+  padding: 0;
 }

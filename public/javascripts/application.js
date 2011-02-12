@@ -101,12 +101,6 @@ var showAll = function() {
   $('div#trip-list tr.trip').show();
 };
 
-//var setTripListWidth = function() {
-//  var width = $('table.calendar:first').outerWidth(true) * 3 + $('div#destination-list').outerWidth(true);
-//  width = width > 500 ? width : 1000; //ensure width set on week view
-//  $('table.trip-list').css("width", width);
-//};
-
 $(document).ready(function() {
   //set tooltips on month view
   TT.setTips();
@@ -132,6 +126,7 @@ $(document).ready(function() {
     $('div#destination-list table tr:last').click(function() {
       showAll(letter);
     });
+  });
 
     // highlight the nav menu selection for the current page
     if ($('#month-calendars').size() > 0) { $('a#month-view').css({'color':'black', 'text-decoration':'underline'}) }
@@ -142,7 +137,6 @@ $(document).ready(function() {
     $('#banner h1').css("fontSize", "6px");
     $('#banner h1').animate({fontSize:"28px"}, 1000);
 
-  });
 
   //WIP accordion
   var openCloseDiv = function(openDiv, closeDiv) {
